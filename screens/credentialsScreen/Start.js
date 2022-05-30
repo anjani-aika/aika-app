@@ -5,16 +5,13 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 const Start = ({ navigation }) => {
     useEffect(() => {
         setTimeout(() => {
-            navigation.navigate('Login')
-        },3000)   
+            navigation.navigate('Login');
+        },1000)   
     })
     
     return (
         <View style={styles.container}>
-            {/* <View > */}
-            {/* <Image source={require('')} style={styles.leave}/>
-            <Image source={require('')} style={styles.logo}/> */}
-            {/* </View> */}
+            <Image source={require('../../static/landingPage.jpg')} style={{width:'100%',height:'100%'}}/>
         </View>
     )
 }
@@ -22,7 +19,6 @@ const Start = ({ navigation }) => {
 export default Start;
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#738BF3',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',

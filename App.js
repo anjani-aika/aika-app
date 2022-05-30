@@ -5,17 +5,20 @@
  * @format
  * @flow strict-local
  */
- import 'react-native-gesture-handler';
+import 'react-native-gesture-handler'
 import React from 'react';
+import linking from './components/Linking';
 import {SafeAreaView,ScrollView,StatusBar,StyleSheet,Text, useColorScheme,View} from 'react-native';
-
+import { useMemo } from 'react';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthContext } from './components/context';
-import Start from './screens/start';
-import Login from './screens/login';
-import Register from './screens/register';
+import Start from './screens/credentialsScreen/Start';
+import Login from './screens/credentialsScreen/Login';
+import Register from './screens/credentialsScreen/Register';
+import ForgotPassword from './screens/credentialsScreen/forgotPassword';
+import MyDrawer from './screens/home/Drawer';
 
 const Stack = createStackNavigator();
 const globalScreenOptions = {
@@ -25,28 +28,61 @@ const globalScreenOptions = {
 
 
 const App= () => {
-  // const isDarkMode = useColorScheme() === 'dark';
 
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
+  const authContext = useMemo(
+    () => ({
+      signIn: async (phoneNo, password) => {
 
+        try {
+          console.log("hi signup");
+        } catch (e) {
+          console.log(e);
+        }
+
+      },
+      signOut: async () => {
+        try {
+          console.log("hi signup");
+          // await AsyncStorage.removeItem('userToken');
+          // const key = await AsyncStorage.getAllKeys()
+          // await AsyncStorage.multiRemove(key)
+        } catch (e) {
+          console.log(e);
+        }
+       // dispatch({ type: 'LOGOUT' });
+      },
+      signUp: async (name, phone, email, password,role,doctorInfo) => {
+        // device token
+        try {
+         console.log("hi signup");
+        }catch(e){
+          console.log("Error in updating the devietoken",e.message);
+        }
+                   
+            },
+      
+      }));
+          
   return (
-    <SafeAreaView style={backgroundStyle}>
-     <AuthContext.Provider >
-      <NavigationContainer>
+    <>
+     <AuthContext.Provider value={authContext}>
+      <NavigationContainer >
         <Stack.Navigator screenOptions={globalScreenOptions}>
           
-            <>
-              <Stack.Screen name="Start" component={Start} />
+            <> 
+            <Stack.Screen name="Start" component={Start} />
+              <Stack.Screen name="Home" component={MyDrawer} />
+        
               <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
               <Stack.Screen name="Register" component={Register} />
+              
 
             </>
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
-    </SafeAreaView>
+    </>
   );
 };
 
