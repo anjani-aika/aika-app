@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   forgotPassword:{
     display:'flex',
     alignSelf:'flex-end',
-    marginTop:-20,
+    marginTop:-12,
     marginRight:18,
     position:'relative',  
     justifyContent:'center',

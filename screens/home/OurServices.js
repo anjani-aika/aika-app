@@ -6,8 +6,9 @@ import Header from '../../components/Header';
 
 const OurServices=({navigation})=>{
     return(
-        <View>
-            <Text>Hi Our services</Text>
+        <View style={{backgroundColor:'white',flex:1,paddingTop:60,padding:25}}>
+
+            <Text>Our Services</Text>
         </View>
     )
 }
