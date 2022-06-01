@@ -4,7 +4,6 @@ import Help from './Help';
 import {Text,Image} from 'react-native';
 import AboutUs from './AboutUs';
 import MyAccount from './MyAccount';
-import OurServices from './OurServices';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsConition from './TermsCondition';
 import { Icon } from 'react-native-elements';
@@ -12,6 +11,7 @@ import Header from '../../components/Header';
 import { NavigationContainer } from '@react-navigation/native';
 import CustomSidebarMenu from './customSidenavbar';
 import OrderNavigation from './OrderNavigation';
+import OurServicesNavigation from '../ourServices/ourServicesNavigation';
 
 const Drawer = createDrawerNavigator();
 
@@ -32,7 +32,7 @@ const MyDrawer=()=>{
         <Drawer.Screen
           
             name="Our Services"
-            component={OurServices}
+            component={OurServicesNavigation}
             
             options={{
             drawerActiveTintColor:'#181725',

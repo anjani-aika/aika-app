@@ -7,7 +7,6 @@
  */
 import 'react-native-gesture-handler'
 import React from 'react';
-import linking from './components/Linking';
 import {SafeAreaView,ScrollView,StatusBar,StyleSheet,Text, useColorScheme,View} from 'react-native';
 import { useMemo } from 'react';
 import {Colors} from 'react-native/Libraries/NewAppScreen';

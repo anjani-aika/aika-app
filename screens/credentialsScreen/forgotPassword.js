@@ -6,7 +6,7 @@ import {Button, Input,Icon} from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../../components/context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const ForgotPassword = ({navigation}) => {
   const [data, setData] = useState({
     email: '',
@@ -20,7 +20,7 @@ const ForgotPassword = ({navigation}) => {
   };
 
   return (
-    <View style={styles.login}>
+    <KeyboardAwareScrollView contentContainerStyle={styles.login}>
       <View style={styles.viel}>
         <Text style={{ fontSize:30, fontWeight:'bold',color:'white'}}>DOOR DEVELOPMENT</Text>
       </View>
@@ -41,13 +41,13 @@ const ForgotPassword = ({navigation}) => {
         
 
         <View style={styles.button}>
-        <Button title=" GET A NEW PASSWORD" buttonStyle={{width:280,backgroundColor:'#F55633'}}/>
+        <Button title=" GET A NEW PASSWORD" buttonStyle={{width:280,height:50,backgroundColor:'#F55633'}}/>
         </View>
         <View style={styles.termsAndServices}>
-          <Text style={{textAlign:'center',width:'100%',fontWeight:'bold',color:'black'}}>By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text></Text>
+          <Text style={{textAlign:'center',width:'100%',color:'black',fontFamily:'Poppins'}}>By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text></Text>
         </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -55,7 +55,7 @@ export default ForgotPassword;
 
 const styles = StyleSheet.create({
   login: {
-    flex: 1,
+    height:650,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection:'column'
