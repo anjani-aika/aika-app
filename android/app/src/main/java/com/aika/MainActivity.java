@@ -3,7 +3,7 @@ package com.aika;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-
+import org.devio.rn.splashscreen.SplashScreen; // here
 public class MainActivity extends ReactActivity {
 
   /**
@@ -12,6 +12,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
+       SplashScreen.show(this);  // here 
     return "aika";
   }
 
