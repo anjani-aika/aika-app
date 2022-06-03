@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import {View,Text, StyleSheet, TouchableOpacity,Image,TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import CheckBox from '@react-native-community/checkbox';
+
 import { Button, Icon } from 'react-native-elements';
 import PageButton from '../../../components/PageButton';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -23,7 +23,8 @@ const SingleItem=({src,material})=>{
             <CheckBox
                 value={value}
                 onValueChange={()=>{setValue(!value)}}
-                 style={{justifyContent:'flex-end'}}
+                tintColors={{ true: '#F55633', false: 'red' }}
+                // style={{justifyContent:'flex-end',backgroundColor:'white',color:'red'}}
             />
             </View>
             {value===true?<View style={{marginHorizontal:25,marginTop:20}}>

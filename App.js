@@ -18,6 +18,7 @@ import Login from './screens/credentialsScreen/Login';
 import Register from './screens/credentialsScreen/Register';
 import ForgotPassword from './screens/credentialsScreen/forgotPassword';
 import MyDrawer from './screens/home/Drawer';
+import SplashScreen from  "react-native-splash-screen";
 
 const Stack = createStackNavigator();
 const globalScreenOptions = {
@@ -27,6 +28,9 @@ const globalScreenOptions = {
 
 
 const App= () => {
+  React.useEffect(() => {
+    SplashScreen.hide();
+  });
 
   const authContext = useMemo(
     () => ({
@@ -66,12 +70,12 @@ const App= () => {
     <>
      <AuthContext.Provider value={authContext}>
       <NavigationContainer >
-        <Stack.Navigator screenOptions={globalScreenOptions}>
-          
+        <Stack.Navigator screenOptions={globalScreenOptions} >
+           
             <> 
             {/* <Stack.Screen name="Start" component={Start} /> */}
-              <Stack.Screen name="Home" component={MyDrawer} />
-              <Stack.Screen name="Start" component={Start} />
+              {/* <Stack.Screen name="Home" component={MyDrawer} /> */}
+              {/* <Stack.Screen name="Start" component={Start} /> */}
               <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
               <Stack.Screen name="Register" component={Register} />
