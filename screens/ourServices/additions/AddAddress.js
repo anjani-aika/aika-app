@@ -1,85 +1,81 @@
 import React, {useState, useLayoutEffect, useEffect} from 'react'
 import { StyleSheet,View,TouchableOpacity,Modal,Text ,TextInput} from 'react-native';
-import { AuthContext } from '../../components/context';
 import { Button,Icon } from 'react-native-elements';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-const Register = ({ navigation }) => {
+const AddAddress = ({ navigation }) => {
 
 
-    const {signUp} = React.useContext(AuthContext);
-    const register =() => {
-        
-    }
+
     useEffect(()=>{console.log("register")});
     return (
 
-       <KeyboardAwareScrollView contentContainerStyle={{height:650,paddingLeft:10,paddingRight:10,paddingTop:10,paddingBottom:10}}>
-           <View  style={{flex:1,borderWidth:0,justifyContent:'center',alignItems:'center'}}>
-                <Text style={{fontWeight:'600',fontSize:24,fontFamily:'Poppins', color:'black'}}>Register New User</Text>
-           </View>
+       <KeyboardAwareScrollView contentContainerStyle={{height:650,paddingTop:65,backgroundColor:'white'}}>
+
+            
+            <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
+               Add Address
+            </Text>
+           
            <View style={{flex:4,borderWidth:0,justifyContent:'space-evenly',alignItems:'center'}}>
             <View style={styles.input}>
-                <Icon name='person-outline' size={30} color="black" style={{alignSelf:'center',justifyContent:'center'}}/>
+                
                 <TextInput
                     style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
                     multiline={true}
                     editable={true}
                     placeholderTextColor = "gray"
-                    placeholder=" Enter your full name"
+                    placeholder=" Address Line 1"
                 ></TextInput>
             </View>
             <View style={styles.input}>
-                <Icon name='call' size={30} color="black" style={{alignSelf:'center',justifyContent:'center'}}/>
+             
                 <TextInput
                     style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
                     multiline={true}
                     editable={true}
                     placeholderTextColor = "gray"
-                    placeholder=" Enter your phone number"
+                    placeholder=" Address Line 2"
                 ></TextInput>
             </View>
             <View style={styles.input}>
-                <Icon name='mail-outline' size={30} color="black" style={{alignSelf:'center',justifyContent:'center'}}/>
+               
                 <TextInput
                     style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
                     multiline={true}
                     editable={true}
                     placeholderTextColor = "gray"
-                    placeholder=" Enter your Email Address"
+                    placeholder=" Pincode"
                 ></TextInput>
             </View>
             <View style={styles.input}>
-            <Icon name='lock-outline' size={30} color="black" style={{alignSelf:'center',justifyContent:'center'}}/>
+           
             <TextInput
                 style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
                 multiline={true}
                 editable={true}
                 placeholderTextColor = "gray"
-                placeholder=" Enter your password"
+                placeholder=" Landmark"
                 ></TextInput>
             </View>
             <View style={styles.input}>
-                <Icon name='place' size={30} color="black" style={{alignSelf:'center',justifyContent:'center'}}/>
+                
                 <TextInput
                     style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
                     multiline={true}
                     editable={true}
                     placeholderTextColor = "gray"
-                    placeholder=" Location"
+                    placeholder=" State"
                 ></TextInput>
             </View>
            </View>
            <View style={{flex:1.5,borderWidth:0,justifyContent:'space-evenly',alignItems:'center'}}>
-                <Text style={{textAlign:'center',width:'80%',fontFamily:'Poppins',color:'black',paddingTop:40}}>
-                By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text>
-                </Text>
-                <Button title="REGISTER" buttonStyle={{width:300,height:56,backgroundColor:'#F55633',marginTop:20,borderRadius:8}}/>
+                <Button title="Confirm" buttonStyle={{width:300,height:56,backgroundColor:'#F55633',marginTop:20,borderRadius:8,marginBottom:10}}/>
            </View>
        </KeyboardAwareScrollView>
     )
 }
 
-export default Register;
+export default AddAddress;
 
 const styles = StyleSheet.create({
     container: {

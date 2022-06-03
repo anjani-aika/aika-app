@@ -54,7 +54,7 @@ const Login = ({navigation}) => {
          
         </View>
         <View style={styles.button}>
-        <Button title="LOG IN" buttonStyle={{width:280,height:50,backgroundColor:'#F55633'}}/>
+        <Button title="LOG IN" buttonStyle={{width:280,height:50,backgroundColor:'#F55633',borderRadius:8}}/>
         </View>
         <View style={styles.termsAndServices}>
           <Text style={{textAlign:'center',width:'100%',color:'black'}}>By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text></Text>

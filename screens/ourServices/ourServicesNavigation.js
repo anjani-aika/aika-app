@@ -1,9 +1,9 @@
 import React from 'react';
 import {Button, View} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Addition from './Addition';
+import AdditionNavigation from './additions/additionNavigation';
 import NewConstruction from './NewConstruction';
-import Remodel from './Remodel';
+import RemodelNavigation from './remodel/remodelNavigation';
 import OurServices from './OurServices';
 const OurServicesNavigation = () => {
     const Stack = createNativeStackNavigator();
@@ -23,7 +23,7 @@ const OurServicesNavigation = () => {
             />
              <Stack.Screen
                 name="Addition"
-                component={Addition}
+                component={AdditionNavigation}
                 options={
                     {
                         headerShown: false
@@ -41,7 +41,7 @@ const OurServicesNavigation = () => {
             />
             <Stack.Screen
                 name="Remodel"
-                component={Remodel}
+                component={RemodelNavigation}
                 options={
                     {
                         headerShown: false

@@ -75,8 +75,8 @@ const OrderDetails=({navigation})=>{
         <AllItems/>
         <Pricing/>
         <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10}}>
-            <View style={{flex:1}}><Button title="Edit" onPress={()=>{navigation.navigate('EditOrders')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center'}}/></View>
-            <View style={{flex:1}}><Button title="Accept" onPress={()=>{navigation.navigate('MyOrdersScreen')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center'}}/></View>
+            <View style={{flex:1}}><Button title="Edit" onPress={()=>{navigation.navigate('EditOrders')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+            <View style={{flex:1}}><Button title="Accept" onPress={()=>{navigation.navigate('MyOrdersScreen')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
 
         </View>
         </ScrollView>
