@@ -12,6 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import CustomSidebarMenu from './customSidenavbar';
 import OrderNavigation from './OrderNavigation';
 import OurServicesNavigation from '../ourServices/ourServicesNavigation';
+import Notification from '../ourServices/Notification';
 
 const Drawer = createDrawerNavigator();
 
@@ -52,6 +53,26 @@ const MyDrawer=()=>{
             
             />
             <Drawer.Screen
+                name="Notification"
+                component={Notification}
+                options={{
+               
+                drawerActiveBackgroundColor:'none',
+                drawerContentContainerStyle:{display:'none'},
+                drawerLabelStyle:{display:'none'},
+                headerShown:true,
+                header: ({ scene }) => {
+                        // const { options } = scene.descriptor;
+                        const title ="MyAccount"
+                        return (
+                            <Header screen={title}/>
+                        );
+                    }
+
+                }}
+            
+            />
+             <Drawer.Screen
                 name="My Account"
                 component={MyAccount}
                 options={{

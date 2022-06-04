@@ -8,7 +8,7 @@ import {AuthContext} from '../../components/context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import axios from "axios";
+// import axios from "axios";
 import Toast from 'react-native-toast-message';
 const Login = ({navigation}) => {
   const [email,setEmail] = useState("test1@gmail.com");
@@ -91,6 +91,9 @@ const Login = ({navigation}) => {
         <View style={styles.button}>
         <Button onPress={()=>{loginHandle()}} title="LOG IN" buttonStyle={{width:280,height:50,backgroundColor:'#F55633'}}/>
         </View>
+        <TouchableOpacity onPress={()=>{  navigation.navigate('Register');}}>
+            <Text style={{color:'#F55633'}}>Register</Text>
+          </TouchableOpacity>
         <View style={styles.termsAndServices}>
           <Text style={{textAlign:'center',width:'100%',color:'black'}}>By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text></Text>
         </View>

@@ -37,7 +37,7 @@ const CustomSidebarMenu = (props) => {
 
       </View>
       <View style={{width:'97%',height:5,backgroundColor:'#E7E7E7',position:'absolute',top:140}}></View>
-      <DrawerContentScrollView {...props}>
+      <DrawerContentScrollView {...props} style={{marginTop:-25}}>
         <DrawerItemList {...props} />
         <Image 
         style={{height:45,width:120,resizeMode:'stretch',alignSelf:'center',marginTop:10}} 

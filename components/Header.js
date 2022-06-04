@@ -11,7 +11,10 @@ export default function Header(){
             <Icon name="menu" size={24} color="black" />
         </TouchableOpacity>
         <View>
-            <Icon name="notifications-none"/>
+            <Icon name="notifications-none"
+                onPress={()=>navigation.navigate('Notification')}
+                />
+
         </View>
     </View>
     )

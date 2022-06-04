@@ -15,12 +15,33 @@ import Window from './Window';
 import CheckoutScreen from './CheckoutScreen';
 import CheckoutPage from './CheckoutPage';
 import AddAddress from './AddAddress';
+import BookingConfirmed from './BookingConfirmed';
+import OurServicesNavigation from '../ourServicesNavigation';
+
 const AdditionNavigation = () => {
     const Stack = createNativeStackNavigator();
     return (
         <Stack.Navigator
             initialRouteName="Addition"
         >
+              <Stack.Screen
+                name="BookingConfirmed"
+                component={BookingConfirmed}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
+            <Stack.Screen
+                name="OurServicesNavigation"
+                component={OurServicesNavigation}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
             <Stack.Screen
                 name="AddAddress"
                 component={AddAddress}

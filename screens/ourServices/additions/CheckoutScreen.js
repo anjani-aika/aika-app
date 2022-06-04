@@ -1,14 +1,14 @@
 import React,{useState} from 'react';
 import {View,Text, StyleSheet, TouchableOpacity,Image,TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import CheckBox from '@react-native-community/checkbox';
-import { Button, Icon } from 'react-native-elements';
+// import CheckBox from '@react-native-community/checkbox';
+import { Button, Icon, CheckBox } from 'react-native-elements';
 import PageButton from '../../../components/PageButton';
 import { ScrollView } from 'react-native-gesture-handler';
 import Checkout from './CheckoutScreen';
 
 const SingleItem=({src,material})=>{
-    const [value,setValue]=useState(false);
+    //const [value,setValue]=useState(false);
     return(
         <View style={{flexDirection:'column',marginTop:30}}>
             <View style={{flexDirection:'row',paddingHorizontal:25,justifyContent:'space-between',alignItems:'center'}}>
@@ -19,14 +19,21 @@ const SingleItem=({src,material})=>{
             />
             <Text style={{fontSize:18,fontWeight:'500',fontFamily:'Poppins'}}>{material}</Text>
             </View>
-            
             <CheckBox
-                value={value}
-                onValueChange={()=>{setValue(!value)}}
-                 style={{justifyContent:'flex-end'}}
+                title=''
+                checked={true}
+                checkedColor='#F55633'
+                uncheckedColor='gray'
             />
+            {/* <CheckBox
+                value={true}
+                // onValueChange={()=>{setValue(!value)}}
+                boxType='circle'
+                tintColors={{ true: '#F55633', false: 'gray' }}
+                style={{justifyContent:'flex-end'}}
+            /> */}
             </View>
-            {value===true?<View style={{marginHorizontal:25,marginTop:20}}>
+            {/* {value===true?<View style={{marginHorizontal:25,marginTop:20}}>
                 <TextInput
                     style={{width:'100%',height:62,borderWidth:1,borderRadius:4,borderColor:'gray', color: 'black'}}
                     multiline={true}
@@ -34,7 +41,7 @@ const SingleItem=({src,material})=>{
                     placeholderTextColor = "gray"
                     placeholder=" Enter Description"
                 ></TextInput>
-            </View>:null}
+            </View>:null} */}
             
         </View>
     )
