@@ -1,18 +1,20 @@
 import { Height, Scale } from '@mui/icons-material';
 import React, {useState} from 'react';
 import {Image} from 'react-native';
-import {StatusBar, StyleSheet, Text, View,TextInput} from 'react-native';
+import {StatusBar, StyleSheet, Text, View,TextInput,ActivityIndicator} from 'react-native';
 import {Button, Input,Icon} from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../../components/context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-// import axios from "axios";
+import axios from "axios";
 import Toast from 'react-native-toast-message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Login = ({navigation}) => {
   const [email,setEmail] = useState("test1@gmail.com");
   const [password,setPassword] = useState("test@123");
+  const [loading,setIsLoading] = useState(false);
   const [isLogin,setIsLogin] = useState(false);
   const {signIn} = React.useContext(AuthContext);
 
@@ -20,24 +22,28 @@ const Login = ({navigation}) => {
     setIsLogin(true);
     
     if(email != "" && password != ""){
-      let headers={
-        'token':'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3QxQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoidGVzdEAxMjMiLCJBUElfVElNRSI6MTY1NDAxMTkwNX0.tx-5NV242WgaWpGUMdtxZ6fMA2TukZVKJIVvUDFKbs0'
-    }
+      setIsLoading(true);
+     
     let data ={
-      "username":"test1@gmail.com",
-      "password":"test@123"
+      "username":email,
+      "password":password
   }
   axios
-    .post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_login',data, { headers: headers })
+    .post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_login',data)
     .then((responseData) => {
       console.log('POST Response: ' + JSON.stringify(responseData.data));
       if(responseData.data.status === 200){
+        setIsLoading(false)
+        AsyncStorage.setItem("user_info",JSON.stringify(responseData.data.user_info) );
         console.log("responseData.data.status ---",responseData.data.message)
         Toast.show({
           type: 'success',
           text1:responseData.data.message ,
          
         });
+        setTimeout(()=>{
+          navigation.navigate('Home');
+        },1000)
         // "Login Successfull"
       }
      
@@ -52,9 +58,11 @@ const Login = ({navigation}) => {
 
   return (
     <KeyboardAwareScrollView  contentContainerStyle={styles.login}>
+     
       <View style={styles.viel}>
         <Text style={{ fontSize:32, fontWeight:'600',fontFamily:'Poppins',color:'white'}}>DOOR DEVELOPMENT</Text>
       </View>
+      <ActivityIndicator style={{position:'absolute'}} size="large" color="#F55633" animating={loading}/>
       <View style={styles.belowViel}>
       <View style={[styles.input,{ borderColor:isLogin && email === "" ? 'red' :'gray',borderWidth:1,}]}>
         {/* <FontAwesome5 name={'mail'}  size={26} style={styles.icons} /> */}
@@ -115,7 +123,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection:'column'
   },
-
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 80
+ },
   input:{
     width:'88%',
     height:50,

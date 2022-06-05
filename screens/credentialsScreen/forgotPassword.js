@@ -8,15 +8,15 @@ import {AuthContext} from '../../components/context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const ForgotPassword = ({navigation}) => {
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-  });
-
+  const [email,setEmail]=useState('');
+  const [isForgotPwd,setIsForgotPwd]=useState(false);
   const {signIn} = React.useContext(AuthContext);
 
-  const loginHandle = (email, pass) => {
-    signIn(email, pass);
+  const onForgotPwdHandle = () => {
+      setIsForgotPwd(true);
+      if(email != ""){
+        
+      }
   };
 
   return (
@@ -27,12 +27,12 @@ const ForgotPassword = ({navigation}) => {
       <View style={styles.belowViel}>
         <View >
             <Text style={{fontWeight:'bold',color:'#F55633',fontSize:25,textAlign:'center',marginBottom:30}}>Reset Password</Text>
-            <View style={styles.input}>
+            <View style={[styles.input,{ borderColor:isForgotPwd && email === "" ? 'red':'gray',borderWidth:1}]}>
                 <Icon name='mail-outline' size={30} color="black" style={{alignSelf:'center'}}/>
                 <TextInput
                     style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
-                    multiline={true}
-                    editable={true}
+                    onChangeText={(text)=>{setEmail(text)}}
+                    value={email}
                     placeholderTextColor = "gray"
                     placeholder=" Enter Email Address"
                 ></TextInput>
@@ -41,7 +41,7 @@ const ForgotPassword = ({navigation}) => {
         
 
         <View style={styles.button}>
-        <Button title=" GET A NEW PASSWORD" buttonStyle={{width:280,height:50,backgroundColor:'#F55633',borderRadius:8}}/>
+        <Button onPress={()=>{onForgotPwdHandle()}} title=" GET A NEW PASSWORD" buttonStyle={{width:280,height:50,backgroundColor:'#F55633'}}/>
         </View>
         <View style={styles.termsAndServices}>
           <Text style={{textAlign:'center',width:'100%',color:'black',fontFamily:'Poppins'}}>By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text></Text>
@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
   input:{
     width:'88%',
     height:50,
-    borderColor:'gray',
-    borderWidth:1,
+    // borderColor:'gray',
+    // borderWidth:1,
     flexDirection:'row',
     justifyContent:'space-evenly',
     alignItems:'center',

@@ -5,8 +5,8 @@ import Bathroom from './Bathroom';
 import Painting from './Painting';
 import Plumbing from './Plumbing';
 import Electrical from './Electrical';
-import Doors from './Doors';
-import Roofings from './Roofings';
+import Door from './Door';
+import Roofing from './Roofing';
 import Flooring from './Flooring';
 import Kitchen from './Kitchen';
 import Addition2 from './Additions2';
@@ -142,8 +142,8 @@ const AdditionNavigation = () => {
                 }
             />
              <Stack.Screen
-                name="Doors"
-                component={Doors}
+                name="Door"
+                component={Door}
                 options={
                     {
                         headerShown: false
@@ -151,8 +151,8 @@ const AdditionNavigation = () => {
                 }
             />
              <Stack.Screen
-                name="Roofings"
-                component={Roofings}
+                name="Roofing"
+                component={Roofing}
                 options={
                     {
                         headerShown: false

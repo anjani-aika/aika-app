@@ -1,6 +1,6 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {View,Text, StyleSheet, TouchableOpacity,Image,TextInput} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+
 // import CheckBox from '@react-native-community/checkbox';
 import { Button, Icon, CheckBox } from 'react-native-elements';
 import PageButton from '../../../components/PageButton';
@@ -46,7 +46,12 @@ const SingleItem=({src,material})=>{
         </View>
     )
 }
-const Kitchen=({navigation})=>{
+const Kitchen=({props})=>{
+    useEffect(() => {
+        console.log("PROPS -----",props.route)
+    })
+
+   
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
         <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60,borderColor:'gray'}}>
