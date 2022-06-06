@@ -44,7 +44,7 @@ const Register = ({ navigation }) => {
                   });
                   setTimeout(()=>{
                     navigation.navigate('Home');
-                  },1000)
+                  },500)
                 
                   // "Login Successfull"
                 }

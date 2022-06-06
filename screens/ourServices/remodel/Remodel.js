@@ -53,7 +53,7 @@ const Remodel=({props,navigation})=>{
                 return (
                    
                     <View>
-                         <TouchableOpacity onPress={()=>{data.category_name == "Addition" ? props.navigation.navigate('Addition2',{categ_id:data.cate_id}) : props.navigation.navigate(data.category_name,{categ_id:data.cate_id})}}><PageButton buttonName={data.category_name}/></TouchableOpacity>
+                         <TouchableOpacity onPress={()=>{ navigation.navigate('Kitchen',{categ_id:data.cate_id,categ_name:data.category_name})}}><PageButton buttonName={data.category_name}/></TouchableOpacity>
                     </View>
                 )
             })

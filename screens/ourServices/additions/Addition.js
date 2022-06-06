@@ -54,7 +54,7 @@ const Addition=({navigation})=>{
                 return (
                    
                     <View>
-                         <TouchableOpacity onPress={()=>{data.category_name == "Addition" ? navigation.navigate('Addition2') : navigation.navigate(data.category_name)}}><PageButton buttonName={data.category_name}/></TouchableOpacity>
+                         <TouchableOpacity onPress={()=>{ navigation.navigate('Kitchen',{categ_id:data.cate_id,categ_name:data.category_name})}}><PageButton buttonName={data.category_name}/></TouchableOpacity>
                     </View>
                 )
             })
