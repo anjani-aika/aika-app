@@ -17,7 +17,7 @@ const SingleItem=({src,material})=>{
                 source={src}
                 style={{marginRight:20}}
             />
-            <Text style={{fontSize:18,fontWeight:'500',fontFamily:'Poppins'}}>{material}</Text>
+            <Text style={{fontSize:18,fontWeight:'500',fontFamily:'Poppins-Light'}}>{material}</Text>
             </View>
             <CheckBox
                 title=''
@@ -51,7 +51,7 @@ const Kitchen=({navigation})=>{
         <View style={{flex:1,backgroundColor:'white'}}>
         <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60,borderColor:'gray'}}>
             
-            <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
+            <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
                Kitchen
             </Text>
             <SingleItem src={require('../../../static/orders/Countertops.png')} material={'Countertops'}/>

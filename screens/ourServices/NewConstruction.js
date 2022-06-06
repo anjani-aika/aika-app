@@ -8,7 +8,7 @@ import PageButton from '../../components/PageButton';
 const NewConstruction=({navigation})=>{
     return(
         <View style={{backgroundColor:'white',flex:1,paddingTop:60}}>
-            <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:10}}>
+            <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:10}}>
                New Construction
             </Text>
            <View style={{flexDirection:'row',paddingHorizontal:25,justifyContent:'space-between',marginVertical:20}}>

@@ -66,7 +66,7 @@ const Pricing=()=>{
 const OrderDetails=({navigation})=>{
     return(
         <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60,paddingTop:25}}>
-        <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
+        <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
             My Orders
         </Text>
         <Text style={{paddingLeft:25,color:'black'}}>Order ID : GISo7OmXnp59</Text>

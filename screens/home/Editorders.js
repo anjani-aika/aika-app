@@ -35,7 +35,7 @@ const EditOrders=({navigation})=>{
     return(
         <View style={{backgroundColor:'white',flex:1,paddingTop:60,paddingTop:25}}>
         <View style={{flex:9}}>
-        <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
+        <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
             Edit Orders
         </Text>
         <AllItems/>

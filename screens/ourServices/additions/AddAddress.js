@@ -13,7 +13,8 @@ const AddAddress = ({ navigation }) => {
     }
     const updateAddresses=async()=>{
         const before= await AsyncStorage.getItem('Addresses');
-        console.log(before)
+        console.log(before);
+        await AsyncStorage.removeItem('Addresses');
         if(before){
             console.log(before);
             const {Address}=JSON.parse(before);
@@ -36,7 +37,7 @@ const AddAddress = ({ navigation }) => {
        <KeyboardAwareScrollView contentContainerStyle={{height:650,paddingTop:65,backgroundColor:'white'}}>
 
             
-            <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
+            <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
                Add Address
             </Text>
            

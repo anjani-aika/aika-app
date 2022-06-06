@@ -15,7 +15,7 @@ const Register = ({ navigation }) => {
 
        <KeyboardAwareScrollView contentContainerStyle={{height:650,paddingLeft:10,paddingRight:10,paddingTop:10,paddingBottom:10}}>
            <View  style={{flex:1,borderWidth:0,justifyContent:'center',alignItems:'center'}}>
-                <Text style={{fontWeight:'600',fontSize:24,fontFamily:'Poppins', color:'black'}}>Register New User</Text>
+                <Text style={{fontWeight:'bold',fontSize:24,fontFamily:'Poppins-Bold', color:'black'}}>Register New User</Text>
            </View>
            <View style={{flex:4,borderWidth:0,justifyContent:'space-evenly',alignItems:'center'}}>
             <View style={styles.input}>
@@ -70,10 +70,10 @@ const Register = ({ navigation }) => {
             </View>
            </View>
            <View style={{flex:1.5,borderWidth:0,justifyContent:'space-evenly',alignItems:'center'}}>
-                <Text style={{textAlign:'center',width:'80%',fontFamily:'Poppins',color:'black',paddingTop:40}}>
+                <Text style={{textAlign:'center',width:'80%',fontFamily:'Poppins-Light',color:'black',paddingTop:40}}>
                 By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text>
                 </Text>
-                <Button title="REGISTER" buttonStyle={{width:300,height:56,backgroundColor:'#F55633',marginTop:20,borderRadius:8}}/>
+                <Button title="REGISTER" buttonStyle={{width:300,height:56,backgroundColor:'#F55633',marginTop:20,borderRadius:10}}/>
            </View>
        </KeyboardAwareScrollView>
     )
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-evenly',
         alignItems:'center',
-        borderRadius:6,
+        borderRadius:8,
         backgroundColor:'#F6F6F6'
       },
 

@@ -7,6 +7,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../../components/context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 const ForgotPassword = ({navigation}) => {
   const [data, setData] = useState({
     email: '',
@@ -22,7 +24,7 @@ const ForgotPassword = ({navigation}) => {
   return (
     <KeyboardAwareScrollView contentContainerStyle={styles.login}>
       <View style={styles.viel}>
-        <Text style={{ fontSize:30, fontWeight:'bold',color:'white'}}>DOOR DEVELOPMENT</Text>
+        <Text style={{ fontSize:30, fontWeight:'bold',color:'white',textAlign:'center'}}>PACIFIC RED DOOR DEVELOPMENT</Text>
       </View>
       <View style={styles.belowViel}>
         <View >
@@ -30,7 +32,7 @@ const ForgotPassword = ({navigation}) => {
             <View style={styles.input}>
                 <Icon name='mail-outline' size={30} color="black" style={{alignSelf:'center'}}/>
                 <TextInput
-                    style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
+                    style={{width:'80%',borderWidth:0,borderRadius:8,borderColor:'gray', color: 'black'}}
                     multiline={true}
                     editable={true}
                     placeholderTextColor = "gray"
@@ -40,11 +42,14 @@ const ForgotPassword = ({navigation}) => {
         </View>
         
 
-        <View style={styles.button}>
-        <Button title=" GET A NEW PASSWORD" buttonStyle={{width:280,height:50,backgroundColor:'#F55633',borderRadius:8}}/>
+        <View>
+        <Button title=" GET A NEW PASSWORD" buttonStyle={{width:280,height:50,backgroundColor:'#F55633',borderRadius:10}}/>
         </View>
+        <TouchableOpacity onPress={()=>{  navigation.navigate('Login');}}>
+            <Text style={{color:'#F55633',fontSize:22,fontFamily:'Poppins-Regular'}}>Login</Text>
+          </TouchableOpacity>
         <View style={styles.termsAndServices}>
-          <Text style={{textAlign:'center',width:'100%',color:'black',fontFamily:'Poppins'}}>By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text></Text>
+          <Text style={{textAlign:'center',width:'100%',color:'black',fontFamily:'Poppins-Regular'}}>By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text></Text>
         </View>
       </View>
     </KeyboardAwareScrollView>
@@ -67,6 +72,8 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   },
   input:{
+    borderRadius:8,
+    backgroundColor:'#F6F6F6',
     width:'88%',
     height:50,
     borderColor:'gray',

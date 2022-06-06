@@ -8,7 +8,7 @@ import {AuthContext} from '../../components/context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-// import axios from "axios";
+import axios from "axios";
 import Toast from 'react-native-toast-message';
 const Login = ({navigation}) => {
   const [email,setEmail] = useState("test1@gmail.com");
@@ -53,14 +53,14 @@ const Login = ({navigation}) => {
   return (
     <KeyboardAwareScrollView  contentContainerStyle={styles.login}>
       <View style={styles.viel}>
-        <Text style={{ fontSize:32, fontWeight:'600',fontFamily:'Poppins',color:'white'}}>DOOR DEVELOPMENT</Text>
+        <Text style={{ fontSize:30, fontWeight:'bold',color:'white',textAlign:'center'}}>PACIFIC RED DOOR DEVELOPMENT</Text>
       </View>
       <View style={styles.belowViel}>
       <View style={[styles.input,{ borderColor:isLogin && email === "" ? 'red' :'gray',borderWidth:1,}]}>
         {/* <FontAwesome5 name={'mail'}  size={26} style={styles.icons} /> */}
           <Icon name='mail-outline' size={30} color="black" style={{alignSelf:'center'}}/>
           <TextInput
-            style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
+            style={{width:'80%',borderWidth:0,borderRadius:8,borderColor:'gray', color: 'black'}}
             multiline={true}
             editable={true}
             onChangeText={(text)=>{setEmail(text)}}
@@ -72,7 +72,7 @@ const Login = ({navigation}) => {
         <View style={[styles.input,{ borderColor:isLogin && password === "" ? 'red' :'gray',borderWidth:1,}]}>
         <Icon name='lock-outline' size={30} color="black" style={{alignSelf:'center',justifyContent:'center'}}/>
           <TextInput
-            style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
+            style={{width:'80%',borderWidth:0,borderRadius:8,borderColor:'gray', color: 'black'}}
             // multiline={true}
             // editable={true}
             onChangeText={(text)=>{setPassword(text)}}
@@ -88,11 +88,11 @@ const Login = ({navigation}) => {
           </TouchableOpacity>
          
         </View>
-        <View style={styles.button}>
-        <Button onPress={()=>{loginHandle()}} title="LOG IN" buttonStyle={{width:280,height:50,backgroundColor:'#F55633'}}/>
+        <View >
+        <Button onPress={()=>{loginHandle()}} title="LOG IN" buttonStyle={{width:280,height:50,backgroundColor:'#F55633',borderRadius:10}}/>
         </View>
         <TouchableOpacity onPress={()=>{  navigation.navigate('Register');}}>
-            <Text style={{color:'#F55633'}}>Register</Text>
+            <Text style={{color:'#F55633',fontSize:22, fontFamily:'Poppins-Regular',}}>Register</Text>
           </TouchableOpacity>
         <View style={styles.termsAndServices}>
           <Text style={{textAlign:'center',width:'100%',color:'black'}}>By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text></Text>
@@ -119,6 +119,8 @@ const styles = StyleSheet.create({
   input:{
     width:'88%',
     height:50,
+    borderRadius:8,
+    backgroundColor:'#F6F6F6',
     // borderColor:'gray',
     // borderWidth:1,
     flexDirection:'row',

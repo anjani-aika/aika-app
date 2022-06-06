@@ -21,7 +21,7 @@ const OrderCard=()=>{
 const Notification=({navigation})=>{
     return(
         <ScrollView style={{backgroundColor:'white',flex:1,paddingTop:60}}>
-            <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
+            <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
                 Notifications
             </Text>
             <TouchableOpacity onPress={()=>{navigation.navigate('OrderDetails')}}>

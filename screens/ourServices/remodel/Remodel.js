@@ -8,7 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 const Remodel=({navigation})=>{
     return(
         <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60}}>
-            <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:10}}>
+            <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:10}}>
                Remodel
             </Text>
             <TouchableOpacity onPress={()=>{navigation.navigate('Kitchen')}}><PageButton buttonName={'Kitchen'}/></TouchableOpacity>

@@ -7,7 +7,7 @@ import PageButton from '../../../components/PageButton';
 const Flooring=({navigation})=>{
     return(
         <View style={{backgroundColor:'white',flex:1,paddingTop:60}}>
-            <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:10}}>
+            <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:10}}>
                Flooring
             </Text>
             <PageButton buttonName={'New Construction'}/>
