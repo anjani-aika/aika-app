@@ -7,7 +7,7 @@
  */
 import 'react-native-gesture-handler'
 import React from 'react';
-import {SafeAreaView,ScrollView,StatusBar,StyleSheet,Text, useColorScheme,View} from 'react-native';
+import {SafeAreaView,ScrollView,StatusBar,StyleSheet,Text, useColorScheme,View,} from 'react-native';
 import { useMemo } from 'react';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -74,9 +74,10 @@ const App= () => {
            
             <> 
         {/* <Stack.Screen name="Start" component={Start} />  */}
-           <Stack.Screen name="Home" component={MyDrawer} /> 
+          
+           <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="Start" component={Start} /> 
-              <Stack.Screen name="Login" component={Login} />
+           <Stack.Screen name="Home" component={MyDrawer} /> 
               <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
               <Stack.Screen name="Register" component={Register} />
               

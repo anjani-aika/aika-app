@@ -1,5 +1,4 @@
- 
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -7,16 +6,55 @@ import {
   Image,
   Text,
   Linking,
+  TouchableOpacity
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from "axios";
 import {Icon} from 'react-native-elements';
 import {
   DrawerContentScrollView,
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
  
 const CustomSidebarMenu = (props) => {
+  const [name,setName]=useState('');
+  useEffect(() => {
+    getUserInfo();
+  },[]);
+  const getUserInfo = async () =>{
+
+    let res = await AsyncStorage.getItem("user_info");
+    let arr = JSON.parse(res);
+    console.log("ARRRRR ------",arr);
+    if(arr!= null || arr === [] || arr == ""){
+       
+        let headers={
+            'token':arr.token
+        }
+        axios
+          .get('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_detail?user_id='+arr.user_id,{headers:headers})
+          .then((responseData) => {
+            console.log('POST Response: ' + JSON.stringify(responseData.data.data));
+            if(responseData.data.status === 200){
+             
+               
+                let userArr =  responseData.data.data[0];
+                let Name = userArr['full_name'];
+                setName(Name);
+                console.log("USER DAYA --",name );
+
+            }
+           
+          })
+          .catch((error) => {
+          
+            console.log(error);
+           
+          });
+    }
+  }
   // console.log("Custom sidebar",props.navigation);
   const BASE_PATH =
     'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
@@ -33,7 +71,7 @@ const CustomSidebarMenu = (props) => {
         />
       </TouchableOpacity>
      
-        <Text style={{fontSize:20,fontWeight:'bold',color:'#F55633',marginTop:70,marginLeft:20}}>Hey There !</Text>
+        <Text style={{fontSize:20,fontWeight:'bold',color:'#F55633',marginTop:70,marginLeft:20}}>Hey {name} !</Text>
 
       </View>
       <View style={{width:'97%',height:5,backgroundColor:'#E7E7E7',position:'absolute',top:140}}></View>

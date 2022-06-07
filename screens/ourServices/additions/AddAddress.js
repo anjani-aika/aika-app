@@ -23,7 +23,7 @@ const AddAddress = ({ navigation }) => {
         }else{
             await AsyncStorage.setItem('Addresses',JSON.stringify({Address:[newAdd]}));
         }
-        navigation.navigate('CheckoutPage');
+        navigation.navigate('CheckoutPage2');
        
     }
 
@@ -34,7 +34,7 @@ const AddAddress = ({ navigation }) => {
     });
     return (
 
-       <KeyboardAwareScrollView contentContainerStyle={{height:650,paddingTop:65,backgroundColor:'white'}}>
+       <KeyboardAwareScrollView contentContainerStyle={{height:750,paddingTop:65,backgroundColor:'white'}}>
 
             
             <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
@@ -104,7 +104,7 @@ const AddAddress = ({ navigation }) => {
             </View>
            </View>
            <View style={{flex:1.5,borderWidth:0,justifyContent:'space-evenly',alignItems:'center'}}>
-                <Button title="Confirm" onPress={()=>onConfirm()} buttonStyle={{width:300,height:56,backgroundColor:'#F55633',marginTop:20,borderRadius:8,marginBottom:10}}/>
+                <Button title="Confirm" onPress={()=>onConfirm()} buttonStyle={{width:300,height:56,backgroundColor:'#F55633',marginTop:0,borderRadius:8,marginBottom:10}}/>
            </View>
        </KeyboardAwareScrollView>
     )

@@ -9,9 +9,9 @@ import Checkout from './CheckoutScreen';
 import { CheckBox } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SingleAddress=({setAddress,add1,add2,landmark,state,pincode})=>{
+const SingleAddress=({ setAddress, add1,add2,landmark,state,pincode})=>{
     const [value,setValue]=useState(false);
-    
+
     return(
      
             <View style={{flexDirection:'row',marginVertical:20,width:340,height:87,alignSelf:'center',borderColor:'gray',borderWidth:1,backgroundColor:(value==true?'#FFBB9E':'white')}}>
@@ -37,9 +37,10 @@ const SingleAddress=({setAddress,add1,add2,landmark,state,pincode})=>{
         
     )
 }
-const CheckoutPage=({navigation,route})=>{
+const CheckoutPage2=({navigation})=>{
     const [oldAddresses,setOldAddresses]=useState([]);
     const [deliveryAdd,setDeliveryAdd]=useState(null);
+
     const getAddresses=async()=>{
         const addresses=await AsyncStorage.getItem('Addresses');
         //await AsyncStorage.removeItem('Addresses');
@@ -65,6 +66,8 @@ const CheckoutPage=({navigation,route})=>{
     const goToBookingConfirm=async()=>{
         if(deliveryAdd){
             navigation.navigate('BookingConfirmed',{checkedItems:route.params.checkedItems,address:deliveryAdd})
+        }else{
+            console.log("must select an address");
         }
         
     }
@@ -92,4 +95,4 @@ const CheckoutPage=({navigation,route})=>{
         </View>
     )
 }
-export default CheckoutPage;
+export default CheckoutPage2;

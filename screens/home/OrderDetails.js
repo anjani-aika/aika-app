@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Button, Icon } from 'react-native-elements';
 import Header from '../../components/Header';
 import { ScrollView } from 'react-native-gesture-handler';
+import axios from 'axios';
+
 const Item=({src,material})=>{
     return(
         <View style={{flexDirection:'row',paddingLeft:25,marginTop:30}}>
@@ -64,6 +66,33 @@ const Pricing=()=>{
     )
 }
 const OrderDetails=({navigation})=>{
+   
+    
+    const acceptingTheOrder=async(req_id,invoice_id)=>{
+        try{
+            let res = await AsyncStorage.getItem("user_info");
+            let arr = JSON.parse(res);
+            console.log("ARRRRR ------",arr);
+            const orderAcceptResult=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/Order_accept',{
+                                            req_id:req_id,
+                                            invoice_id:invoice_id
+                                        },{
+                                            headers:{
+                                                'token':arr.token
+                                            }
+                                    });
+            if(orderAcceptResult.status=='200'){
+                console.log("Result: ",orderAcceptResult);
+                navigation.navigate('MyOrdersScreen');
+            }else{
+                console.log("Error in accepting the order.");
+            }
+        }catch(err){
+            console.log("Error: ",err);
+        }
+
+     
+    }
     return(
         <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60,paddingTop:25}}>
         <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
@@ -76,7 +105,7 @@ const OrderDetails=({navigation})=>{
         <Pricing/>
         <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10}}>
             <View style={{flex:1}}><Button title="Edit" onPress={()=>{navigation.navigate('EditOrders')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
-            <View style={{flex:1}}><Button title="Accept" onPress={()=>{navigation.navigate('MyOrdersScreen')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+            <View style={{flex:1}}><Button title="Accept" onPress={()=>{acceptingTheOrder()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
 
         </View>
         </ScrollView>

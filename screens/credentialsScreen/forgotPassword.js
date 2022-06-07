@@ -10,15 +10,15 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ForgotPassword = ({navigation}) => {
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-  });
-
+  const [email,setEmail]=useState('');
+  const [isForgotPwd,setIsForgotPwd]=useState(false);
   const {signIn} = React.useContext(AuthContext);
 
-  const loginHandle = (email, pass) => {
-    signIn(email, pass);
+  const onForgotPwdHandle = () => {
+      setIsForgotPwd(true);
+      if(email != ""){
+        
+      }
   };
 
   return (
@@ -29,12 +29,12 @@ const ForgotPassword = ({navigation}) => {
       <View style={styles.belowViel}>
         <View >
             <Text style={{fontWeight:'bold',color:'#F55633',fontSize:25,textAlign:'center',marginBottom:30}}>Reset Password</Text>
-            <View style={styles.input}>
+            <View style={[styles.input,{ borderColor:isForgotPwd && email === "" ? 'red':'gray',borderWidth:1}]}>
                 <Icon name='mail-outline' size={30} color="black" style={{alignSelf:'center'}}/>
                 <TextInput
-                    style={{width:'80%',borderWidth:0,borderRadius:8,borderColor:'gray', color: 'black'}}
-                    multiline={true}
-                    editable={true}
+                    style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
+                    onChangeText={(text)=>{setEmail(text)}}
+                    value={email}
                     placeholderTextColor = "gray"
                     placeholder=" Enter Email Address"
                 ></TextInput>
@@ -42,8 +42,8 @@ const ForgotPassword = ({navigation}) => {
         </View>
         
 
-        <View>
-        <Button title=" GET A NEW PASSWORD" buttonStyle={{width:280,height:50,backgroundColor:'#F55633',borderRadius:10}}/>
+        <View style={styles.button}>
+        <Button onPress={()=>{onForgotPwdHandle()}} title=" GET A NEW PASSWORD" buttonStyle={{width:280,height:50,backgroundColor:'#F55633'}}/>
         </View>
         <TouchableOpacity onPress={()=>{  navigation.navigate('Login');}}>
             <Text style={{color:'#F55633',fontSize:22,fontFamily:'Poppins-Regular'}}>Login</Text>
@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     backgroundColor:'#F6F6F6',
     width:'88%',
     height:50,
-    borderColor:'gray',
-    borderWidth:1,
+    // borderColor:'gray',
+    // borderWidth:1,
     flexDirection:'row',
     justifyContent:'space-evenly',
     alignItems:'center',

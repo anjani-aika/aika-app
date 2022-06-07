@@ -5,8 +5,8 @@ import Bathroom from './Bathroom';
 import Painting from './Painting';
 import Plumbing from './Plumbing';
 import Electrical from './Electrical';
-import Doors from './Doors';
-import Roofings from './Roofings';
+import Door from './Door';
+import Roofing from './Roofing';
 import Flooring from './Flooring';
 import Kitchen from './Kitchen';
 import Addition2 from './Additions2';
@@ -15,6 +15,7 @@ import Window from './Window';
 import CheckoutScreen from './CheckoutScreen';
 import CheckoutPage from './CheckoutPage';
 import AddAddress from './AddAddress';
+import CheckoutPage2 from './CheckoutPage2';
 import BookingConfirmed from './BookingConfirmed';
 import OurServicesNavigation from '../ourServicesNavigation';
 
@@ -63,6 +64,15 @@ const AdditionNavigation = () => {
             <Stack.Screen
                 name="CheckoutPage"
                 component={CheckoutPage}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
+            <Stack.Screen
+                name="CheckoutPage2"
+                component={CheckoutPage2}
                 options={
                     {
                         headerShown: false
@@ -142,8 +152,8 @@ const AdditionNavigation = () => {
                 }
             />
              <Stack.Screen
-                name="Doors"
-                component={Doors}
+                name="Door"
+                component={Door}
                 options={
                     {
                         headerShown: false
@@ -151,8 +161,8 @@ const AdditionNavigation = () => {
                 }
             />
              <Stack.Screen
-                name="Roofings"
-                component={Roofings}
+                name="Roofing"
+                component={Roofing}
                 options={
                     {
                         headerShown: false
