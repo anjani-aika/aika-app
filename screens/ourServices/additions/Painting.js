@@ -162,6 +162,22 @@ const Painting=({navigation,route})=>{
         
         return checkedItems;
     }
+    const addmore=async()=>{
+        let checkedItems=await getCheckedItems();
+        const toBeBookedItems=await AsyncStorage.getItem("checkedItems");
+        if(toBeBookedItems!=null && toBeBookedItems!=undefined){
+            await AsyncStorage.removeItem("checkedItems");
+            const alreadyCheckedItems= JSON.parse(toBeBookedItems);
+            let allcheckedItems=[...alreadyCheckedItems,...checkedItems]
+            console.log("All checked items",allcheckedItems);
+            await AsyncStorage.setItem("checkedItems",JSON.stringify(allcheckedItems));
+
+        }else{
+            await AsyncStorage.setItem("checkedItems",JSON.stringify(checkedItems));
+        }
+        navigation.navigate('Addition');
+       
+    }
     const checkOutPage=async()=>{
         let checkedItems=await getCheckedItems();
         const toBeBookedItems=await AsyncStorage.getItem("checkedItems");
@@ -187,8 +203,10 @@ const Painting=({navigation,route})=>{
                {categName}
             </Text>
             {subCategData && subCategData.length > 0 ? getSubCategoryMap() :null}
+
+
             <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10}}>
-            <View style={{flex:1}}><Button title="Add More +" onPress={()=>{navigation.navigate('Addition')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+            <View style={{flex:1}}><Button title="Add More +" onPress={()=>{addmore();}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
             <View style={{flex:1}}><Button title="Check out" onPress={()=>{checkOutPage();}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
 
         </View>
