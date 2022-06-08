@@ -45,7 +45,7 @@ const MyDrawer=()=>{
                     // const { options } = scene.descriptor;
                     const title ="OurServices"
                     return (
-                        <Header screen={title}/>
+                        <Header />
                     );
                 }
 
@@ -63,9 +63,9 @@ const MyDrawer=()=>{
                 headerShown:true,
                 header: ({ scene }) => {
                         // const { options } = scene.descriptor;
-                        const title ="MyAccount"
+                        
                         return (
-                            <Header screen={title}/>
+                            <Header />
                         );
                     }
 
@@ -76,21 +76,15 @@ const MyDrawer=()=>{
                 name="My Account"
                 component={MyAccount}
                 options={{
-                    drawerIcon: config => 
-                    <Image 
-                        style={{height:25,width:25,resizeMode:'stretch',marginTop:0,marginLeft:0}} 
-                        source={require('../../static/sidebar/account.png')}
-                    />
-            
-                ,
                 drawerActiveTintColor:'#181725',
                 drawerActiveBackgroundColor:'none',
+                drawerLabelStyle:{paddingLeft:'10%'},
                 headerShown:true,
                 header: ({ scene }) => {
                         // const { options } = scene.descriptor;
-                        const title ="MyAccount"
+                        
                         return (
-                            <Header screen={title}/>
+                            <Header />
                         );
                     }
 
@@ -101,21 +95,15 @@ const MyDrawer=()=>{
                 name="My Orders"
                 component={OrderNavigation}
                 options={{
-                    drawerIcon: config => 
-                    <Image 
-                    style={{height:25,width:25,resizeMode:'stretch',marginTop:0,marginLeft:0}} 
-                    source={require('../../static/sidebar/orders.png')}
-                />
-            
-                ,
                 drawerActiveTintColor:'#181725',
+                drawerLabelStyle:{paddingLeft:'10%'},
                 drawerActiveBackgroundColor:'none',
                 headerShown:true,
                 header: ({ scene }) => {
                         // const { options } = scene.descriptor;
-                        const title ="MyAccount"
+                        
                         return (
-                            <Header screen={title}/>
+                            <Header />
                         );
                     }
 
@@ -126,20 +114,14 @@ const MyDrawer=()=>{
                 name="About Us"
                 component={AboutUs}
                 options={{
-                    drawerIcon: config =>
-                    <Image 
-                        style={{height:25,width:25,resizeMode:'stretch',marginTop:0,marginLeft:0}} 
-                        source={require('../../static/sidebar/aboutus.png')}
-                    />
-            
-                ,
                 drawerActiveTintColor:'#181725',
+                drawerLabelStyle:{paddingLeft:'10%'},
                 drawerActiveBackgroundColor:'none',
                 headerShown:true,
                 header: ({ scene }) => {
-                        const title ="MyAccount"
+                        
                         return (
-                            <Header screen={title}/>
+                            <Header />
                         );
                     }
 
@@ -150,20 +132,15 @@ const MyDrawer=()=>{
                 name="Privacy Policy"
                 component={PrivacyPolicy}
                 options={{
-                    drawerIcon: config => 
-                    <Image 
-                        style={{height:25,width:25,resizeMode:'stretch',marginTop:0,marginLeft:0}} 
-                        source={require('../../static/sidebar/privacy.png')}
-                    />
-            
-                ,
+
                 drawerActiveTintColor:'#181725',
+                drawerLabelStyle:{paddingLeft:'10%'},
                 drawerActiveBackgroundColor:'none',
                 headerShown:true,
                 header: ({ scene }) => {
-                        const title ="MyAccount"
+                        
                         return (
-                            <Header screen={title}/>
+                            <Header />
                         );
                     }
 
@@ -174,20 +151,15 @@ const MyDrawer=()=>{
                 name="Terms & Conditions"
                 component={TermsConition}
                 options={{
-                    drawerIcon: config => 
-                    <Image 
-                        style={{height:25,width:25,resizeMode:'stretch',marginTop:0,marginLeft:0}} 
-                        source={require('../../static/sidebar/terms.png')}
-                    />
-            
-                ,
+
                 drawerActiveTintColor:'#181725',
+                drawerLabelStyle:{paddingLeft:'10%'},
                 drawerActiveBackgroundColor:'none',
                 headerShown:true,
                 header: ({ scene }) => {
-                        const title ="MyAccount"
+                        
                         return (
-                            <Header screen={title}/>
+                            <Header />
                         );
                     }
 
@@ -198,21 +170,16 @@ const MyDrawer=()=>{
                 name="Help"
                 component={Help}
                 options={{
-                    drawerIcon: config =>
-                    <Image 
-                        style={{height:25,width:25,resizeMode:'stretch',marginTop:0,marginLeft:0}} 
-                        source={require('../../static/sidebar/help.png')}
-                    />
-            
-                ,
+
                 drawerActiveTintColor:'#181725',
+                drawerLabelStyle:{paddingLeft:'10%'},
                 drawerActiveBackgroundColor:'none',
                 headerShown:true,
                 header: ({ scene }) => {
                         // const { options } = scene.descriptor;
-                        const title ="MyAccount"
+                        
                         return (
-                            <Header screen={title}/>
+                            <Header />
                         );
                     }
 

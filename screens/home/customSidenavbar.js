@@ -78,7 +78,7 @@ const CustomSidebarMenu = (props) => {
       <DrawerContentScrollView {...props} style={{marginTop:-25}}>
         <DrawerItemList {...props} />
         <Image 
-        style={{height:45,width:120,resizeMode:'stretch',alignSelf:'center',marginTop:10}} 
+        style={{height:45,width:120,resizeMode:'stretch',alignSelf:'center',marginTop:20}} 
         source={require('../../static/sidebar/logout.png')}
       />
 

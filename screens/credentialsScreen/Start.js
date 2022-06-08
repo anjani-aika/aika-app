@@ -6,12 +6,12 @@ const Start = ({ navigation }) => {
     useEffect(() => {
         setTimeout(() => {
             navigation.navigate('Login');
-        },1000)   
+        },2000)   
     })
     
     return (
         <View style={styles.container}>
-            <Image source={require('../../static/landingPage.png')} style={{width:'100%',height:'100%'}}/>
+            <Image source={require('../../static/landingPage2.png')} style={{width:'100%',height:'100%'}}/>
             <Text style={{ fontSize:32, fontWeight:'bold',color:'black',textAlign:'center',position:'absolute',top:20}}>PACIFIC RED DOOR DEVELOPMENT</Text>
         </View>
     )
