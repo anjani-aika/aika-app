@@ -65,7 +65,7 @@ const CheckoutPage2=({navigation})=>{
     }
     const goToBookingConfirm=async()=>{
         if(deliveryAdd){
-            navigation.navigate('BookingConfirmed',{checkedItems:route.params.checkedItems,address:deliveryAdd})
+            navigation.navigate('BookingConfirmed',{address:deliveryAdd})
         }else{
             console.log("must select an address");
         }

@@ -14,7 +14,7 @@ const SingleAddress=({setAddress,add1,add2,landmark,state,pincode})=>{
     
     return(
      
-            <View style={{flexDirection:'row',marginVertical:20,width:340,height:87,alignSelf:'center',borderColor:'gray',borderWidth:1,backgroundColor:(value==true?'#FFBB9E':'white')}}>
+            <View style={{flexDirection:'row',marginVertical:20,width:340,height:87,alignSelf:'center',borderColor:(value==true?'#FFBB9E':'gray'),borderWidth:(value==true?2:1)}}>
             <View style={{width:'13%',justifyContent:'center',}}>
             <CheckBox
                 center
@@ -64,14 +64,14 @@ const CheckoutPage=({navigation,route})=>{
     }
     const goToBookingConfirm=async()=>{
         if(deliveryAdd){
-            navigation.navigate('BookingConfirmed',{checkedItems:route.params.checkedItems,address:deliveryAdd})
+            navigation.navigate('BookingConfirmed',{address:deliveryAdd})
         }
         
     }
     useEffect(()=>{
         getAddresses();
     },[])
-    useEffect(()=>{console.log('hi')},[oldAddresses])
+    useEffect(()=>{console.log('Route: ',route.params)},[oldAddresses])
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
         <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60,borderColor:'gray'}}>

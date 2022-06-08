@@ -10,7 +10,7 @@ const Register = ({ navigation }) => {
     const [name,setName] = useState("");
     const [phno,setPhno] = useState("");
     const [email,setEmail] = useState("");
-    const [loading,setIsLoading] = useState(false);
+    const [loading,setIsLoading] = useState(true);
     const [password,setPassword] = useState("");
     const [location,setLocation] = useState("");
     const [isRegister,setIsRegister] = useState(false);

@@ -7,7 +7,7 @@ import PageButton from '../../../components/PageButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 const Remodel=({props,navigation})=>{
-    const [loading,setIsLoading] = useState(false);
+    const [loading,setIsLoading] = useState(true);
     const [mainCategData,setMainCategData] = useState([]);
 
       useEffect(() => {
@@ -62,7 +62,7 @@ const Remodel=({props,navigation})=>{
 
     return(
     <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60}}>
-   <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'70%'}} size="large" color="#F55633" animating={loading}/>
+   <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'70%',position:'absolute',top:'50%'}} size="large" color="#F55633" animating={loading}/>
             <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:10}}>
                Remodel
             </Text>

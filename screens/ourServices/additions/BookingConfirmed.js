@@ -35,27 +35,24 @@ const BookingConfirmed=({navigation,route})=>{
             // let items=route.params.checkedItems;
             console.log("ITEMS ------",items)
             let orderIds=[];
-            for(let i=0;i<checkedItems.length;i++){
+            for(let i=0;i<items.length;i++){
                let data={
-                    'booking[0][user_id]':arr.user_id,
-                    'booking[0][category_id]':'2',
-                    'booking[0][subcategory_id]':items[i].subcategory_id,
-                    'booking[0][category_name]':items[i].category_name,
-                    'booking[0][subcategory_name]':items[i].subcategory_name,
-                    'booking[0][description]':'hey',
-                    'booking[0][location]':'Maharatra', //
-                    'service_id':items[i].service_id,
+                    user_id:arr.user_id,
+                    category_id:items[i].cate_id,
+                    subcategory_id:items[i].subcategory_id,
+                    category_name:items[i].category_name,
+                    subcategory_name:items[i].subcategory_name,
+                    description:items[i].description,
+                    location:route.params.address, //
+                    service_id:items[i].service_id,
                 }
-                const result=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/booking',
-                              data ,{
-                    headers:{
-                        'token':res.token
-                    }
-                });
+                const result=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/booking',data,
+                              {headers:{'token':res.token}} );
                 let date=new Date();
                 
                 if(result.status=='200'){
                     orderIds.push({orderId:result.data.order_id,status:'pending',bookingTime:`${date.getHours} : ${date.getMinutes}`,bookingDate:`${date.getDate} : ${date.getMonth+1} : ${date.getFullYear}`});
+                    await AsyncStorage.removeItem("checkedItems");
                     
                 }
 
@@ -75,6 +72,7 @@ const BookingConfirmed=({navigation,route})=>{
             setIsLoading(false);
             
         }catch(err){
+            // await AsyncStorage.removeItem("checkedItems");
             console.log("Error: ",err);
         }
 
@@ -93,7 +91,7 @@ const BookingConfirmed=({navigation,route})=>{
             
             <Image source={require('../../../static/bookingConfirmed.png')} style={{resizeMode:'stretch',borderWidth:0,borderColor:'gray',width:300,height:250,alignSelf:'center'}}/>
             <Text style={{alignSelf:'center',fontSize:28,fontWeight:'500'}}>Booking Confirmed</Text>
-            <Text style={{alignSelf:'center',fontSize:18,fontWeight:'400',width:330,marginVertical:25}}>We Have Received Your Booking and Will Update your Service  Soon !!!</Text>
+            <Text style={{alignSelf:'center',fontSize:18,fontWeight:'400',width:310,marginVertical:25,textAlign:'center'}}>We Have Received Your Booking and Will Update your Service  Soon !!!</Text>
             {/* <Text style={{alignSelf:'center',fontSize:18,fontWeight:'400',marginBottom:25}}>Order ID : {route.params.orderId}</Text> */}
       
      

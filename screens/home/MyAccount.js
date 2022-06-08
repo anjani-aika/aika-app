@@ -6,7 +6,7 @@ import axios from "axios";
 import Toast from 'react-native-toast-message';
 
 const MyAccount=({navigation})=>{
-    const [loading,setIsLoading] = useState(false);
+    const [loading,setIsLoading] = useState(true);
     const [userData,setUserData] = useState([]);
 
       useEffect(() => {
