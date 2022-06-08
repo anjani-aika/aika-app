@@ -7,7 +7,7 @@ import PageButton from '../../../components/PageButton';
 import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
-
+import  TextInputComponent  from './TextInputComponent';
 const SingleItem=({src,material})=>{
     const [value,setValue]=useState(false);
  
@@ -36,13 +36,13 @@ const SingleItem=({src,material})=>{
             /> */}
             </View>
             {value===true?<View style={{marginHorizontal:25,marginTop:20}}>
-                <TextInput
+                <TextInputComponent
                     style={{width:'100%',height:62,borderWidth:1,borderRadius:4,borderColor:'gray', color: 'black'}}
                     multiline={true}
                     editable={true}
                     placeholderTextColor = "gray"
                     placeholder=" Enter Description"
-                ></TextInput>
+                ></TextInputComponent>
             </View>:null}
             
         </View>
@@ -108,15 +108,25 @@ const Kitchen=({navigation,route})=>{
          setSubCategData(arr);
         return setCount(count+1);
       }
-      function _handleMultiInput(data,index,text) {
-          console.log("INDEX-----",text);
-      
+      function _handleMultiInput(data,index) {
+          console.log("INDEX-----",index);
+          return (text) => {
             let arr = subCategData;
             arr[index].description = text;
             console.log("ARR {] ---des ----",arr[index].description)
              setSubCategData(arr);
                setCount(count+1);
+        }
+           
       
+    }
+    const handleAddMore = (text, index) => {
+        // let res=textInput;
+        let arr = subCategData;
+        arr[index].description = text;
+        console.log("ARR {] ---des ----",arr[index].description)
+         setSubCategData(arr);
+           setCount(count+1);
     }
       function getSubCategoryMap(){
        
@@ -157,21 +167,29 @@ const Kitchen=({navigation,route})=>{
                      style={{justifyContent:'flex-end',backgroundColor:'white',color:'red'}}
                 /> */}
                 </View>
-                {data.checked ===true?<View key={count} style={{marginHorizontal:25,marginTop:20}}>
-                    <TextInput
-                        style={{width:'100%',height:62,borderWidth:1,borderRadius:4,borderColor:'gray', color: 'black'}}
-                        multiline={true}
-                        editable={true}
-                        onBlur={()=>{
-                            console.log("ON BLUR ---",description)
-                            onSetDescription(data,index)
-                        }}
-                        value={description}
-                        // onChangeText={_handleMultiInput('myName')}
-                        onChangeText={(text)=>{setDescription(text)}}
-                        placeholderTextColor = "gray"
+                {data.checked ===true?<View key={count} style={{marginHorizontal:25,marginTop:0}}>
+                    <TextInputComponent
+                       
+                        // onBlur={()=>{
+                        //     console.log("ON BLUR ---",description)
+                        //     onSetDescription(data,index)
+                        // }}
+                        
+                       
+                        value={data.description}
+                        //  onChangeText={_handleMultiInput(data,index)}
+                        onChangeText = {(text) => { 
+                            let arr = subCategData;
+                            arr[index].description = text;
+                            console.log("ARR {] ---des ----",arr[index].description)
+                             setSubCategData(arr);
+                               setCount(count+1);
+                         }}
+                          
+                        // onChangeText={(text)=>{setDescription(text)}}
+                        
                         placeholder=" Enter Description"
-                    ></TextInput>
+                    />
                 </View>:null}
                 
             </View>

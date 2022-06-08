@@ -6,6 +6,7 @@ import { Button, Icon, CheckBox } from 'react-native-elements';
 import PageButton from '../../../components/PageButton';
 import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TextInputComponent from '../remodel/TextInputComponent';
 import axios from "axios";
 
 // const SingleItem=({src,material})=>{
@@ -76,6 +77,7 @@ const Kitchen=({navigation,route})=>{
                 let arr = responseData.data.data;
                for(let i =0;i<arr.length;i++){
                 arr[i].checked = false;
+                arr[i].description="";
                }      
                 setSubCategData(arr);
                 setCount(count+1)
@@ -138,15 +140,31 @@ const Kitchen=({navigation,route})=>{
                      style={{justifyContent:'flex-end',backgroundColor:'white',color:'red'}}
                 /> */}
                 </View>
-                {data.checked ===true?<View key={count} style={{marginHorizontal:25,marginTop:20}}>
-                    <TextInput
-                        style={{width:'100%',height:62,borderWidth:1,borderRadius:4,borderColor:'gray', color: 'black'}}
-                        // multiline={true}
-                        // editable={true}
-                        placeholderTextColor = "gray"
+                {data.checked ===true?<View key={count} style={{marginHorizontal:25,marginTop:0}}>
+                    <TextInputComponent
+                       
+                        // onBlur={()=>{
+                        //     console.log("ON BLUR ---",description)
+                        //     onSetDescription(data,index)
+                        // }}
+                        
+                       
+                        value={data.description}
+                        //  onChangeText={_handleMultiInput(data,index)}
+                        onChangeText = {(text) => { 
+                            let arr = subCategData;
+                            arr[index].description = text;
+                            console.log("ARR {] ---des ----",arr[index].description)
+                             setSubCategData(arr);
+                               setCount(count+1);
+                         }}
+                          
+                        // onChangeText={(text)=>{setDescription(text)}}
+                        
                         placeholder=" Enter Description"
-                    ></TextInput>
+                    />
                 </View>:null}
+                
                 
             </View>
               )
@@ -164,6 +182,7 @@ const Kitchen=({navigation,route})=>{
     }
     const checkOutPage=async()=>{
         let checkedItems=await getCheckedItems();
+        AsyncStorage.setItem("checkedItems",JSON.stringify(checkedItems));
         navigation.navigate('CheckoutScreen',{checkedItems:checkedItems});
         
     }
