@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 import 'react-native-gesture-handler'
-import React from 'react';
+import React, { useState } from 'react';
 import {SafeAreaView,ScrollView,StatusBar,StyleSheet,Text, useColorScheme,View,} from 'react-native';
 import { useMemo } from 'react';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -19,6 +19,7 @@ import Register from './screens/credentialsScreen/Register';
 import ForgotPassword from './screens/credentialsScreen/forgotPassword';
 import MyDrawer from './screens/home/Drawer';
 import SplashScreen from  "react-native-splash-screen";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 const globalScreenOptions = {
@@ -28,9 +29,28 @@ const globalScreenOptions = {
 
 
 const App= () => {
+  const [initialRouteName,setinitialRouteName] = useState('');
   React.useEffect(() => {
     SplashScreen.hide();
+    getUserInfo();
   });
+  
+  const getUserInfo = async () =>{
+
+    let res = await AsyncStorage.getItem("user_info");
+    let arr = JSON.parse(res);
+    console.log("ARRRRR ------",arr);
+   if(arr === null || arr === "null"){
+    console.log("IF LOGIN ------");
+    setinitialRouteName("Login");
+   }
+   else{
+     console.log("ELSE HOME ------");
+    setinitialRouteName("Home");
+    console.log("intialROUTE NAME ----",initialRouteName)
+   }
+    
+   }
 
   const authContext = useMemo(
     () => ({
@@ -70,13 +90,13 @@ const App= () => {
     <>
      <AuthContext.Provider value={authContext}>
       <NavigationContainer >
-        <Stack.Navigator screenOptions={globalScreenOptions} >
+        <Stack.Navigator screenOptions={globalScreenOptions} initialRouteName={initialRouteName}>
            
             <> 
         {/* <Stack.Screen name="Start" component={Start} />  */}
           
            <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Start" component={Start} /> 
+              {/* <Stack.Screen name="Start" component={Start} />  */}
            <Stack.Screen name="Home" component={MyDrawer} /> 
               <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
               <Stack.Screen name="Register" component={Register} />

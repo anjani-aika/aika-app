@@ -27,11 +27,15 @@ const BookingConfirmed=({navigation,route})=>{
         try{
 
             let res = await AsyncStorage.getItem("user_info");
+            
+            let items = await AsyncStorage.getItem("checkedItems");
             let arr = JSON.parse(res);
             console.log("ARRRRR ------",arr);
-            let items=route.params.checkedItems;
+            
+            // let items=route.params.checkedItems;
+            console.log("ITEMS ------",items)
             let orderIds=[];
-            for(let i=0;i<route.params.checkedItems.length;i++){
+            for(let i=0;i<checkedItems.length;i++){
                let data={
                     'booking[0][user_id]':arr.user_id,
                     'booking[0][category_id]':'2',
@@ -39,7 +43,7 @@ const BookingConfirmed=({navigation,route})=>{
                     'booking[0][category_name]':items[i].category_name,
                     'booking[0][subcategory_name]':items[i].subcategory_name,
                     'booking[0][description]':'hey',
-                    'booking[0][location]':route.params.address.location.toString(),
+                    'booking[0][location]':'Maharatra', //
                     'service_id':items[i].service_id,
                 }
                 const result=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/booking',
@@ -77,9 +81,11 @@ const BookingConfirmed=({navigation,route})=>{
     }
 
     useEffect(()=>{
+       
         bookItems();
+       
     },[])
-    console.log("Route: ", route.params);
+   
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
                <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'70%'}} size="large" color="#F55633" animating={loading}/>

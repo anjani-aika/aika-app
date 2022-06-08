@@ -9,7 +9,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from "axios";
-import Toast from 'react-native-toast-message';
+// import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const Login = ({navigation}) => {
   const [email,setEmail] = useState("test1@gmail.com");
@@ -36,11 +36,11 @@ const Login = ({navigation}) => {
         setIsLoading(false)
         AsyncStorage.setItem("user_info",JSON.stringify(responseData.data.user_info) );
         console.log("responseData.data.status ---",responseData.data.message)
-        Toast.show({
-          type: 'success',
-          text1:responseData.data.message ,
+        // Toast.show({
+        //   type: 'success',
+        //   text1:responseData.data.message ,
          
-        });
+        // });
         setTimeout(()=>{
           navigation.navigate('Home');
         },1000)
@@ -105,7 +105,7 @@ const Login = ({navigation}) => {
         <View style={styles.termsAndServices}>
           <Text style={{textAlign:'center',width:'100%',color:'black'}}>By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text></Text>
         </View>
-        <Toast position='bottom' ref={(ref) => Toast.setRef(ref)} />
+        {/* <Toast position='bottom' ref={(ref) => Toast.setRef(ref)} /> */}
 
       </View>
     </KeyboardAwareScrollView>
