@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View,Text, StyleSheet, TouchableOpacity,Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Button, Icon } from 'react-native-elements';
 import Header from '../../components/Header';
 import { ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Item=({src,material})=>{
     return(
@@ -65,7 +66,7 @@ const Pricing=()=>{
        </View> 
     )
 }
-const OrderDetails=({navigation})=>{
+const OrderDetails=({navigation,route})=>{
    
     
     const acceptingTheOrder=async(req_id,invoice_id)=>{
@@ -93,6 +94,32 @@ const OrderDetails=({navigation})=>{
 
      
     }
+    const getOrderDetails=async(request_id)=>{
+
+        try{
+            let res = await AsyncStorage.getItem("user_info");
+            let arr = JSON.parse(res);
+            console.log("ARRRRR ------",arr,arr.user_id);
+            const viewOrder=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/view_order',{
+                request_id:request_id
+            },{
+                headers:{
+                    'token':arr.token
+                }
+            });
+            console.log("View Order: ",viewOrder.data);
+            if(viewOrder.data.status==200){
+
+            }
+        }catch(err){
+            console.log('Error: ',err)
+        }
+    }
+
+    useEffect(()=>{
+        console.log("Request_id: ",route.params.request_id);
+        getOrderDetails(route.params.request_id);
+    },[])
     return(
         <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60,paddingTop:25}}>
         <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>

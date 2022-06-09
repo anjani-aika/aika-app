@@ -5,36 +5,37 @@ import { Icon } from 'react-native-elements';
 import Header from '../../components/Header';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
-const OrderCardUnClickable=({orderId,bookingTime,bookingDate})=>{
-    return(
-        <View style={{width:'88%',height:89,borderColor:'#ACACAC',borderWidth:1,borderRadius:10,alignSelf:'center',marginTop:20,padding:15}}>
-            <Text>Order ID : GISo7OmXnp59 </Text>
-            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <Text><Text>Booking Time :</Text> 19:07</Text>
-            <Icon 
-             name="arrow-forward-ios"
-             />
-            </View>
+// const OrderCardUnClickable=({orderId,bookingTime,bookingDate})=>{
+//     return(
+//         <View style={{width:'88%',height:89,borderColor:'#ACACAC',borderWidth:1,borderRadius:10,alignSelf:'center',marginTop:20,padding:15}}>
+//             <Text>Order ID : GISo7OmXnp59 </Text>
+//             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+//             <Text><Text>Booking Time :</Text> 19:07</Text>
+//             <Icon 
+//              name="arrow-forward-ios"
+//              />
+//             </View>
           
-            <Text><Text>Booking Date :</Text> April 15 2022</Text>
+//             <Text><Text>Booking Date :</Text> April 15 2022</Text>
             
-        </View>
-    )
-}
+//         </View>
+//     )
+// }
 const OrderCardClickable=({orderId,bookingTime,bookingDate,navigation})=>{
     return(
-        <TouchableOpacity  onPress={()=>{navigation.navigate('OrderDetails')}}>
+        <TouchableOpacity  onPress={()=>{navigation.navigate('OrderDetails',{request_id:orderId})}}>
         <View style={{width:'88%',height:89,borderColor:'#ACACAC',borderWidth:1,borderRadius:10,alignSelf:'center',marginTop:20,padding:15}}>
-            <Text>Order ID : GISo7OmXnp59 </Text>
+            <Text>Order ID : {orderId} </Text>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <Text><Text>Booking Time :</Text> 19:07</Text>
+            <Text><Text>Booking Time :</Text>{bookingTime}</Text>
             <Icon 
              name="arrow-forward-ios"
              />
             </View>
           
-            <Text><Text>Booking Date :</Text> April 15 2022</Text>
+            <Text><Text>Booking Date :</Text> {bookingDate}</Text>
             
         </View>
         </TouchableOpacity>
@@ -43,11 +44,36 @@ const OrderCardClickable=({orderId,bookingTime,bookingDate,navigation})=>{
 const MyOrders=({navigation})=>{
     const [oldOrders,setOldOrders]=useState([]);
     const getOrders=async()=>{
-        const prevOrders=await AsyncStorage.getItem('Orders');
-        if(prevOrders){
-            const Orders=JSON.parse(prevOrders);
-            setOldOrders([...Orders]);
-
+   
+        try{
+                let res = await AsyncStorage.getItem("user_info");
+                let arr = JSON.parse(res);
+                console.log("ARRRRR ------",arr,arr.user_id);
+                if(arr!= null || arr === [] || arr == ""){
+                    const viewAllOrders=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/view_all_order',{
+                            user_id:arr.user_id
+                        },{
+                            headers:{
+                                'token':arr.token
+                            }
+                    });
+                    console.log("View All Orders: ",viewAllOrders.data.order[0]);
+                    if(viewAllOrders){
+                        let filterOrders=viewAllOrders.data.order.map(order=>{
+                           let bookingTimeAndDate= order.created_date.split(' ');
+                           let bookingTime=bookingTimeAndDate[1];
+                           let bookingDate=bookingTimeAndDate[0]
+                           return {orderId:order.req_id,bookingTime:bookingTime,bookingDate:bookingDate}
+                        });
+                        console.log("FilteredOrders: ",filterOrders);
+                        setOldOrders([...filterOrders]);
+                    }
+                    
+                  
+                }
+                    
+        }catch(err){
+            console.log("Error: ",err);
         }
     }
     useEffect(()=>{
@@ -58,15 +84,15 @@ const MyOrders=({navigation})=>{
             <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
                 My Orders
             </Text>
-           
-            {oldOrders.length!=0?oldOrders.map(order=>(
-                    order.status!='pending'? 
-                        (<OrderCardClickable  navigation={navigation} orderId={order.orderId} bookingTime={order.bookingTime} bookingDate={order.bookingDate}/>):
-                        (<OrderCardUnClickable   orderId={order.orderId} bookingTime={order.bookingTime} bookingDate={order.bookingDate} />)
-            )):null}
-             <TouchableOpacity onPress={()=>{navigation.navigate('OrderDetails')}}>
-                 <OrderCardUnClickable/>
-            </TouchableOpacity>
+           <View style={{marginBottom:100}}>
+                 {oldOrders.length!=0?oldOrders.map((order,index)=>(
+                        
+                    (<OrderCardClickable key={`${index}_${order.bookingDate}_${order.bookingTime}`} navigation={navigation} orderId={order.orderId} bookingTime={order.bookingTime} bookingDate={order.bookingDate}/>)
+                        // (<OrderCardUnClickable   orderId={order.orderId} bookingTime={order.bookingTime} bookingDate={order.bookingDate} />)
+                )):null}
+           </View>
+            
+             
         </ScrollView>
     )
 }

@@ -25,50 +25,63 @@ const BookingConfirmed=({navigation,route})=>{
     const [loading,setIsLoading] = useState(true);
     const bookItems=async()=>{
         try{
-
+            
             let res = await AsyncStorage.getItem("user_info");
             
-            let items = await AsyncStorage.getItem("checkedItems");
+            const items = JSON.parse(await AsyncStorage.getItem("checkedItems"));
             let arr = JSON.parse(res);
             console.log("ARRRRR ------",arr);
-            
-            // let items=route.params.checkedItems;
-            console.log("ITEMS ------",items)
-            let orderIds=[];
+            // // let items=route.params.checkedItems;
+            // console.log("ITEMS ------",items,typeof(items));
+            let item2=[];
+            // let orderIds=[];
             for(let i=0;i<items.length;i++){
-               let data={
-                    user_id:arr.user_id,
-                    category_id:items[i].cate_id,
-                    subcategory_id:items[i].subcategory_id,
-                    category_name:items[i].category_name,
-                    subcategory_name:items[i].subcategory_name,
-                    description:items[i].description,
-                    location:route.params.address, //
-                    service_id:items[i].service_id,
-                }
-                const result=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/booking',data,
-                              {headers:{'token':res.token}} );
-                let date=new Date();
-                
-                if(result.status=='200'){
-                    orderIds.push({orderId:result.data.order_id,status:'pending',bookingTime:`${date.getHours} : ${date.getMinutes}`,bookingDate:`${date.getDate} : ${date.getMonth+1} : ${date.getFullYear}`});
-                    await AsyncStorage.removeItem("checkedItems");
+                console.log(parseInt(arr.user_id),typeof(JSON.stringify(route.params.address)));
+                const ids=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/send_request',{
+                    user_id:arr.user_id ,service_id:items[i].service_id
+                });
+                console.log("Ids: ",ids.data);
+                if(ids.data.status==200){
+                    const result=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/booking',
+                    {
+                        
+                        user_id:parseInt(arr.user_id),
+                        category_id:items[i].cate_id,
+                        subcategory_id:parseInt(items[i].subcategory_id),
+                        category_name:items[i].category_name,
+                        subcategory_name:items[i].subcategory_name,
+                        description:items[i].description,
+                        location:JSON.stringify(route.params.address), 
+                        orderid:ids.data.order_id,
+                        req_id:ids.data.req_id,
+                        
+                    },
+                    {
+                        headers:{'token':arr.token}
+                    } );
+                    if(result.status=='200' && i==(items.length-1)){
+                        console.log(result.data);
+                        let date=new Date();
+                        let newOrder={req_id:result.data.req_id,status:'pending',bookingTime:`${date.getHours()} : ${date.getMinutes()}`,bookingDate:`${date.getDate()} : ${date.getMonth()+1} : ${date.getFullYear()}`};
+                        const prevOrders=await AsyncStorage.getItem('Orders');
+                        console.log("newOrder: ",newOrder);
+                        if(prevOrders!==undefined && prevOrders){
+                            console.log("PrevOrders: ",prevOrders,typeof(prevOrders));
+                            const {Orders}=JSON.parse(prevOrders);
+                            console.log(Orders);
+                            await AsyncStorage.removeItem('Orders');
+                            let accumulatedOrders=[...Orders,newOrder];
+                            await AsyncStorage.setItem('Orders',JSON.stringify({Orders:accumulatedOrders}))
+                        }else{
+                            await AsyncStorage.setItem('Orders',JSON.stringify({Orders:[newOrder]}));
+                        }
+                        await AsyncStorage.removeItem("checkedItems");
                     
+                    }
                 }
 
+            }
 
-            }
-            const prevOrders=await AsyncStorage.getItem('Orders');
-            console.log("OrderIds: ",orderIds);
-            if(prevOrders!=undefined && prevOrders!=null){
-                const {Orders}=JSON.parse(prevOrders);
-                console.log(Orders);
-                await AsyncStorage.removeItem('Orders');
-                let accumulatedOrders=[...Orders,...orderIds];
-                await AsyncStorage.setItem('Orders',JSON.stringify({Orders:accumulatedOrders}))
-            }else{
-                await AsyncStorage.setItem('Orders',JOSN.stringify({Orders:orderIds}));
-            }
             setIsLoading(false);
             
         }catch(err){
@@ -86,8 +99,8 @@ const BookingConfirmed=({navigation,route})=>{
    
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
-               <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'70%'}} size="large" color="#F55633" animating={loading}/>
-        <View style={{backgroundColor:'white',paddingTop:60,borderColor:'gray'}}>
+               <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'50%',top:'40%'}} size="large" color="#F55633" animating={loading}/>
+        {loading!=true?<View style={{backgroundColor:'white',paddingTop:60,borderColor:'gray'}}>
             
             <Image source={require('../../../static/bookingConfirmed.png')} style={{resizeMode:'stretch',borderWidth:0,borderColor:'gray',width:300,height:250,alignSelf:'center'}}/>
             <Text style={{alignSelf:'center',fontSize:28,fontWeight:'500'}}>Booking Confirmed</Text>
@@ -99,7 +112,7 @@ const BookingConfirmed=({navigation,route})=>{
             <View ><Button title="Booking Details" onPress={()=>{navigation.navigate('CheckoutScreen')}} buttonStyle={{backgroundColor:'#F55633',width:313,height:56,alignSelf:'center',borderRadius:8}}/></View>
           
 
-        </View>
+        </View>:null}
        
         </View>
     )
