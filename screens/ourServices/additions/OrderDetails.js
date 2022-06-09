@@ -101,7 +101,7 @@ const OrderDetails=({navigation,route})=>{
             let arr = JSON.parse(res);
             console.log("ARRRRR ------",arr,arr.user_id);
             const viewOrder=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/view_order',{
-                request_id:request_id
+                request_id:parseInt(request_id)
             },{
                 headers:{
                     'token':arr.token
