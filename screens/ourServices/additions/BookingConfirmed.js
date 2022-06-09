@@ -30,26 +30,30 @@ const BookingConfirmed=({navigation,route})=>{
             
             let items = await AsyncStorage.getItem("checkedItems");
             let arr = JSON.parse(res);
-            console.log("ARRRRR ------",arr);
+            console.log("ARRRRR ------1111",res);
             
             // let items=route.params.checkedItems;
-            console.log("ITEMS ------",items)
+            console.log("ITEMS ------1111",items)
             let orderIds=[];
             for(let i=0;i<items.length;i++){
                let data={
                     user_id:arr.user_id,
-                    category_id:items[i].cate_id,
-                    subcategory_id:items[i].subcategory_id,
+                    category_id:parseInt(items[i].cate_id),
+                    subcategory_id:parseInt(items[i].subcategory_id),
                     category_name:items[i].category_name,
                     subcategory_name:items[i].subcategory_name,
                     description:items[i].description,
                     location:route.params.address, //
                     service_id:items[i].service_id,
                 }
+                console.log("DATA ------ 2222",data)
+
+               
+
                 const result=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/booking',data,
                               {headers:{'token':res.token}} );
                 let date=new Date();
-                
+                console.log("RES --------",result)
                 if(result.status=='200'){
                     orderIds.push({orderId:result.data.order_id,status:'pending',bookingTime:`${date.getHours} : ${date.getMinutes}`,bookingDate:`${date.getDate} : ${date.getMonth+1} : ${date.getFullYear}`});
                     await AsyncStorage.removeItem("checkedItems");

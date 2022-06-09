@@ -93,7 +93,7 @@ const App= () => {
         <Stack.Navigator screenOptions={globalScreenOptions} initialRouteName={initialRouteName}>
            
             <> 
-        <Stack.Screen name="Start" component={Start} /> 
+        {/* <Stack.Screen name="Start" component={Start} />  */}
           
            <Stack.Screen name="Login" component={Login} />
               {/* <Stack.Screen name="Start" component={Start} />  */}
