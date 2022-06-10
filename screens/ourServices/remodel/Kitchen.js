@@ -1,57 +1,17 @@
 import React,{useState,useEffect} from 'react';
-import {View,Text, StyleSheet, TouchableOpacity,Image,TextInput} from 'react-native';
+import {View,Text, StyleSheet, TouchableOpacity,Image,TextInput,ScrollView,ActivityIndicator} from 'react-native';
 
 // import CheckBox from '@react-native-community/checkbox';
 import { Button, Icon, CheckBox } from 'react-native-elements';
 import PageButton from '../../../components/PageButton';
-import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TextInputComponent from '../remodel/TextInputComponent';
 import axios from "axios";
-import  TextInputComponent  from './TextInputComponent';
-const SingleItem=({src,material})=>{
-    const [value,setValue]=useState(false);
- 
-    return(
-        <View style={{flexDirection:'column',marginTop:30}}>
-            <View style={{flexDirection:'row',paddingHorizontal:25,justifyContent:'space-between',alignItems:'center'}}>
-            <View style={{flexDirection:'row',alignItems:'center'}}>
-            <Image
-                source={src}
-                style={{marginRight:20}}
-            />
-            <Text style={{fontSize:18,fontWeight:'500',fontFamily:'Poppins'}}>{material}</Text>
-            </View>
-            <CheckBox
-                title=''
-                checked={value}
-                onIconPress={()=>setValue(!value)}
-                checkedColor='#F55633'
-                uncheckedColor='gray'
-            />
-            {/* <CheckBox
-                value={value}
-                onValueChange={()=>{setValue(!value)}}
-                tintColors={{ true: '#F55633', false: 'gray' }}
-                 style={{justifyContent:'flex-end',backgroundColor:'white',color:'red'}}
-            /> */}
-            </View>
-            {value===true?<View style={{marginHorizontal:25,marginTop:20}}>
-                <TextInputComponent
-                    style={{width:'100%',height:62,borderWidth:1,borderRadius:4,borderColor:'gray', color: 'black'}}
-                    multiline={true}
-                    editable={true}
-                    placeholderTextColor = "gray"
-                    placeholder=" Enter Description"
-                ></TextInputComponent>
-            </View>:null}
-            
-        </View>
-    )
-}
+
+
 const Kitchen=({navigation,route})=>{
     const [subCategData,setSubCategData] = useState([]);
     const [categName,setCategName] =useState('');
-    const [description,setDescription] =useState('');
     const [count,setCount]= useState(1);
 
     useEffect(() => {
@@ -78,7 +38,7 @@ const Kitchen=({navigation,route})=>{
                 let arr = responseData.data.data;
                for(let i =0;i<arr.length;i++){
                 arr[i].checked = false;
-                arr[i].description = "";
+                arr[i].description="";
                }      
                 setSubCategData(arr);
                 setCount(count+1)
@@ -102,37 +62,11 @@ const Kitchen=({navigation,route})=>{
          setSubCategData(arr);
         return setCount(count+1);
       }
-     function onSetDescription(data,index){
-       let arr = subCategData;
-     arr[index].description = description;
-         setSubCategData(arr);
-        return setCount(count+1);
-      }
-      function _handleMultiInput(data,index) {
-          console.log("INDEX-----",index);
-          return (text) => {
-            let arr = subCategData;
-            arr[index].description = text;
-            console.log("ARR {] ---des ----",arr[index].description)
-             setSubCategData(arr);
-               setCount(count+1);
-        }
-           
-      
-    }
-    const handleAddMore = (text, index) => {
-        // let res=textInput;
-        let arr = subCategData;
-        arr[index].description = text;
-        console.log("ARR {] ---des ----",arr[index].description)
-         setSubCategData(arr);
-           setCount(count+1);
-    }
       function getSubCategoryMap(){
        
    
         return subCategData.map((data, index) => {
-            //  console.log("DATA --------",data)
+             console.log("DATA --------",data)
               return (
                  
                 <View style={{flexDirection:'column',marginTop:30}}>
@@ -192,32 +126,95 @@ const Kitchen=({navigation,route})=>{
                     />
                 </View>:null}
                 
+                
             </View>
               )
           })
       
     }
+    const getCheckedItems=async()=>{
+        let checkedItems=[];
+        const toBeBookedItems=await AsyncStorage.getItem("checkedItems");
+        if(toBeBookedItems!=null && toBeBookedItems!=undefined){
+            const alreadyCheckedItems= JSON.parse(toBeBookedItems);
+            subCategData.map((data,index)=>{
+                if(data.checked){
+                    let i;let isPresent=false;
+                    for(i=0;i>alreadyCheckedItems.length;i++){
+                        if(alreadyCheckedItems[i].image_path==data.image_path){
+                            isPresent=true;
+                            break;
+                        }
+                    }
+                    if(!isPresent){
+                        checkedItems.push({...data,cate_id:route.params.categ_id});
+                        isPresent=false;
+                    }
+                }
+                });
+        }else{
+            subCategData.map((data,index)=>{
+                if(data.checked){
+                    checkedItems.push({...data,cate_id:route.params.categ_id});
+                }
+                });
+        }
+        
+        return checkedItems;
+    }
+    const addmore=async()=>{
+        let checkedItems=await getCheckedItems();
+        const toBeBookedItems=await AsyncStorage.getItem("checkedItems");
+        if(toBeBookedItems!=null && toBeBookedItems!=undefined){
+            await AsyncStorage.removeItem("checkedItems");
+            const alreadyCheckedItems= JSON.parse(toBeBookedItems);
+            let allcheckedItems=[...alreadyCheckedItems,...checkedItems]
+            console.log("All checked items",allcheckedItems);
+            await AsyncStorage.setItem("checkedItems",JSON.stringify(allcheckedItems));
+
+        }else{
+            await AsyncStorage.setItem("checkedItems",JSON.stringify(checkedItems));
+        }
+        navigation.navigate('Addition');
+       
+    }
+    const checkOutPage=async()=>{
+        let checkedItems=await getCheckedItems();
+        const toBeBookedItems=await AsyncStorage.getItem("checkedItems");
+        if(toBeBookedItems!=null && toBeBookedItems!=undefined){
+            await AsyncStorage.removeItem("checkedItems");
+            const alreadyCheckedItems= JSON.parse(toBeBookedItems);
+            let allcheckedItems=[...alreadyCheckedItems,...checkedItems]
+            console.log("All checked items",allcheckedItems);
+            await AsyncStorage.setItem("checkedItems",JSON.stringify(allcheckedItems));
+
+        }else{
+            await AsyncStorage.setItem("checkedItems",JSON.stringify(checkedItems));
+        }
+       
+        navigation.navigate('CheckoutScreen',{checkedItems:checkedItems});
+        
+    }
     return(
-        <View style={{flex:1,backgroundColor:'white'}}>
-        <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60,borderColor:'gray'}}>
-            
+
+        <ScrollView style={{backgroundColor:'white',paddingTop:60,borderColor:'gray',flex:1}}>
+          <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:100,top:'12%'}} size="large" color="#F55633" animating={subCategData.length==0}/>  
             <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
                {categName}
             </Text>
+            <View style={{paddingBottom:60}}>
             {subCategData && subCategData.length > 0 ? getSubCategoryMap() :null}
-            {/* <SingleItem src={require('../../../static/orders/Countertops.png')} material={'Countertops'}/> */}
-            {/* <SingleItem src={require('../../../static/orders/Countertops.png')} material={'Handles'}/>
-            <SingleItem src={require('../../../static/orders/Countertops.png')} material={'Kitchen Facuet'}/>
-            <SingleItem src={require('../../../static/orders/Countertops.png')} material={'Kitchen sink'}/> */}
+            {subCategData && subCategData.length==0?null:(<>
+                <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10}}>
+                    <View style={{flex:1}}><Button title="Add More +" onPress={()=>{addmore();}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+                    <View style={{flex:1}}><Button title="Check out" onPress={()=>{checkOutPage();}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+                </View>
 
-            <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10}}>
-            <View style={{flex:1}}><Button title="Add More +" onPress={()=>{navigation.navigate('Kitchen')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
-            <View style={{flex:1}}><Button title="Check out" onPress={()=>{navigation.navigate('CheckoutScreen')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+            </>)}
+            </View>
 
-        </View>
         </ScrollView>
-       
-        </View>
+
     )
 }
 export default Kitchen;

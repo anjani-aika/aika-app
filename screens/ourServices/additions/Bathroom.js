@@ -1,10 +1,9 @@
 import React,{useState,useEffect} from 'react';
-import {View,Text, StyleSheet, TouchableOpacity,Image,TextInput} from 'react-native';
+import {View,Text, StyleSheet, TouchableOpacity,Image,TextInput,ScrollView,ActivityIndicator} from 'react-native';
 
 // import CheckBox from '@react-native-community/checkbox';
 import { Button, Icon, CheckBox } from 'react-native-elements';
 import PageButton from '../../../components/PageButton';
-import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextInputComponent from '../remodel/TextInputComponent';
 import axios from "axios";
@@ -14,6 +13,7 @@ const Bathroom=({navigation,route})=>{
     const [subCategData,setSubCategData] = useState([]);
     const [categName,setCategName] =useState('');
     const [count,setCount]= useState(1);
+
     useEffect(() => {
         console.log("PROPS ROUTE -----",route.params.categ_id);
         getSubCategoryList();
@@ -196,23 +196,25 @@ const Bathroom=({navigation,route})=>{
         
     }
     return(
-        <View style={{flex:1,backgroundColor:'white'}}>
-        <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60,borderColor:'gray'}}>
-            
+
+        <ScrollView style={{backgroundColor:'white',paddingTop:60,borderColor:'gray',flex:1}}>
+          <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:100,top:'12%'}} size="large" color="#F55633" animating={subCategData.length==0}/>  
             <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
                {categName}
             </Text>
+            <View style={{paddingBottom:60}}>
             {subCategData && subCategData.length > 0 ? getSubCategoryMap() :null}
+            {subCategData && subCategData.length==0?null:(<>
+                <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10}}>
+                    <View style={{flex:1}}><Button title="Add More +" onPress={()=>{addmore();}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+                    <View style={{flex:1}}><Button title="Check out" onPress={()=>{checkOutPage();}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+                </View>
 
+            </>)}
+            </View>
 
-            <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10}}>
-            <View style={{flex:1}}><Button title="Add More +" onPress={()=>{addmore();}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
-            <View style={{flex:1}}><Button title="Check out" onPress={()=>{checkOutPage();}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
-
-        </View>
         </ScrollView>
-       
-        </View>
+
     )
 }
 export default Bathroom;

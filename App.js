@@ -94,10 +94,10 @@ const App= () => {
            
             <> 
         <Stack.Screen name="Start" component={Start} /> 
-          
+        <Stack.Screen name="Home" component={MyDrawer} /> 
            <Stack.Screen name="Login" component={Login} />
               {/* <Stack.Screen name="Start" component={Start} />  */}
-           <Stack.Screen name="Home" component={MyDrawer} /> 
+        
               <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
               <Stack.Screen name="Register" component={Register} />
               

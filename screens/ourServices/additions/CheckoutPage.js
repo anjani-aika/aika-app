@@ -79,8 +79,8 @@ const CheckoutPage=({navigation,route})=>{
             <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
                Choose Address
             </Text>
-            <SingleAddress add1={'add1'} add2={'add2'} pincode={'pincode'} landmark={'landmark'} state={'state'}/>
-            {oldAddresses==null?null: oldAddresses.map((address,index)=>(<SingleAddress setAddress={setAddress} key={index} add1={address.add1} add2={address.add2} pincode={address.pincode} landmark={address.landmark} state={address.state}/> ))}
+            {/* <SingleAddress add1={'add1'} add2={'add2'} pincode={'pincode'} landmark={'landmark'} state={'state'}/> */}
+            {oldAddresses==null?null: oldAddresses.map((address,index)=>(<SingleAddress   setAddress={setAddress} key={index} add1={address.add1} add2={address.add2} pincode={address.pincode} landmark={address.landmark} state={address.state}/> ))}
             
      
             <View style={{marginBottom:20}}><Button title=" +  Add New Address" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.navigate('AddAddress')}} buttonStyle={{backgroundColor:'white',width:190,height:41,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>

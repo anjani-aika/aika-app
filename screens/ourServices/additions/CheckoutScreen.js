@@ -67,7 +67,7 @@ const CheckoutScreen=({navigation,route})=>{
               return (
                  
                       
-                <View style={{flexDirection:'column',marginTop:30}}>
+                <View style={{flexDirection:'column',marginTop:30}} key={index}>
                 <View style={{flexDirection:'row',paddingHorizontal:25,justifyContent:'space-between',alignItems:'center'}}>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Image

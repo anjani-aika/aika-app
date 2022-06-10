@@ -12,9 +12,9 @@ import axios from "axios";
 // import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const Login = ({navigation}) => {
-  const [email,setEmail] = useState("test1@gmail.com");
-  const [password,setPassword] = useState("test@123");
-  const [loading,setIsLoading] = useState(true);
+  const [email,setEmail] = useState("testaktest@gmail.com");
+  const [password,setPassword] = useState("testaktest@123");
+  const [loading,setIsLoading] = useState(false);
   const [isLogin,setIsLogin] = useState(false);
   const {signIn} = React.useContext(AuthContext);
 

@@ -14,6 +14,10 @@ import Window from './Window';
 import Remodel from './Remodel';
 import CheckoutScreen from './CheckoutScreen';
 import CheckoutPage from './CheckoutPage';
+import CheckoutPage2 from './CheckoutPage2';
+import BookingConfirmed from './BookingConfirmed';
+import OurServicesNavigation from '../ourServicesNavigation';
+import AddAddress from './AddAddress';
 
 const RemodelNavigation = () => {
     const Stack = createNativeStackNavigator();
@@ -21,6 +25,33 @@ const RemodelNavigation = () => {
         <Stack.Navigator
             initialRouteName="Remodel"
         >
+            <Stack.Screen
+                name="BookingConfirmed"
+                component={BookingConfirmed}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
+            <Stack.Screen
+                name="OurServicesNavigation"
+                component={OurServicesNavigation}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
+            <Stack.Screen
+                name="AddAddress"
+                component={AddAddress}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
             <Stack.Screen
                 name="CheckoutScreen"
                 component={CheckoutScreen}
@@ -33,6 +64,15 @@ const RemodelNavigation = () => {
             <Stack.Screen
                 name="CheckoutPage"
                 component={CheckoutPage}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
+             <Stack.Screen
+                name="CheckoutPage2"
+                component={CheckoutPage2}
                 options={
                     {
                         headerShown: false

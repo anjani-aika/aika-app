@@ -82,7 +82,7 @@ const CheckoutPage2=({navigation})=>{
             <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
                Choose Address
             </Text>
-            {/* <SingleAddress add1={'add1'} add2={'add2'} pincode={'pincode'} landmark={'landmark'} state={'state'}/> */}
+            <SingleAddress add1={'add1'} add2={'add2'} pincode={'pincode'} landmark={'landmark'} state={'state'}/>
             {oldAddresses==null?null: oldAddresses.map((address,index)=>(<SingleAddress setAddress={setAddress} key={index} add1={address.add1} add2={address.add2} pincode={address.pincode} landmark={address.landmark} state={address.state}/> ))}
             
      

@@ -10,7 +10,7 @@ const Register = ({ navigation }) => {
     const [name,setName] = useState("");
     const [phno,setPhno] = useState("");
     const [email,setEmail] = useState("");
-    const [loading,setIsLoading] = useState(true);
+    const [loading,setIsLoading] = useState(false);
     const [password,setPassword] = useState("");
     const [location,setLocation] = useState("");
     const [isRegister,setIsRegister] = useState(false);
@@ -127,7 +127,7 @@ const Register = ({ navigation }) => {
                 <Text style={{textAlign:'center',width:'80%',fontFamily:'Poppins-Light',color:'black',paddingTop:40}}>
                 By singing up you accept the <Text style={{color:'#748AF9'}}>Team</Text> of <Text style={{color:'#748AF9'}}>Service</Text> and <Text style={{color:'#748AF9'}}>Privacy Policy</Text>
                 </Text>
-                <Button onPress={()=>{register()}} title="REGISTER" buttonStyle={{width:300,height:56,backgroundColor:'#F55633',marginTop:20}}/>
+                <Button onPress={()=>{register()}} title="REGISTER" buttonStyle={{width:300,height:56,backgroundColor:'#F55633',marginTop:20,borderRadius:10}}/>
            </View>
            
            <Toast position='bottom' ref={(ref) => Toast.setRef(ref)} />

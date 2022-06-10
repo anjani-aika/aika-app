@@ -9,11 +9,20 @@ const OrderNavigation = () => {
     const Stack = createNativeStackNavigator();
     return (
         <Stack.Navigator
-            initialRouteName="MyOrdersScreen"
+            initialRouteName="MyOrdersScreen2"
         >
             
             <Stack.Screen
                 name="MyOrdersScreen"
+                component={MyOrders}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
+            <Stack.Screen
+                name="MyOrdersScreen2"
                 component={MyOrders}
                 options={
                     {

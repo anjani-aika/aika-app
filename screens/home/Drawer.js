@@ -128,6 +128,7 @@ const MyDrawer=()=>{
                 }}
             
             />
+            
               <Drawer.Screen
                 name="Privacy Policy"
                 component={PrivacyPolicy}

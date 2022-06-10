@@ -39,8 +39,12 @@ const Remodel=({props,navigation})=>{
                
               })
               .catch((error) => {
-              
-                console.log(error);
+                if(error.response.data){
+                  console.log(error.response.data);
+                }else{
+                  console.log(error);
+                }
+                
                
               });
         }
@@ -52,7 +56,7 @@ const Remodel=({props,navigation})=>{
                console.log("DATA --------",data)
                 return (
                    
-                    <View>
+                    <View key={index}>
                          <TouchableOpacity onPress={()=>{ navigation.navigate('Kitchen',{categ_id:data.cate_id,categ_name:data.category_name})}}><PageButton buttonName={data.category_name}/></TouchableOpacity>
                     </View>
                 )
@@ -61,12 +65,14 @@ const Remodel=({props,navigation})=>{
       }
 
     return(
-    <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60}}>
-   <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'70%',position:'absolute',top:'50%'}} size="large" color="#F55633" animating={loading}/>
+    <ScrollView style={{backgroundColor:'white',paddingTop:60,flex:1}}>
+     <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:100,top:'20%'}} size="large" color="#F55633" animating={loading}/>
             <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:10}}>
                Remodel
             </Text>
+            <View style={{paddingBottom:35}}>
             {mainCategData && mainCategData.length > 0 ? mainCategoryListMap() : null}
+            </View>
             {/* <TouchableOpacity onPress={()=>{navigation.navigate('Kitchen')}}><PageButton buttonName={'Kitchen'}/></TouchableOpacity>
             <TouchableOpacity onPress={()=>{navigation.navigate('Bathroom')}}><PageButton buttonName={'Bathroom'}/></TouchableOpacity>
             <TouchableOpacity onPress={()=>{navigation.navigate('Flooring')}}><PageButton buttonName={'Flooring'}/></TouchableOpacity>

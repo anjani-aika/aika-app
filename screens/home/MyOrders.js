@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {View,Text, StyleSheet, ScrollView} from 'react-native';
+import {View,Text, StyleSheet, ScrollView , ActivityIndicator} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 import Header from '../../components/Header';
@@ -25,7 +25,7 @@ import axios from 'axios';
 // }
 const OrderCardClickable=({orderId,bookingTime,bookingDate,navigation})=>{
     return(
-        <TouchableOpacity  onPress={()=>{navigation.navigate('OrderDetails',{request_id:orderId})}}>
+        <TouchableOpacity  onPress={()=>{navigation.navigate('OrderDetails',{request_id:orderId,bookingDate:bookingDate,bookingTime:bookingTime})}}>
         <View style={{width:'88%',height:89,borderColor:'#ACACAC',borderWidth:1,borderRadius:10,alignSelf:'center',marginTop:20,padding:15}}>
             <Text>Order ID : {orderId} </Text>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
@@ -43,6 +43,10 @@ const OrderCardClickable=({orderId,bookingTime,bookingDate,navigation})=>{
 }
 const MyOrders=({navigation})=>{
     const [oldOrders,setOldOrders]=useState([]);
+    const [loading,setIsLoading]=useState(true);
+    const reloadOrders=async()=>{
+        await getOrders();
+    }
     const getOrders=async()=>{
    
         try{
@@ -65,8 +69,9 @@ const MyOrders=({navigation})=>{
                            let bookingDate=bookingTimeAndDate[0]
                            return {orderId:order.req_id,bookingTime:bookingTime,bookingDate:bookingDate}
                         });
-                        console.log("FilteredOrders: ",filterOrders);
+                       // console.log("FilteredOrders: ",filterOrders);
                         setOldOrders([...filterOrders]);
+                        setIsLoading(false);
                     }
                     
                   
@@ -77,13 +82,19 @@ const MyOrders=({navigation})=>{
         }
     }
     useEffect(()=>{
-        getOrders()
+        getOrders();
+        console.log("inside my orers");
     },[])
     return(
         <ScrollView style={{backgroundColor:'white',flex:1,paddingTop:60}}>
-            <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
+            <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'50%',top:'50%'}} size="large" color="#F55633" animating={loading}/>
+            <View style={{paddingTop:25,flexDirection:'row'}}>
+            <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,color:'black',paddingLeft:25,flex:1}}>
                 My Orders
             </Text>
+            <Text onPress={()=>reloadOrders()} style={{color:'#F55633',flex:1,textAlign:'right',paddingRight:25}}>Refresh</Text>
+            </View>
+           
            <View style={{marginBottom:100}}>
                  {oldOrders.length!=0?oldOrders.map((order,index)=>(
                         

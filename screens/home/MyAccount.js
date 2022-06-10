@@ -48,7 +48,7 @@ const MyAccount=({navigation})=>{
             <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
                 My Account
             </Text>
-            <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'100%'}} size="large" color="#F55633" animating={loading}/>
+            <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'10%',top:'10%'}} size="large" color="#F55633" animating={loading}/>
             <Text style={{paddingLeft:25,color:'#F55633',fontWeight:'bold',fontSize:24,fontFamily:'Poppins',marginTop:40}}>Hey {userData['full_name']} !</Text>
             <View style={{width:'100%',paddingLeft:-100 ,height:14,backgroundColor:'#E7E7E7',marginTop:30}}></View>
             <View style={{flexDirection:'row',justifyContent:'space-between',paddingRight:25}}>
