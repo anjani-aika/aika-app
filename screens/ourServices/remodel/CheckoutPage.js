@@ -1,62 +1,92 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {View,Text, StyleSheet, TouchableOpacity,Image,TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import CheckBox from '@react-native-community/checkbox';
+// import CheckBox from '@react-native-community/checkbox';
 import { Button, Icon } from 'react-native-elements';
 import PageButton from '../../../components/PageButton';
 import { ScrollView } from 'react-native-gesture-handler';
 import Checkout from './CheckoutScreen';
+import { CheckBox } from 'react-native-elements'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SingleItem=({src,material})=>{
+const SingleAddress=({setAddress,add1,add2,landmark,state,pincode})=>{
     const [value,setValue]=useState(false);
+    
     return(
-        <View style={{flexDirection:'column',marginTop:30}}>
-            <View style={{flexDirection:'row',paddingHorizontal:25,justifyContent:'space-between',alignItems:'center'}}>
-            <View style={{flexDirection:'row',alignItems:'center'}}>
-            <Image
-                source={src}
-                style={{marginRight:20}}
-            />
-            <Text style={{fontSize:18,fontWeight:'500',fontFamily:'Poppins-Light'}}>{material}</Text>
-            </View>
-            
+     
+            <View style={{flexDirection:'row',marginVertical:20,width:340,height:87,alignSelf:'center',borderColor:(value==true?'#FFBB9E':'gray'),borderWidth:(value==true?2:1)}}>
+            <View style={{width:'13%',justifyContent:'center',}}>
             <CheckBox
-                value={value}
-                onValueChange={()=>{setValue(!value)}}
-                 style={{justifyContent:'flex-end'}}
-            />
+                center
+                title=''
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
+                checked={value}
+                size={24}
+                checkedColor='#F55633'
+                containerStyle={{alignSelf:'center',justifyContent:'center',alignContent:'center'}}
+                onIconPress={()=>{setAddress(add1,add2,landmark,state,pincode);setValue(!value)}}
+                />
             </View>
-            {value===true?<View style={{marginHorizontal:25,marginTop:20}}>
-                <TextInput
-                    style={{width:'100%',height:62,borderWidth:1,borderRadius:4,borderColor:'gray', color: 'black'}}
-                    multiline={true}
-                    editable={true}
-                    placeholderTextColor = "gray"
-                    placeholder=" Enter Description"
-                ></TextInput>
-            </View>:null}
-            
-        </View>
+            <View style={{width:'87%',padding:5,justifyContent:'center',}}>
+                <Text style={{fontSize:16,fontWeight:'500',textTransform:'capitalize'}}>{state}</Text>
+                <Text style={{fontSize:14,fontWeight:'500'}}>{add1},{add2},{landmark},{state},{pincode}</Text>
+            </View>
+            </View>
+
+        
     )
 }
-const CheckoutPage=({navigation})=>{
+const CheckoutPage=({navigation,route})=>{
+    const [oldAddresses,setOldAddresses]=useState([]);
+    const [deliveryAdd,setDeliveryAdd]=useState(null);
+    const getAddresses=async()=>{
+        const addresses=await AsyncStorage.getItem('Addresses');
+        //await AsyncStorage.removeItem('Addresses');
+        if(addresses){
+            const {Address}=JSON.parse(addresses);
+            console.log("adrrss",Address);
+            setOldAddresses([...Address]);
+            console.log(oldAddresses)
+
+        }
+    }
+    const setAddress=async(add1,add2,landmark,state,pincode)=>{
+        setDeliveryAdd({
+            location:{
+                add1:add1,
+                add2:add2,
+                landmark:landmark,
+                state:state,
+                pincode:pincode
+            }
+        });
+    }
+    const goToBookingConfirm=async()=>{
+        if(deliveryAdd){
+            navigation.navigate('BookingConfirmed',{address:deliveryAdd})
+        }
+        
+    }
+    useEffect(()=>{
+        getAddresses();
+    },[])
+    useEffect(()=>{console.log('Route: ',route.params)},[oldAddresses])
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
         <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60,borderColor:'gray'}}>
             
             <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,padding:25,color:'black',paddingTop:25,marginBottom:0}}>
-               Checkout
+               Choose Address
             </Text>
-            <SingleItem src={require('../../../static/orders/Countertops.png')} material={'Countertops'}/>
-            <SingleItem src={require('../../../static/orders/Countertops.png')} material={'Handles'}/>
-            <SingleItem src={require('../../../static/orders/Countertops.png')} material={'Checkout Facuet'}/>
-            <SingleItem src={require('../../../static/orders/Countertops.png')} material={'Kitchen sink'}/>
+            {/* <SingleAddress add1={'add1'} add2={'add2'} pincode={'pincode'} landmark={'landmark'} state={'state'}/> */}
+            {oldAddresses==null?null: oldAddresses.map((address,index)=>(<SingleAddress   setAddress={setAddress} key={index} add1={address.add1} add2={address.add2} pincode={address.pincode} landmark={address.landmark} state={address.state}/> ))}
+            
+     
+            <View style={{marginBottom:20}}><Button title=" +  Add New Address" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.navigate('AddAddress')}} buttonStyle={{backgroundColor:'white',width:190,height:41,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>
+            <View style={{marginBottom:25}}><Button title="Check out" onPress={()=>{goToBookingConfirm()}} buttonStyle={{backgroundColor:'#F55633',width:304,height:50,alignSelf:'center',borderRadius:8}}/></View>
+          
 
-            <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10}}>
-            <View style={{flex:1}}><Button title="Add More +" onPress={()=>{navigation.navigate('Kitchen')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
-            <View style={{flex:1}}><Button title="Check out" onPress={()=>{navigation.navigate('CheckoutPage')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
-
-        </View>
         </ScrollView>
        
         </View>

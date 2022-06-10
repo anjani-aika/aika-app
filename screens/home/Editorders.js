@@ -34,25 +34,15 @@ const EditOrders=({navigation,route})=>{
             let res = await AsyncStorage.getItem("user_info");
             let arr = JSON.parse(res);
             console.log("ARRRRR ------",arr);
+          
             for(let i=0;i<prevProducts.length;i++){
                 console.log("Prev product ",prevProducts[i])
-                const userEdit=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_edit_product',{
-                    product_id:prevProducts[i].previous_req_id,
-                    user_id:prevProducts[i].user_id,
-                    reqid:prevProducts[i].request_id,
-                    order_id:prevProducts[i].order_id,
-                },{
-                    headers:{
-                        'token':arr.token,
-
-                    }
-                });
-                console.log("User Edit: ",userEdit.data);
+                
                 const confirmBookEdit=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/conformEditBooking',{
 
                         catID:prevProducts[i].category_id,
                         subcategory_id:prevProducts[i].subcategory_id,
-                        cat_name:prevProducts[i].category,
+                        cat_name:prevProducts[i].subcategory_name,
                         desc:prevProducts[i].descriptions,
                         reqid:prevProducts[i].request_id
 
@@ -61,12 +51,27 @@ const EditOrders=({navigation,route})=>{
                         'token':arr.token
                     }
                 })
+                const userEdit=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_edit_product',{
+                    product_id:prevProducts[0].previous_req_id,
+                    user_id:prevProducts[0].user_id,
+                    reqid:prevProducts[0].request_id,
+                    order_id:prevProducts[0].order_id,
+                },{
+                    headers:{
+                        'token':arr.token,
+    
+                    }
+                });
+                console.log("User Edit: ",userEdit.data);
                 if(confirmBookEdit.data.status==200){
                     console.log("Done!!!!!",confirmBookEdit.data);
-                    navigation.navigate('Our Services');
+                   
                 }
+               
             }
-          
+           
+           
+            navigation.navigate('Our Services');
            
             
         }catch(err){
@@ -88,14 +93,14 @@ const EditOrders=({navigation,route})=>{
     },[])
     return(
         <ScrollView style={{backgroundColor:'white',flex:1,paddingTop:60,paddingTop:25}}>
-        <View style={{flex:9}}>
+        <View style={{flex:9,marginBottom:20}}>
         <Text style={{fontFamily:'Poppins-Light',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
             Edit Orders
         </Text>
         {prevProducts.length>0?prevProducts.map((product,index)=><Item key={product.img_path} src={{uri:product.img_path}} removeItem={removeItem} material={product.subcategory_name} index={index}/>):null}
         {/* <AllItems/> */}
         </View>
-        <View style={{flex:1,marginBottom:20}}><Button onPress={()=>{updateOrder()}} buttonStyle={{width:304,height:54,alignSelf:'center',backgroundColor:'#F55633'}} title="Update"/></View>
+        <View style={{flex:1,marginBottom:20,marginTop:20}}><Button onPress={()=>{updateOrder()}} buttonStyle={{width:304,height:54,alignSelf:'center',backgroundColor:'#F55633'}} title="Update"/></View>
         </ScrollView>
     )
 }

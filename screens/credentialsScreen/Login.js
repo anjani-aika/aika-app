@@ -12,13 +12,13 @@ import axios from "axios";
 // import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const Login = ({navigation}) => {
-  const [email,setEmail] = useState("testaktest@gmail.com");
-  const [password,setPassword] = useState("testaktest@123");
+  const [email,setEmail] = useState("test65@gmail.com");
+  const [password,setPassword] = useState("test@123");
   const [loading,setIsLoading] = useState(false);
   const [isLogin,setIsLogin] = useState(false);
   const {signIn} = React.useContext(AuthContext);
 
-  const loginHandle = () => {
+      const loginHandle = async () => {
     setIsLogin(true);
     
     if(email != "" && password != ""){
@@ -31,10 +31,13 @@ const Login = ({navigation}) => {
   axios
     .post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_login',data)
     .then((responseData) => {
+      let user_info={token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmdWxsbmFtZSI6InRlc3QxMiIsIm1vYmlsZSI6Ijk3MTIzMTIzMjIiLCJlbWFpbCI6InRlc3Q2NUBnbWFpbC5jb20iLCJhZGRyZXNzMSI6InZhZG9kYXJhIiwiY3JlYXRlZF9hdCI6IjIwMjItMDYtMTEiLCJwYXNzd29yZCI6bnVsbCwiQVBJX1RJTUUiOjE2NTQ4Nzc3Mjd9.JgQTheptD4lc1tw2VxYx_x2gd8WNwBsOs3Lz7DZxX-k',
+       user_id:89};
       console.log('POST Response: ' + JSON.stringify(responseData.data));
       if(responseData.data.status === 200){
         setIsLoading(false)
-        AsyncStorage.setItem("user_info",JSON.stringify(responseData.data.user_info) );
+        // AsyncStorage.setItem("user_info",JSON.stringify(responseData.data.user_info) );
+        AsyncStorage.setItem("user_info",JSON.stringify(user_info) );
         console.log("responseData.data.status ---",responseData.data.message)
         // Toast.show({
         //   type: 'success',
@@ -45,6 +48,9 @@ const Login = ({navigation}) => {
           navigation.navigate('Home');
         },1000)
         // "Login Successfull"
+      }
+      else{
+        setIsLoading(false)
       }
      
     })

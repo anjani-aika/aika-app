@@ -175,7 +175,7 @@ const Kitchen=({navigation,route})=>{
         }else{
             await AsyncStorage.setItem("checkedItems",JSON.stringify(checkedItems));
         }
-        navigation.navigate('Addition');
+        navigation.navigate('Remodel');
        
     }
     const checkOutPage=async()=>{

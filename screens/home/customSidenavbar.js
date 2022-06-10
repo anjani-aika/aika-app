@@ -55,6 +55,29 @@ const CustomSidebarMenu = (props) => {
           });
     }
   }
+
+  const onLogOut = async () =>{
+
+    console.log("LOG OUT ----");
+        axios
+          .post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/app_logout')
+          .then((responseData) => {
+            console.log('POST Response: ' + JSON.stringify(responseData.data.data));
+            if(responseData.data.status === 200){
+              AsyncStorage.removeItem("user_info");
+              props.navigation.navigate('Login');
+
+            }
+           
+          })
+          .catch((error) => {
+          
+            console.log('error ----',error);
+           
+          });
+    }
+  
+
   // console.log("Custom sidebar",props.navigation);
   const BASE_PATH =
     'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
@@ -77,11 +100,12 @@ const CustomSidebarMenu = (props) => {
       <View style={{width:'97%',height:5,backgroundColor:'#E7E7E7',position:'absolute',top:140}}></View>
       <DrawerContentScrollView {...props} style={{marginTop:-25}}>
         <DrawerItemList {...props} />
+        <TouchableOpacity onPress={()=>{onLogOut()}}>
         <Image 
         style={{height:45,width:120,resizeMode:'stretch',alignSelf:'center',marginTop:20}} 
         source={require('../../static/sidebar/logout.png')}
       />
-
+</TouchableOpacity>
       </DrawerContentScrollView>
     </SafeAreaView>
   );

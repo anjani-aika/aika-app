@@ -171,6 +171,7 @@ const OrderDetails=({navigation,route})=>{
             console.log("AMOUNT",viewOrder.data.data.fast_rsponse_amount);
             console.log("INVOICE",viewOrder.data.data.fastinvoice);
             console.log("SECOND",viewOrder.data.data.secondinvoice);
+            console.log("SECOND AMOUNT",viewOrder.data.data.second_rsponse_amount);
             if(viewOrder.data.status==200){
                 console.log('hi');
                 if(viewOrder.data.data.secondinvoice.length>0){
