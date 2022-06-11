@@ -11,13 +11,13 @@ const Notification=({navigation})=>{
 const OrderCard=()=>{
     return(
         <View style={{width:'88%',height:89,borderColor:'#ACACAC',borderWidth:1,borderRadius:10,alignSelf:'center',marginTop:20,padding:15}}>
-            <Text>Order ID : GISo7OmXnp59 </Text>
+            <Text style={{color:'black'}}>Order ID : GISo7OmXnp59 </Text>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <Text><Text>Booking Time :</Text> 19:07</Text>
+            <Text style={{color:'black'}}><Text style={{color:'black'}}>Booking Time :</Text> 19:07</Text>
             <Text style={{color:'green'}}>(invoice received)</Text>
             </View>
           
-            <Text><Text>Booking Date :</Text> April 15 2022</Text>
+            <Text style={{color:'black'}}><Text style={{color:'black'}}>Booking Date :</Text> April 15 2022</Text>
             
         </View>
     )

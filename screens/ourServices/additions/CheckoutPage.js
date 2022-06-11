@@ -14,7 +14,7 @@ const SingleAddress=({setAddress,add1,add2,landmark,state,pincode})=>{
     
     return(
      
-            <View style={{flexDirection:'row',marginVertical:20,width:340,height:87,alignSelf:'center',borderColor:(value==true?'#FFBB9E':'gray'),borderWidth:(value==true?2:1)}}>
+            <View style={{flexDirection:'row',marginVertical:20,width:340,height:87,alignSelf:'center',borderRadius:8,borderColor:(value==true?'#FFBB9E':'gray'),borderWidth:(value==true?2:1)}}>
             <View style={{width:'13%',justifyContent:'center',}}>
             <CheckBox
                 center
@@ -29,8 +29,8 @@ const SingleAddress=({setAddress,add1,add2,landmark,state,pincode})=>{
                 />
             </View>
             <View style={{width:'87%',padding:5,justifyContent:'center',}}>
-                <Text style={{fontSize:16,fontWeight:'500',textTransform:'capitalize'}}>{state}</Text>
-                <Text style={{fontSize:14,fontWeight:'500'}}>{add1},{add2},{landmark},{state},{pincode}</Text>
+                <Text style={{fontSize:16,fontWeight:'500',textTransform:'capitalize',color:'black'}}>{state}</Text>
+                <Text style={{fontSize:14,fontWeight:'500',color:'black'}}>{add1},{add2},{landmark},{state=='Home'?'':state},{pincode}</Text>
             </View>
             </View>
 

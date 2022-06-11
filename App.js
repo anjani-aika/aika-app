@@ -7,7 +7,7 @@
  */
 import 'react-native-gesture-handler'
 import React, { useState } from 'react';
-import {SafeAreaView,ScrollView,StatusBar,StyleSheet,Text, useColorScheme,View,} from 'react-native';
+import {SafeAreaView,ScrollView,StatusBar,StyleSheet,Text, useColorScheme,View,ActivityIndicator} from 'react-native';
 import { useMemo } from 'react';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -29,7 +29,8 @@ const globalScreenOptions = {
 
 
 const App= () => {
-  const [initialRouteName,setinitialRouteName] = useState('');
+  const [initialRouteName,setinitialRouteName] = useState();
+  const [loading,setIsLoading]=useState(true)
   React.useEffect(() => {
     SplashScreen.hide();
     getUserInfo();
@@ -42,14 +43,18 @@ const App= () => {
     console.log("ARRRRR ------",arr);
    if(arr === null || arr === "null"){
     console.log("IF LOGIN ------");
-    setinitialRouteName("Login");
+    setinitialRouteName((initialRouteName)=>{
+      return "Start"
+    });
    }
    else{
      console.log("ELSE HOME ------");
-    setinitialRouteName("Home");
+     setinitialRouteName((initialRouteName)=>{
+      return "Home"
+    });
     console.log("intialROUTE NAME ----",initialRouteName)
    }
-    
+    setIsLoading(false)
    }
 
   const authContext = useMemo(
@@ -88,24 +93,27 @@ const App= () => {
           
   return (
     <>
-     <AuthContext.Provider value={authContext}>
+      <ActivityIndicator style={{position:'absolute',top:'40%',alignSelf:'center'}} size='large' color="#F55633"  animating={loading}/>
+      {loading==false?(
+          <>
+           <AuthContext.Provider value={authContext}>
       <NavigationContainer >
-        <Stack.Navigator screenOptions={globalScreenOptions} initialRouteName={initialRouteName}>
+        <Stack.Navigator screenOptions={globalScreenOptions} initialRouteName={initialRouteName && initialRouteName=='Home'?'Home':'Start'}>
            
-            <> 
-        <Stack.Screen name="Start" component={Start} /> 
+          <> 
+          <Stack.Screen name="Start" component={Start} /> 
           <Stack.Screen name="Home" component={MyDrawer} /> 
-           <Stack.Screen name="Login" component={Login} />
-              {/* <Stack.Screen name="Start" component={Start} />  */}
-        
-              <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-              <Stack.Screen name="Register" component={Register} />
-              
-
-            </>
+          <Stack.Screen name="Login" component={Login} />
+          {/* <Stack.Screen name="Start" component={Start} />  */}
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="Register" component={Register} />
+          </>
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
+          </>
+      ):null}
+    
     </>
   );
 };

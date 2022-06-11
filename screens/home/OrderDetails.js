@@ -27,7 +27,7 @@ const Pricinglist=({material,rate})=>{
         <View style={{...styles.div,marginTop:15}}>
             <Text style={{flex:1.4,...styles.innerdiv,fontSize:15,textAlign:'left',height:55}}>{material}</Text>
             <View style={{flex:2}}>
-                <Text style={{textAlign:'right',borderColor:'gray',justifyContent:'center',alignItems:'center',borderWidth:1,width:134,height:32,textAlign:'center', alignSelf:'flex-end',textAlignVertical:'center',borderRadius:10}}>{rate}$/Sqft</Text>
+                <Text style={{textAlign:'right',borderColor:'gray',justifyContent:'center',alignItems:'center',borderWidth:1,width:134,height:32,textAlign:'center', alignSelf:'flex-end',textAlignVertical:'center',borderRadius:10,color:'black'}}>{rate}$/Sqft</Text>
             </View>
         </View>
     )
@@ -96,6 +96,8 @@ const OrderDetails=({navigation,route})=>{
    const [secondInvoice,setSecondInvoice]=useState(false);
    const [productsPrice,setProductsPrice]=useState([]);
    const [loading,setIsLoading]=useState(true);
+   const [isCancelled,setIsCancelled]=useState(false);
+   const [isAccepted,setIsAccepted]=useState(false);
     
     const acceptingTheOrder=async()=>{
         try{
@@ -115,6 +117,7 @@ const OrderDetails=({navigation,route})=>{
                                         console.log("Result: ",orderAcceptResult.data);
                 if(orderAcceptResult.data.status=='200'){
                     console.log("Result: ",orderAcceptResult.data);
+                    setIsAccepted(true);
                     navigation.navigate('Our Services');
                 }else{
                     console.log("Error in accepting the order.");
@@ -147,7 +150,9 @@ const OrderDetails=({navigation,route})=>{
         console.log("cancelled: ",cancelled.data);
         if(cancelled.data.status==200){
             console.log("cancelled: ",cancelled.data);
+            setIsCancelled(true);
             navigation.navigate('Our Services');
+
         }
         
     }
@@ -217,9 +222,9 @@ const OrderDetails=({navigation,route})=>{
             <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10,paddingBottom:35}}>
                 <View style={{flex:1}}>{productsPrice.length>0 && secondInvoice!=true?
                 (<Button title="Edit" onPress={()=>{navigation.navigate('EditOrders',{products:productList})}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/>)
-                :<Button title="Cancel" onPress={()=>{onCancelBooking()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/>
+                :<Button title="Cancel" disabled={isCancelled} onPress={()=>{onCancelBooking()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/>
                     }</View>
-                <View style={{flex:1}}><Button title="Accept" onPress={()=>{acceptingTheOrder()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+                <View style={{flex:1}}><Button title="Accept" disabled={isAccepted} onPress={()=>{acceptingTheOrder()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
 
             </View>
            
@@ -239,6 +244,7 @@ const styles= StyleSheet.create({
     },
     innerdiv:{
         textAlign:'right',
+        color:'black'
   
     }
 })

@@ -31,13 +31,13 @@ const Login = ({navigation}) => {
   axios
     .post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_login',data)
     .then((responseData) => {
-      let user_info={token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmdWxsbmFtZSI6InRlc3QxMiIsIm1vYmlsZSI6Ijk3MTIzMTIzMjIiLCJlbWFpbCI6InRlc3Q2NUBnbWFpbC5jb20iLCJhZGRyZXNzMSI6InZhZG9kYXJhIiwiY3JlYXRlZF9hdCI6IjIwMjItMDYtMTEiLCJwYXNzd29yZCI6bnVsbCwiQVBJX1RJTUUiOjE2NTQ4Nzc3Mjd9.JgQTheptD4lc1tw2VxYx_x2gd8WNwBsOs3Lz7DZxX-k',
-       user_id:89};
+      // let user_info={token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmdWxsbmFtZSI6InRlc3QxMiIsIm1vYmlsZSI6Ijk3MTIzMTIzMjIiLCJlbWFpbCI6InRlc3Q2NUBnbWFpbC5jb20iLCJhZGRyZXNzMSI6InZhZG9kYXJhIiwiY3JlYXRlZF9hdCI6IjIwMjItMDYtMTEiLCJwYXNzd29yZCI6bnVsbCwiQVBJX1RJTUUiOjE2NTQ4Nzc3Mjd9.JgQTheptD4lc1tw2VxYx_x2gd8WNwBsOs3Lz7DZxX-k',
+      //  user_id:89};
       console.log('POST Response: ' + JSON.stringify(responseData.data));
       if(responseData.data.status === 200){
         setIsLoading(false)
-        // AsyncStorage.setItem("user_info",JSON.stringify(responseData.data.user_info) );
-        AsyncStorage.setItem("user_info",JSON.stringify(user_info) );
+        AsyncStorage.setItem("user_info",JSON.stringify(responseData.data.user_info) );
+        // AsyncStorage.setItem("user_info",JSON.stringify(user_info) );
         console.log("responseData.data.status ---",responseData.data.message)
         // Toast.show({
         //   type: 'success',

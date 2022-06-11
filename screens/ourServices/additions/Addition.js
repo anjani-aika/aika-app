@@ -32,8 +32,8 @@ const Addition=({navigation})=>{
                        
                   let categArr =  responseData.data.data;
                   console.log("CATEGORY DATA -----",categArr)
-                  setMainCategData(categArr);
-                  console.log("USER DAYA --",mainCategData[0].category_name);
+                  setMainCategData([...categArr]);
+                  //console.log("USER DAYA --",mainCategData[0].category_name);
                   
                 }
                
@@ -52,7 +52,7 @@ const Addition=({navigation})=>{
                console.log("DATA --------",data)
                 return (
                    
-                    <View>
+                    <View key={index}>
                          <TouchableOpacity onPress={()=>{ navigation.navigate('Kitchen',{categ_id:data.cate_id,categ_name:data.category_name})}}><PageButton key={index} buttonName={data.category_name}/></TouchableOpacity>
                     </View>
                 )

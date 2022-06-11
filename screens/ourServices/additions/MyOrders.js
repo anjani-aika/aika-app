@@ -10,15 +10,15 @@ import axios from 'axios';
 // const OrderCardUnClickable=({orderId,bookingTime,bookingDate})=>{
 //     return(
 //         <View style={{width:'88%',height:89,borderColor:'#ACACAC',borderWidth:1,borderRadius:10,alignSelf:'center',marginTop:20,padding:15}}>
-//             <Text>Order ID : GISo7OmXnp59 </Text>
+//             <Text style={{color:'black'}}>Order ID : GISo7OmXnp59 </Text>
 //             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-//             <Text><Text>Booking Time :</Text> 19:07</Text>
+//             <Text style={{color:'black'}}><Text style={{color:'black'}}>Booking Time :</Text> 19:07</Text>
 //             <Icon 
 //              name="arrow-forward-ios"
 //              />
 //             </View>
           
-//             <Text><Text>Booking Date :</Text> April 15 2022</Text>
+//             <Text style={{color:'black'}}><Text style={{color:'black'}}>Booking Date :</Text> April 15 2022</Text>
             
 //         </View>
 //     )
@@ -27,15 +27,15 @@ const OrderCardClickable=({orderId,bookingTime,bookingDate,navigation})=>{
     return(
         <TouchableOpacity  onPress={()=>{navigation.navigate('OrderDetails',{request_id:orderId})}}>
         <View style={{width:'88%',height:89,borderColor:'#ACACAC',borderWidth:1,borderRadius:10,alignSelf:'center',marginTop:20,padding:15}}>
-            <Text>Order ID : {orderId} </Text>
+            <Text style={{color:'black'}}>Order ID : {orderId} </Text>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <Text><Text>Booking Time :</Text>{bookingTime}</Text>
+            <Text style={{color:'black'}}><Text style={{color:'black'}}>Booking Time :</Text>{bookingTime}</Text>
             <Icon 
              name="arrow-forward-ios"
              />
             </View>
           
-            <Text><Text>Booking Date :</Text> {bookingDate}</Text>
+            <Text style={{color:'black'}}><Text style={{color:'black'}}>Booking Date :</Text> {bookingDate}</Text>
             
         </View>
         </TouchableOpacity>

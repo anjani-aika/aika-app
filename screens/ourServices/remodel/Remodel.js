@@ -33,13 +33,13 @@ const Remodel=({props,navigation})=>{
                   let categArr =  responseData.data.data;
                   console.log("CATEGORY DATA -----",categArr)
                   setMainCategData(categArr);
-                  console.log("USER DAYA --",mainCategData[0].category_name);
+                  //console.log("USER DAYA --",mainCategData[0].category_name);
                   
                 }
                
               })
               .catch((error) => {
-                if(error.response.data){
+                if(error.response.data!=undefined){
                   console.log(error.response.data);
                 }else{
                   console.log(error);

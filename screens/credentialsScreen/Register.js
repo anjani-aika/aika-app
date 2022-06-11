@@ -31,11 +31,12 @@ const Register = ({ navigation }) => {
             }
             axios
               .post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_signup',data)
-              .then((responseData) => {
+              .then(async(responseData) => {
                 console.log('POST Response: ' + JSON.stringify(responseData.data));
                 if(responseData.data.status === 200){
                   console.log("responseData.data.status ---",responseData.data.user_info)
-                  AsyncStorage.setItem("user_info",JSON.stringify(responseData.data.user_info) );
+                  await AsyncStorage.setItem("user_info",JSON.stringify(responseData.data.user_info) );
+                  await AsyncStorage.setItem('Addresses',JSON.stringify({Address:[{add1:location,add2:'',landmark:'',state:'Home',pincode:''}]}));
                   setIsLoading(false)
                   Toast.show({
                     type: 'success',

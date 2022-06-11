@@ -8,8 +8,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 const PrivacyPolicy=({navigation})=>{
     return(
         <ScrollView contentContainerStyle={{backgroundColor:'white',paddingTop:60,padding:25}}>
-            <Text style={{fontWeight:'600',fontSize:18,color:'black',fontFamily:'Poppins-Light'}}>Privacy And Policies</Text>
-            <Text style={{textAlign:'justify',marginTop:10,fontSize:15}}>
+            <Text style={{fontWeight:'600',fontSize:18,color:'black',fontFamily:'Poppins-Regular'}}>Privacy And Policies</Text>
+            <Text style={{textAlign:'justify',marginTop:10,fontSize:15,color:'black'}}>
             1. Introduction
 
 Welcome to Pacific Red Door Development Inc..
@@ -21,7 +21,7 @@ Our Privacy Policy governs your visit to https://reddoordevelopment.com/, and ex
 We use your data to provide and improve Service. By using Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.
 
 Our Terms and Conditions (“Terms”) govern all use of our Service and together with the Privacy Policy constitutes your agreement with us (“agreement”).
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 2. Definitions
 
 SERVICE means the https://reddoordevelopment.com/ website operated by Pacific Red Door Development Inc..
@@ -39,11 +39,11 @@ DATA PROCESSORS (OR SERVICE PROVIDERS) means any natural or legal person who pro
 DATA SUBJECT is any living individual who is the subject of Personal Data.
 
 THE USER is the individual using our Service. The User corresponds to the Data Subject, who is the subject of Personal Data.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 3. Information Collection and Use
 
 We collect several different types of information for various purposes to provide and improve our Service to you.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 4. Types of Data Collected
 
 Personal Data
@@ -97,7 +97,7 @@ Examples of Cookies we use:
 Other Data
 
 While using our Service, we may also collect the following information: sex, age, date of birth, place of birth, passport details, citizenship, registration at place of residence and actual address, telephone number (work, mobile), details of documents on education, qualification, professional training, employment agreements, NDA agreements, information on bonuses and compensation, information on marital status, family members, social security (or other taxpayer identification) number, office location and other data.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 5. Use of Data
 
 Pacific Red Door Development Inc. uses the collected data for various purposes:
@@ -127,13 +127,13 @@ Pacific Red Door Development Inc. uses the collected data for various purposes:
 0.12. in any other way we may describe when you provide the information;
 
 0.13. for any other purpose with your consent.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 6. Retention of Data
 
 We will retain your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.
 
 We will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period, except when this data is used to strengthen the security or to improve the functionality of our Service, or we are legally obligated to retain this data for longer time periods.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 7. Transfer of Data
 
 Your information, including Personal Data, may be transferred to – and maintained on – computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.
@@ -143,7 +143,7 @@ If you are located outside Washington and choose to provide information to us, p
 Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.
 
 Pacific Red Door Development Inc. will take all the steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organisation or a country unless there are adequate controls in place including the security of your data and other personal information.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 8. Disclosure of Data
 
 We may disclose personal information that we collect, or you provide:
@@ -167,11 +167,11 @@ If we or our subsidiaries are involved in a merger, acquisition or asset sale, y
 0.2.6. with your consent in any other cases;
 
 0.2.7. if we believe disclosure is necessary or appropriate to protect the rights, property, or safety of the Company, our customers, or others.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 9. Security of Data
 
 The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 10. Your Data Protection Rights Under General Data Protection Regulation (GDPR)
 
 If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR.
@@ -197,7 +197,7 @@ In certain circumstances, you have the following data protection rights:
 Please note that we may ask you to verify your identity before responding to such requests. Please note, we may not able to provide Service without some necessary data.
 
 You have the right to complain to a Data Protection Authority about our collection and use of your Personal Data. For more information, please contact your local data protection authority in the European Economic Area (EEA).
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 11. Your Data Protection Rights under the California Privacy Protection Act (CalOPPA)
 
 CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law’s reach stretches well beyond California to require a person or company in the United States (and conceivable the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals with whom it is being shared, and to comply with this policy.
@@ -217,7 +217,7 @@ Our Policy on “Do Not Track” Signals:
 We honor Do Not Track signals and do not track, plant cookies, or use advertising when a Do Not Track browser mechanism is in place. Do Not Track is a preference you can set in your web browser to inform websites that you do not want to be tracked.
 
 You can enable or disable Do Not Track by visiting the Preferences or Settings page of your web browser.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 12. Your Data Protection Rights under the California Consumer Privacy Act (CCPA)
 
 If you are a California resident, you are entitled to learn what data we collect about you, ask to delete your data and not to sell (share) it. To exercise your data protection rights, you can make certain requests and ask us:
@@ -251,25 +251,25 @@ Please note, if you ask us to delete or stop selling your data, it may impact yo
 To exercise your California data protection rights described above, please send your request(s) by email: info@reddoordevelopment.com.
 
 Your data protection rights, described above, are covered by the CCPA, short for the California Consumer Privacy Act. To find out more, visit the official California Legislative Information website. The CCPA took effect on 01/01/2020.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 13. Service Providers
 
 We may employ third party companies and individuals to facilitate our Service (“Service Providers”), provide Service on our behalf, perform Service-related services or assist us in analysing how our Service is used.
 
 These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 14. Analytics
 
 We may use third-party Service Providers to monitor and analyze the use of our Service.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 15. CI/CD tools
 
 We may use third-party Service Providers to automate the development process of our Service.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 16. Behavioral Remarketing
 
 We may use remarketing services to advertise on third party websites to you after you visited our Service. We and our third-party vendors use cookies to inform, optimise and serve ads based on your past visits to our Service.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 17. Links to Other Sites
 
 Our Service may contain links to other sites that are not operated by us. If you click a third party link, you will be directed to that third party’s site. We strongly advise you to review the Privacy Policy of every site you visit.
@@ -277,13 +277,13 @@ Our Service may contain links to other sites that are not operated by us. If you
 We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
 
 For example, the outlined privacy policy has been made using PolicyMaker.io, a free tool that helps create high-quality legal documents. PolicyMaker’s privacy policy generator is an easy-to-use tool for creating a privacy policy for blog, website, e-commerce store or mobile app.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 18. Children’s Privacy
 
 Our Services are not intended for use by children under the age of 18 (“Child” or “Children”).
 
 We do not knowingly collect personally identifiable information from Children under 18. If you become aware that a Child has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from Children without verification of parental consent, we take steps to remove that information from our servers.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 19. Changes to This Privacy Policy
 
 We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.
@@ -291,11 +291,11 @@ We may update our Privacy Policy from time to time. We will notify you of any ch
 We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update “effective date” at the top of this Privacy Policy.
 
 You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 20. Contact Us
 
 If you have any questions about this Privacy Policy, please contact us by email: info@reddoordevelopment.com.
-</Text><Text>
+</Text><Text style={{color:'black'}}>
 This Privacy Policy was created for https://reddoordevelopment.com/ by PolicyMaker.io on 2021-01-01.
             </Text>
         </ScrollView>
