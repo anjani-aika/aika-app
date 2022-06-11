@@ -78,7 +78,7 @@ const CheckoutScreen=({navigation,route})=>{
                         height: 50,borderRadius:5
                     }}
                 />
-                <Text style={{fontSize:18,fontWeight:'500',fontFamily:'Poppins',width:180}}>{data.subcategory_name}</Text>
+                <Text style={{fontSize:18,fontWeight:'500',fontFamily:'Poppins',width:180,color:'black'}}>{data.subcategory_name}</Text>
                 </View>
 
                 <CheckBox

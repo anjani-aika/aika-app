@@ -29,8 +29,8 @@ const SingleAddress=({ setAddress, add1,add2,landmark,state,pincode})=>{
                 />
             </View>
             <View style={{width:'87%',padding:5,justifyContent:'center',}}>
-                <Text style={{fontSize:16,fontWeight:'500',textTransform:'capitalize'}}>{state}</Text>
-                <Text style={{fontSize:14,fontWeight:'500'}}>{add1},{add2},{landmark},{state},{pincode}</Text>
+                <Text style={{fontSize:16,fontWeight:'500',textTransform:'capitalize',color:'black'}}>{state}</Text>
+                <Text style={{fontSize:14,fontWeight:'500',color:'black'}}>{add1},{add2},{landmark},{state=='Home'?'':state},{pincode}</Text>
             </View>
             </View>
 
