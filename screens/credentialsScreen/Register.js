@@ -30,7 +30,7 @@ const Register = ({ navigation }) => {
                
             }
             axios
-              .post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_signup',data)
+              .post('https://reddoordevelopment.com/index.php/api/Users/user_signup',data)
               .then(async(responseData) => {
                 console.log('POST Response: ' + JSON.stringify(responseData.data));
                 if(responseData.data.status === 200){

@@ -150,7 +150,8 @@ const OrderDetails=({navigation,route})=>{
         console.log("cancelled: ",cancelled.data);
         if(cancelled.data.status==200){
             console.log("cancelled: ",cancelled.data);
-            setIsCancelled(true);
+            // setIsCancelled(true);
+            setIsAccepted(true);
             navigation.navigate('Our Services');
 
         }
@@ -163,7 +164,7 @@ const OrderDetails=({navigation,route})=>{
             let res = await AsyncStorage.getItem("user_info");
             let arr = JSON.parse(res);
             console.log("ARRRRR ------",arr,arr.user_id);
-            const viewOrder=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/view_order',{
+            const viewOrder=await axios.post('https://reddoordevelopment.com/index.php/api/Users/view_order',{
                 request_id:request_id
             }
             ,{
@@ -222,12 +223,12 @@ const OrderDetails=({navigation,route})=>{
             <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10,paddingBottom:35}}>
                 <View style={{flex:1}}>{productsPrice.length>0 && secondInvoice!=true?
                 (<Button title="Edit" onPress={()=>{navigation.navigate('EditOrders',{products:productList})}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/>)
-                :<Button title="Cancel" disabled={isCancelled} onPress={()=>{onCancelBooking()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/>
+                :<Button title="Cancel" disabled={isAccepted} onPress={()=>{onCancelBooking()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/>
                     }</View>
                 <View style={{flex:1}}><Button title="Accept" disabled={isAccepted} onPress={()=>{acceptingTheOrder()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
 
             </View>
-           
+            {/* disabled={isCancelled} */}
            </>):null} 
         </ScrollView>
    

@@ -55,7 +55,7 @@ const EditOrders=({navigation,route})=>{
                 // });
                 
                 // console.log("User Edit: ",userEdit.data);
-                const confirmBookEdit=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/conformEditBooking',{
+                const confirmBookEdit=await axios.post('https://reddoordevelopment.com/index.php/api/Users/conformEditBooking',{
 
                         catID:prevProducts[i].cate_id,
                         subcategory_id:prevProducts[i].subcategory_id,

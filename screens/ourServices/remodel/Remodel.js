@@ -24,7 +24,7 @@ const Remodel=({props,navigation})=>{
                 'token':arr.token
             }
             axios
-              .get('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_category',{headers:headers})
+              .get('https://reddoordevelopment.com/index.php/api/Users/user_category',{headers:headers})
               .then((responseData) => {
                 console.log('POST Response: ' + JSON.stringify(responseData.data.data));
                 if(responseData.data.status === 200){

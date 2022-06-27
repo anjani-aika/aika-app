@@ -29,7 +29,7 @@ const ForgotPassword = ({navigation}) => {
       "password":password
   }
   axios
-    .post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/forget_password',data)
+    .post('https://reddoordevelopment.com/index.php/api/Users/forget_password',data)
     .then((responseData) => {
       console.log('POST Response: ' + JSON.stringify(responseData.data));
       if(responseData.data.status === 200){

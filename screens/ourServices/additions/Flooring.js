@@ -28,7 +28,7 @@ const Flooring=({navigation,route})=>{
                 'token':arr.token
             }
             axios
-              .get('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/subcategory_detail?cate_id='+route.params.categ_id,{headers:headers})
+              .get('https://reddoordevelopment.com/index.php/api/Users/subcategory_detail?cate_id='+route.params.categ_id,{headers:headers})
               .then((responseData) => {
                 console.log('POST Response: ' + JSON.stringify(responseData.data.data));
                 if(responseData.data.status === 200){

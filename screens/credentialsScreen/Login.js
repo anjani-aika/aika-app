@@ -29,7 +29,7 @@ const Login = ({navigation}) => {
       "password":password
   }
   axios
-    .post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/user_login',data)
+    .post('https://reddoordevelopment.com/index.php/api/Users/user_login',data)
     .then((responseData) => {
       // let user_info={token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmdWxsbmFtZSI6InRlc3QxMiIsIm1vYmlsZSI6Ijk3MTIzMTIzMjIiLCJlbWFpbCI6InRlc3Q2NUBnbWFpbC5jb20iLCJhZGRyZXNzMSI6InZhZG9kYXJhIiwiY3JlYXRlZF9hdCI6IjIwMjItMDYtMTEiLCJwYXNzd29yZCI6bnVsbCwiQVBJX1RJTUUiOjE2NTQ4Nzc3Mjd9.JgQTheptD4lc1tw2VxYx_x2gd8WNwBsOs3Lz7DZxX-k',
       //  user_id:89};

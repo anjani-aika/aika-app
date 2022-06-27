@@ -74,7 +74,7 @@ const OrderDetails=({navigation,route})=>{
             let res = await AsyncStorage.getItem("user_info");
             let arr = JSON.parse(res);
             console.log("ARRRRR ------",arr);
-            const orderAcceptResult=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/Order_accept',{
+            const orderAcceptResult=await axios.post('https://reddoordevelopment.com/index.php/api/Users/Order_accept',{
                                             req_id:req_id,
                                             invoice_id:invoice_id
                                         },{
@@ -100,7 +100,7 @@ const OrderDetails=({navigation,route})=>{
             let res = await AsyncStorage.getItem("user_info");
             let arr = JSON.parse(res);
             console.log("ARRRRR ------",arr,arr.user_id);
-            const viewOrder=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/view_order',{
+            const viewOrder=await axios.post('https://reddoordevelopment.com/index.php/api/Users/view_order',{
                 request_id:parseInt(request_id)
             },{
                 headers:{
