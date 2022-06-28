@@ -73,8 +73,15 @@ const CheckoutPage2=({navigation})=>{
     }
     useEffect(()=>{
         getAddresses();
+        const willFocusSubscription = navigation.addListener('focus', () => {
+            // console.log("jio");
+           getAddresses();
+        });
+      
+  
+      return willFocusSubscription;
         
-    },[])
+    },[navigation])
     useEffect(()=>{console.log('hi')},[oldAddresses])
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
@@ -87,7 +94,7 @@ const CheckoutPage2=({navigation})=>{
             {oldAddresses==null?null: oldAddresses.map((address,index)=>(<SingleAddress setAddress={setAddress} key={index} add1={address.add1} add2={address.add2} pincode={address.pincode} landmark={address.landmark} state={address.state}/> ))}
             
      
-            <View style={{marginBottom:20}}><Button title=" +  Add New Address" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.navigate('AddAddress',{from:'Readd'})}} buttonStyle={{backgroundColor:'white',width:190,height:41,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>
+            <View style={{marginBottom:20}}><Button title=" +  Add New Address" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.navigate('AddAddress')}} buttonStyle={{backgroundColor:'white',width:190,height:41,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>
             <View style={{marginBottom:25}}><Button title="Check out" onPress={()=>{goToBookingConfirm()}} buttonStyle={{backgroundColor:'#F55633',width:304,height:50,alignSelf:'center',borderRadius:8}}/></View>
           
 
