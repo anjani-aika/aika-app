@@ -19,6 +19,41 @@ const MyAccount=({navigation})=>{
       useEffect(() => {
         getUserInfo();
       },[]);
+}
+const updateHandle = async () => {
+  let res = await AsyncStorage.getItem("user_info");
+        let arr = JSON.parse(res);
+        console.log("ARRRRR ------",arr);
+  let data ={
+    "fullname":name ? name : '',
+    "email":email ? email : '',
+    "mobile":mobile ? mobile : '',
+    "address":address ? address :''
+}
+let headers={
+  'token':arr.token
+}
+axios
+  .post('https://reddoordevelopment.com/index.php/api/Users/update_profile',data,{headers:headers})
+  .then((responseData) => {
+    // let user_info={token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmdWxsbmFtZSI6InRlc3QxMiIsIm1vYmlsZSI6Ijk3MTIzMTIzMjIiLCJlbWFpbCI6InRlc3Q2NUBnbWFpbC5jb20iLCJhZGRyZXNzMSI6InZhZG9kYXJhIiwiY3JlYXRlZF9hdCI6IjIwMjItMDYtMTEiLCJwYXNzd29yZCI6bnVsbCwiQVBJX1RJTUUiOjE2NTQ4Nzc3Mjd9.JgQTheptD4lc1tw2VxYx_x2gd8WNwBsOs3Lz7DZxX-k',
+    //  user_id:89};
+    console.log('POST Response: ' + JSON.stringify(responseData.data));
+    if(responseData.data.status === 200){
+      console.log('POST Response: ' + JSON.stringify(responseData.data));
+    }
+    else{
+     // setIsLoading(false)
+    }
+   
+  })
+  .catch((error) => {
+  
+    console.log(error);
+   
+  });
+};
+
       const getUserInfo = async () =>{
 
         let res = await AsyncStorage.getItem("user_info");
@@ -121,10 +156,9 @@ const MyAccount=({navigation})=>{
 indiranagar , begaluru,karnataka, india , 256778</Text> */}
 <View style={{width:'100%',paddingLeft:-50 ,height:6,backgroundColor:'#E7E7E7',marginTop:20}}></View>
 {isName === true || isEmail === true || isAddress === true ?
-<Button title="Update" buttonStyle={{marginTop:10,justifyContent:'center',alignSelf:'center',width:100,height:50,backgroundColor:'#F55633',borderRadius:10}}/>
+<Button title="Update" onPress={()=>{updateHandle()}} buttonStyle={{marginTop:10,justifyContent:'center',alignSelf:'center',width:100,height:50,backgroundColor:'#F55633',borderRadius:10}}/>
 : null}
         </View>
     )
 }
-
 export default MyAccount;
