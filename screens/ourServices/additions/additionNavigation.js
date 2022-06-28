@@ -34,6 +34,7 @@ const AdditionNavigation = () => {
                     }
                 }
             />
+          
             <Stack.Screen
                 name="OurServicesNavigation"
                 component={OurServicesNavigation}
@@ -62,6 +63,15 @@ const AdditionNavigation = () => {
                 }
             />
             <Stack.Screen
+                name="CheckoutScreen"
+                component={CheckoutScreen}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
+            <Stack.Screen
                 name="CheckoutPage"
                 component={CheckoutPage}
                 options={
@@ -69,7 +79,8 @@ const AdditionNavigation = () => {
                         headerShown: false
                     }
                 }
-            />
+            /> 
+
             <Stack.Screen
                 name="CheckoutPage2"
                 component={CheckoutPage2}

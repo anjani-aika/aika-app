@@ -5,6 +5,10 @@ import AdditionNavigation from './additions/additionNavigation';
 import NewConstruction from './NewConstruction';
 import RemodelNavigation from './remodel/remodelNavigation';
 import OurServices from './OurServices';
+import BookingNewConstruction from './BookingNewConstruction';
+import CheckoutNewConstruction from './CheckoutNewConstruction';
+import AddAddressNewCons from './AddAddressNewCons';
+
 const OurServicesNavigation = () => {
     const Stack = createNativeStackNavigator();
     return (
@@ -21,6 +25,33 @@ const OurServicesNavigation = () => {
                     }
                 }
             />
+              <Stack.Screen
+                name="BookingNewConstruction"
+                component={BookingNewConstruction}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
+            <Stack.Screen
+                name="AddAddressNewCons"
+                component={AddAddressNewCons}
+                options={
+                    {
+                        headerShown: false
+                    }
+                }
+            />
+             <Stack.Screen
+            name="CheckoutNewConstruction"
+            component={CheckoutNewConstruction}
+            options={
+                {
+                    headerShown: false
+                }
+            }
+        />
              <Stack.Screen
                 name="Addition"
                 component={AdditionNavigation}

@@ -3,9 +3,9 @@ import {View,Text, StyleSheet, TouchableOpacity,Image,TextInput} from 'react-nat
 import { useNavigation } from '@react-navigation/native';
 // import CheckBox from '@react-native-community/checkbox';
 import { Button, Icon } from 'react-native-elements';
-import PageButton from '../../../components/PageButton';
+import PageButton from '../../components/PageButton';
 import { ScrollView } from 'react-native-gesture-handler';
-import Checkout from './CheckoutScreen';
+import Checkout from './additions/CheckoutScreen';
 import { CheckBox } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -37,7 +37,7 @@ const SingleAddress=({setAddress,add1,add2,landmark,state,pincode})=>{
         
     )
 }
-const CheckoutPage=({navigation,route})=>{
+const CheckoutNewConstruction=({navigation,route})=>{
     const [oldAddresses,setOldAddresses]=useState([]);
     const [deliveryAdd,setDeliveryAdd]=useState(null);
     const getAddresses=async()=>{
@@ -64,13 +64,20 @@ const CheckoutPage=({navigation,route})=>{
     }
     const goToBookingConfirm=async()=>{
         if(deliveryAdd){
-            navigation.navigate('BookingConfirmed',{address:deliveryAdd})
+            navigation.navigate('BookingNewConstruction',{address:deliveryAdd,order_id:route.params.order_id})
         }
         
     }
     useEffect(()=>{
         getAddresses();
-    },[])
+        const willFocusSubscription = navigation.addListener('focus', () => {
+            console.log("jio");
+           getAddresses();
+        });
+      
+  
+      return willFocusSubscription;
+    },[navigation])
     useEffect(()=>{console.log('Route: ',route.params)},[oldAddresses])
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
@@ -83,7 +90,7 @@ const CheckoutPage=({navigation,route})=>{
             {oldAddresses==null?null: oldAddresses.map((address,index)=>(<SingleAddress   setAddress={setAddress} key={index} add1={address.add1} add2={address.add2} pincode={address.pincode} landmark={address.landmark} state={address.state}/> ))}
             
      
-            <View style={{marginBottom:20}}><Button title=" +  Add New Address" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.navigate('AddAddress',{from:'Readd'})}} buttonStyle={{backgroundColor:'white',width:190,height:41,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>
+            <View style={{marginBottom:20}}><Button title=" +  Add New Address" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.navigate('AddAddressNewCons')}} buttonStyle={{backgroundColor:'white',width:190,height:41,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>
             <View style={{marginBottom:25}}><Button title="Check out" onPress={()=>{goToBookingConfirm()}} buttonStyle={{backgroundColor:'#F55633',width:304,height:50,alignSelf:'center',borderRadius:8}}/></View>
           
 
@@ -92,4 +99,4 @@ const CheckoutPage=({navigation,route})=>{
         </View>
     )
 }
-export default CheckoutPage;
+export default CheckoutNewConstruction;
