@@ -1,14 +1,21 @@
 import React,{useEffect,useState} from 'react';
-import {View,Text, StyleSheet, TouchableOpacity,Image,ActivityIndicator} from 'react-native';
+import {View,Text, StyleSheet, TouchableOpacity,Image,ActivityIndicator,TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
+import {Button, Input,Icon} from 'react-native-elements';
 import Toast from 'react-native-toast-message';
+
 
 const MyAccount=({navigation})=>{
     const [loading,setIsLoading] = useState(true);
+    const [isName,setIsName] = useState(false);
+    const [isEmail,setIsEmail] = useState(false);
+    const [isAddress,setIsAddress] = useState(false);
     const [userData,setUserData] = useState([]);
-
+    const [name,setName] = useState('');
+    const [email,setEmail] = useState('');
+    const [address,setAddress] = useState('');
       useEffect(() => {
         getUserInfo();
       },[]);
@@ -48,39 +55,74 @@ const MyAccount=({navigation})=>{
             <Text style={{fontFamily:'Poppins',fontWeight:'600',fontSize:18,color:'black',paddingTop:25,paddingLeft:25}}>
                 My Account
             </Text>
+            
             <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'10%',top:'10%'}} size="large" color="#F55633" animating={loading}/>
             <Text style={{paddingLeft:25,color:'#F55633',fontWeight:'bold',fontSize:24,fontFamily:'Poppins',marginTop:40}}>Hey {userData['full_name']} !</Text>
             <View style={{width:'100%',paddingLeft:-100 ,height:14,backgroundColor:'#E7E7E7',marginTop:30}}></View>
             <View style={{flexDirection:'row',justifyContent:'space-between',paddingRight:25}}>
             <Text style={{paddingLeft:25,fontSize:13,color:'#F55633',fontFamily:'Poppins-Light',marginTop:10,fontWeight:'500'}}>Name</Text>
+          
+          <TouchableOpacity onPress={()=>{setIsName(!isName)}}>
             <Image 
                 style={{height:13,width:13,resizeMode:'stretch',marginTop:10}} 
                 source={require('../../static/edit.png')}
             />
+            </TouchableOpacity>
             </View>
             <ActivityIndicator style={{position:'absolute'}} size="large" color="#F55633" animating={true}/>
+            {isName === true ?
+            <TextInput 
+            value={name}
+            onChangeText={(text)=>{setName(text)}}
+ style={{paddingLeft:25,fontSize:13,color:'#000000',fontFamily:'Poppins',marginTop:10,fontWeight:'500'}}
+            />
+            :
             <Text style={{paddingLeft:25,fontSize:13,color:'#000000',fontFamily:'Poppins',marginTop:10,fontWeight:'500'}}>{userData['full_name']}</Text>
+}
             <View style={{width:'100%',paddingLeft:-50 ,height:6,backgroundColor:'#E7E7E7',marginTop:20}}></View>
             <View style={{flexDirection:'row',justifyContent:'space-between',paddingRight:25}}>
             <Text style={{paddingLeft:25,fontSize:13,color:'#F55633',fontFamily:'Poppins-Light',marginTop:10,fontWeight:'500'}}>Email</Text>
+            <TouchableOpacity onPress={()=>{setIsEmail(!isEmail)}}>
             <Image 
                 style={{height:13,width:13,resizeMode:'stretch',marginTop:10}} 
                 source={require('../../static/edit.png')}
             />
+            </TouchableOpacity>
             </View>
+            {isEmail === true ?
+            <TextInput 
+            value={email}
+            onChangeText={(text)=>{setEmail(text)}}
+ style={{paddingLeft:25,fontSize:13,color:'#000000',fontFamily:'Poppins',marginTop:10,fontWeight:'500'}}
+            />
+            :
             <Text style={{paddingLeft:25,fontSize:13,color:'#000000',fontFamily:'Poppins',marginTop:10,fontWeight:'500'}}>{userData['email']}</Text>
+}
             <View style={{width:'100%',paddingLeft:-50 ,height:6,backgroundColor:'#E7E7E7',marginTop:20}}></View>
             <View style={{flexDirection:'row',justifyContent:'space-between',paddingRight:25}}>
             <Text style={{paddingLeft:25,fontSize:13,color:'#F55633',fontFamily:'Poppins-Light',marginTop:10,fontWeight:'500'}}>Address</Text>
+            <TouchableOpacity onPress={()=>{setIsAddress(!isAddress)}}>
             <Image 
                 style={{height:13,width:13,resizeMode:'stretch',marginTop:10}} 
                 source={require('../../static/edit.png')}
             />
+            </TouchableOpacity>
             </View>
+            {isAddress === true ?
+            <TextInput 
+            value={address}
+            onChangeText={(text)=>{setAddress(text)}}
+ style={{paddingLeft:25,fontSize:13,color:'#000000',fontFamily:'Poppins',marginTop:10,fontWeight:'500'}}
+            />
+            :
             <Text style={{paddingLeft:25,fontSize:16,color:'#000000',fontFamily:'Poppins',marginTop:10,fontWeight:'500'}}>{userData['address']}</Text>
+}
             {/* <Text style={{paddingLeft:25,fontSize:11,fontFamily:'Poppins',marginTop:10}}>toit indiranagar ,100 feet road, binnamangala,
 indiranagar , begaluru,karnataka, india , 256778</Text> */}
 <View style={{width:'100%',paddingLeft:-50 ,height:6,backgroundColor:'#E7E7E7',marginTop:20}}></View>
+{isName === true || isEmail === true || isAddress === true ?
+<Button title="Update" buttonStyle={{marginTop:10,justifyContent:'center',alignSelf:'center',width:100,height:50,backgroundColor:'#F55633',borderRadius:10}}/>
+: null}
         </View>
     )
 }
