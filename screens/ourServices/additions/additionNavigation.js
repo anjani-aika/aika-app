@@ -53,15 +53,7 @@ const AdditionNavigation = () => {
                     }
                 }
             />
-            <Stack.Screen
-                name="CheckoutScreen"
-                component={CheckoutScreen}
-                options={
-                    {
-                        headerShown: false
-                    }
-                }
-            />
+   
             <Stack.Screen
                 name="CheckoutScreen"
                 component={CheckoutScreen}

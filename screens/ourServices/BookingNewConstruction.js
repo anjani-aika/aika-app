@@ -51,7 +51,7 @@ const BookingNewConstruction=({navigation,route})=>{
             
         }catch(err){
             // await AsyncStorage.removeItem("checkedItems");
-            console.log("Error: ",err);
+            console.log("Error New Construction: ",err);
         }
 
     }

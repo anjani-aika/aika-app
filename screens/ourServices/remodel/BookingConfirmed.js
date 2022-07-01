@@ -35,7 +35,7 @@ const BookingConfirmed=({navigation,route})=>{
             // console.log("ITEMS ------",items,typeof(items));
             let item2=[];
             // let orderIds=[];
-            const ids=await axios.post('https://reddoordevelopment.com/index.php/api/Users/send_request',{
+            const ids=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/send_request',{
                 user_id:arr.user_id ,service_id:items[0].service_id
             });
             for(let i=0;i<items.length;i++){
@@ -43,7 +43,7 @@ const BookingConfirmed=({navigation,route})=>{
             
                 console.log("Ids: ",ids.data);
                 if(ids.data.status==200){
-                    const result=await axios.post('https://reddoordevelopment.com/index.php/api/Users/booking',
+                    const result=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/booking',
                     {
                         
                         user_id:parseInt(arr.user_id),
@@ -58,24 +58,27 @@ const BookingConfirmed=({navigation,route})=>{
                         
                     },
                     {
-                        headers:{'token':arr.token}
+                        headers:{
+                            'token':arr.token,
+                            'Content-Type':'multipart/form-data',
+                        }
                     } );
                     if(result.status=='200' && i==(items.length-1)){
-                        console.log(result.data);
-                        let date=new Date();
-                        let newOrder={req_id:result.data.req_id,status:'pending',bookingTime:`${date.getHours()} : ${date.getMinutes()}`,bookingDate:`${date.getDate()} : ${date.getMonth()+1} : ${date.getFullYear()}`};
-                        const prevOrders=await AsyncStorage.getItem('Orders');
-                        console.log("newOrder: ",newOrder);
-                        if(prevOrders!==undefined && prevOrders){
-                            console.log("PrevOrders: ",prevOrders,typeof(prevOrders));
-                            const {Orders}=JSON.parse(prevOrders);
-                            console.log(Orders);
-                            await AsyncStorage.removeItem('Orders');
-                            let accumulatedOrders=[...Orders,newOrder];
-                            await AsyncStorage.setItem('Orders',JSON.stringify({Orders:accumulatedOrders}))
-                        }else{
-                            await AsyncStorage.setItem('Orders',JSON.stringify({Orders:[newOrder]}));
-                        }
+                        // console.log(result.data);
+                        // let date=new Date();
+                        // let newOrder={req_id:result.data.req_id,status:'pending',bookingTime:`${date.getHours()} : ${date.getMinutes()}`,bookingDate:`${date.getDate()} : ${date.getMonth()+1} : ${date.getFullYear()}`};
+                        // const prevOrders=await AsyncStorage.getItem('Orders');
+                        // console.log("newOrder: ",newOrder);
+                        // if(prevOrders!==undefined && prevOrders){
+                        //     console.log("PrevOrders: ",prevOrders,typeof(prevOrders));
+                        //     const {Orders}=JSON.parse(prevOrders);
+                        //     console.log(Orders);
+                        //     await AsyncStorage.removeItem('Orders');
+                        //     let accumulatedOrders=[...Orders,newOrder];
+                        //     await AsyncStorage.setItem('Orders',JSON.stringify({Orders:accumulatedOrders}))
+                        // }else{
+                        //     await AsyncStorage.setItem('Orders',JSON.stringify({Orders:[newOrder]}));
+                        // }
                         await AsyncStorage.removeItem("checkedItems");
                     
                     }

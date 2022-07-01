@@ -94,7 +94,7 @@ const CustomSidebarMenu = (props) => {
         />
       </TouchableOpacity>
      
-        <Text style={{fontSize:20,fontWeight:'bold',color:'#F55633',marginTop:70,marginLeft:20}}>Hey {name} !</Text>
+        <Text style={{fontSize:20,fontWeight:'bold',color:'#F55633',marginTop:70,marginLeft:20,overflow:'hidden',maxWidth:200}}>Hey {name} !</Text>
 
       </View>
       <View style={{width:'97%',height:5,backgroundColor:'#E7E7E7',position:'absolute',top:140}}></View>
