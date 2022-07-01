@@ -58,6 +58,27 @@ const OrderCard=()=>{
         }
     }
 
+
+    const OrderCardClickable=({orderId,bookingTime,bookingDate,navigation})=>{
+        return(
+            <TouchableOpacity  onPress={()=>{navigation.navigate('OrderDetails',{request_id:orderId})}}>
+            <View style={{width:'88%',height:89,borderColor:'#ACACAC',borderWidth:1,borderRadius:10,alignSelf:'center',marginTop:20,padding:15}}>
+                <Text style={{color:'black'}}>Order ID : {orderId} </Text>
+                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                <Text style={{color:'black'}}><Text style={{color:'black'}}>Booking Time :</Text>{bookingTime}</Text>
+                <Icon 
+                 name="arrow-forward-ios"
+                 />
+                </View>
+              
+                <Text style={{color:'black'}}><Text style={{color:'black'}}>Booking Date :</Text> {bookingDate}</Text>
+                
+            </View>
+            </TouchableOpacity>
+        )
+    }
+
+    
     useEffect(()=>{
         getOrders()
     },[])
@@ -67,7 +88,15 @@ const OrderCard=()=>{
                 Notifications
             </Text>
             <TouchableOpacity onPress={()=>{navigation.navigate('OrderDetails')}}>
-            <OrderCard/>
+            {/* <OrderCard/> */}
+            <View style={{marginBottom:100}}>
+                 {oldOrders.length!=0?oldOrders.map((order,index)=>(
+                        
+                    (<OrderCardClickable key={`${index}_${order.bookingDate}_${order.bookingTime}`} navigation={navigation} orderId={order.orderId} bookingTime={order.bookingTime} bookingDate={order.bookingDate}/>)
+                        // (<OrderCardUnClickable   orderId={order.orderId} bookingTime={order.bookingTime} bookingDate={order.bookingDate} />)
+                )):null}
+           </View>
+            
             </TouchableOpacity>
         </ScrollView>
     )

@@ -110,7 +110,9 @@ const getUserInfo=async()=>{
          
             
             })
-          .catch(error => console.log('error', error));
+          .catch(error => {console.log('error', error)
+            setLoading(false)
+        });
                     
                 }catch(err){
                     
