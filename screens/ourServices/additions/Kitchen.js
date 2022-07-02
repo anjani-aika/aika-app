@@ -30,7 +30,7 @@ const Kitchen=({navigation,route})=>{
             axios
               .get('https://reddoordevelopment.com/index.php/api/Users/subcategory_detail?cate_id='+route.params.categ_id,{headers:headers})
               .then((responseData) => {
-                console.log('POST Response: ' + JSON.stringify(responseData.data.data));
+               // console.log('POST Response: ' + JSON.stringify(responseData.data.data));
                 if(responseData.data.status === 200){
                   
                 
@@ -42,7 +42,7 @@ const Kitchen=({navigation,route})=>{
                }      
                 setSubCategData(arr);
                 setCount(count+1)
-                console.log("SUB DATA -----",arr)
+                //console.log("SUB DATA -----",arr)
                 setCategName(arr[0].category_name)
                   
                 }
@@ -66,7 +66,7 @@ const Kitchen=({navigation,route})=>{
        
    
         return subCategData.map((data, index) => {
-             console.log("DATA --------",data)
+            // console.log("DATA --------",data)
               return (
                  
                 <View style={{flexDirection:'column',marginTop:30}} key={index}>
@@ -136,12 +136,14 @@ const Kitchen=({navigation,route})=>{
         let checkedItems=[];
         const toBeBookedItems=await AsyncStorage.getItem("checkedItems");
         if(toBeBookedItems!=null && toBeBookedItems!=undefined){
+           
             const alreadyCheckedItems= JSON.parse(toBeBookedItems);
             subCategData.map((data,index)=>{
                 if(data.checked){
                     let i;let isPresent=false;
-                    for(i=0;i>alreadyCheckedItems.length;i++){
+                    for(i=0;i<alreadyCheckedItems.length;i++){
                         if(alreadyCheckedItems[i].image_path==data.image_path){
+                            console.log("1000");
                             isPresent=true;
                             break;
                         }
@@ -153,6 +155,7 @@ const Kitchen=({navigation,route})=>{
                 }
                 });
         }else{
+            console.log("2000");
             subCategData.map((data,index)=>{
                 if(data.checked){
                     checkedItems.push({...data,cate_id:route.params.categ_id});

@@ -8,45 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Checkout from './CheckoutScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SingleItem=({src,material})=>{
-    useEffect(()=>{console.log(src)},[])
-    return(
-        <View style={{flexDirection:'column',marginTop:30}}>
-            <View style={{flexDirection:'row',paddingHorizontal:25,justifyContent:'space-between',alignItems:'center'}}>
-            <View style={{flexDirection:'row',alignItems:'center'}}>
-            <Image
-                source={{uri:' https://pushpdiamonds.com/Door_Devp/upload/1652530497.png'}}
-                style={{marginRight:20}}
-            />
-            <Text style={{fontSize:18,fontWeight:'500',fontFamily:'Poppins-Light',width:180}}>{material}</Text>
-            </View>
-            <CheckBox
-                title=''
-                checked={true}
-                checkedColor='#F55633'
-                uncheckedColor='gray'
-            />
-            {/* <CheckBox
-                value={true}
-                // onValueChange={()=>{setValue(!value)}}
-                boxType='circle'
-                tintColors={{ true: '#F55633', false: 'gray' }}
-                style={{justifyContent:'flex-end'}}
-            /> */}
-            </View>
-            {/* {value===true?<View style={{marginHorizontal:25,marginTop:20}}>
-                <TextInput
-                    style={{width:'100%',height:62,borderWidth:1,borderRadius:4,borderColor:'gray', color: 'black'}}
-                    multiline={true}
-                    editable={true}
-                    placeholderTextColor = "gray"
-                    placeholder=" Enter Description"
-                ></TextInput>
-            </View>:null} */}
-            
-        </View>
-    )
-}
+
 const CheckoutScreen=({navigation,route})=>{
     const [allItems,setAllItems]=useState([]);
     const getCheckedItems=async()=>{
@@ -58,6 +20,16 @@ const CheckoutScreen=({navigation,route})=>{
             console.log("No Items selected");
         }
        
+    }
+    async function removeItem(index){
+        let arr2=[];
+        for(let i=0;i<allItems.length;i++){
+            if(i!=index){
+                arr2.push(allItems[i]);
+            }
+        }
+        console.log(arr2);
+        setAllItems([...arr2]);
     }
     function checkedListMap(){
         console.log("checkedList -----MAP",allItems)
@@ -84,6 +56,7 @@ const CheckoutScreen=({navigation,route})=>{
                 <CheckBox
                     key={index}
                     title=''
+                    onIconPress={()=>removeItem(index)}
                     checked={true}
                     checkedColor='#F55633'
                     uncheckedColor='gray'
@@ -115,7 +88,7 @@ const CheckoutScreen=({navigation,route})=>{
 
             <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10}}>
             <View style={{flex:1}}><Button title="Add More +" onPress={()=>{navigation.navigate('Remodel')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
-            <View style={{flex:1}}><Button title="Check out" onPress={()=>{navigation.navigate('CheckoutPage',{checkedItems:route.params.checkedItems})}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+            <View style={{flex:1}}><Button title="Check out" onPress={()=>{navigation.navigate('CheckoutPage',{checkedItems:allItems})}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
 
         </View>
         </ScrollView>

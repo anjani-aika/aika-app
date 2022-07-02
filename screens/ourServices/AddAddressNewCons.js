@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const AddAddressNewCons = ({ navigation }) => {
-    const [newAdd,setNewAdd]=useState({add1:'',add2:'',landmark:'',state:'',pincode:''});
+    const [newAdd,setNewAdd]=useState({add1:'',add2:'',landmark:'',state:'',pincode:'',city:''});
 
     const onConfirm=async()=>{
         await updateAddresses();
@@ -90,6 +90,19 @@ const AddAddressNewCons = ({ navigation }) => {
                 value={newAdd.landmark}
                 ></TextInput>
             </View>
+            <View style={styles.input}>
+           
+           <TextInput
+               style={{width:'80%',borderWidth:0,borderRadius:4,borderColor:'gray', color: 'black'}}
+               multiline={true}
+               editable={true}
+               placeholderTextColor = "gray"
+               placeholder=" City"
+               onChangeText={(text)=>{setNewAdd({...newAdd,city:text})}}
+               value={newAdd.city}
+               ></TextInput>
+           </View>
+            
             <View style={styles.input}>
                 
                 <TextInput

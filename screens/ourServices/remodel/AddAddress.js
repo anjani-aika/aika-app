@@ -23,7 +23,7 @@ const AddAddress = ({ navigation }) => {
         }else{
             await AsyncStorage.setItem('Addresses',JSON.stringify({Address:[newAdd]}));
         }
-        navigation.navigate('CheckoutPage2');
+        navigation.navigate('CheckoutPage');
        
     }
 

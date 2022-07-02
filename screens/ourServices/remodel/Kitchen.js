@@ -66,7 +66,7 @@ const Kitchen=({navigation,route})=>{
        
    
         return subCategData.map((data, index) => {
-             console.log("DATA --------",data)
+             //console.log("DATA --------",data)
               return (
                  
                 <View style={{flexDirection:'column',marginTop:30}} key={index}>
@@ -140,7 +140,7 @@ const Kitchen=({navigation,route})=>{
             subCategData.map((data,index)=>{
                 if(data.checked){
                     let i;let isPresent=false;
-                    for(i=0;i>alreadyCheckedItems.length;i++){
+                    for(i=0;i<alreadyCheckedItems.length;i++){
                         if(alreadyCheckedItems[i].image_path==data.image_path){
                             isPresent=true;
                             break;

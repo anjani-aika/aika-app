@@ -35,55 +35,57 @@ const BookingConfirmed=({navigation,route})=>{
             // console.log("ITEMS ------",items,typeof(items));
             let item2=[];
             // let orderIds=[];
-            const ids=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/send_request',{
+            const ids=await axios.post('https://reddoordevelopment.com/index.php/api/Users/send_request',{
                 user_id:arr.user_id ,service_id:items[0].service_id
             });
-            for(let i=0;i<items.length;i++){
-                console.log(parseInt(arr.user_id),typeof(JSON.stringify(route.params.address)));
-            
-                console.log("Ids: ",ids.data);
-                if(ids.data.status==200){
-                    const result=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/booking',
-                    {
-                        
-                        user_id:parseInt(arr.user_id),
-                        category_id:items[i].cate_id,
-                        subcategory_id:parseInt(items[i].subcategory_id),
-                        category_name:items[i].category_name,
-                        subcategory_name:items[i].subcategory_name,
-                        description:items[i].description,
-                        location:JSON.stringify(route.params.address), 
-                        orderid:ids.data.order_id,
-                        req_id:ids.data.req_id,
-                        
-                    },
-                    {
-                        headers:{
-                            'token':arr.token,
-                            'Content-Type':'multipart/form-data',
-                        }
-                    } );
-                    if(result.status=='200' && i==(items.length-1)){
-                        // console.log(result.data);
-                        // let date=new Date();
-                        // let newOrder={req_id:result.data.req_id,status:'pending',bookingTime:`${date.getHours()} : ${date.getMinutes()}`,bookingDate:`${date.getDate()} : ${date.getMonth()+1} : ${date.getFullYear()}`};
-                        // const prevOrders=await AsyncStorage.getItem('Orders');
-                        // console.log("newOrder: ",newOrder);
-                        // if(prevOrders!==undefined && prevOrders){
-                        //     console.log("PrevOrders: ",prevOrders,typeof(prevOrders));
-                        //     const {Orders}=JSON.parse(prevOrders);
-                        //     console.log(Orders);
-                        //     await AsyncStorage.removeItem('Orders');
-                        //     let accumulatedOrders=[...Orders,newOrder];
-                        //     await AsyncStorage.setItem('Orders',JSON.stringify({Orders:accumulatedOrders}))
-                        // }else{
-                        //     await AsyncStorage.setItem('Orders',JSON.stringify({Orders:[newOrder]}));
-                        // }
-                        await AsyncStorage.removeItem("checkedItems");
-                    
-                    }
-                }
+            let add=route.params.address.location;
+            const addAddress=await axios.post('https://reddoordevelopment.com/index.php/api/Users/addlocation',{
+                address:`${add.add1},${add.add2}`,
+                pincode:add.pincode,
+                landmark:add.landmark,
+                state:add.state,
+                city:add.city,
+                userid:arr.user_id,
+                req_id:ids.data.req_id
+            },{
+                headers:{
+                    'token':arr.token,
+                    'Content-Type':'multipart/form-data'
 
+                }
+            });
+            console.log("Address: ",addAddress.data);
+            if(addAddress.data.status==200 ||addAddress.data.status==201){
+                for(let i=0;i<items.length;i++){
+                    console.log("Ids: ",ids.data);
+                    if(ids.data.status==200){
+                        const result=await axios.post('https://reddoordevelopment.com/index.php/api/Users/booking',
+                        {
+                            
+                            user_id:parseInt(arr.user_id),
+                            category_id:items[i].cate_id,
+                            subcategory_id:parseInt(items[i].subcategory_id),
+                            category_name:items[i].category_name,
+                            subcategory_name:items[i].subcategory_name,
+                            description:items[i].description,
+                            orderid:ids.data.order_id,
+                            req_id:ids.data.req_id,
+                            
+                        },
+                        {
+                            headers:{
+                                'token':arr.token,
+                                'Content-Type':'multipart/form-data',
+                            }
+                        } );
+                        if(result.status=='200' && i==(items.length-1)){
+                            console.log(result.data);
+                            await AsyncStorage.removeItem("checkedItems");
+                        
+                        }
+                    }
+
+                }
             }
 
             setIsLoading(false);
@@ -112,7 +114,10 @@ const BookingConfirmed=({navigation,route})=>{
             {/* <Text style={{alignSelf:'center',fontSize:18,fontWeight:'400',marginBottom:25}}>Order ID : {route.params.orderId}</Text> */}
       
      
-            <View style={{marginBottom:20}}><Button title="Back To Home" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.navigate('OurServicesNavigation')}} buttonStyle={{backgroundColor:'white',width:313,height:56,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>
+            <View style={{marginBottom:20}}><Button title="Back To Home" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.reset({
+                        index: 0,
+                        routes: [{name: 'OurServicesNavigation'}],
+                      });}} buttonStyle={{backgroundColor:'white',width:313,height:56,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>
             {/* <View ><Button title="Booking Details" onPress={()=>{navigation.navigate('CheckoutScreen')}} buttonStyle={{backgroundColor:'#F55633',width:313,height:56,alignSelf:'center',borderRadius:8}}/></View> */}
           
 

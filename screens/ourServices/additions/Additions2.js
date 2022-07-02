@@ -140,7 +140,7 @@ const Addition2=({navigation,route})=>{
             subCategData.map((data,index)=>{
                 if(data.checked){
                     let i;let isPresent=false;
-                    for(i=0;i>alreadyCheckedItems.length;i++){
+                    for(i=0;i<alreadyCheckedItems.length;i++){
                         if(alreadyCheckedItems[i].image_path==data.image_path){
                             isPresent=true;
                             break;
@@ -148,7 +148,6 @@ const Addition2=({navigation,route})=>{
                     }
                     if(!isPresent){
                         checkedItems.push({...data,cate_id:route.params.categ_id});
-                        isPresent=false;
                     }
                 }
                 });

@@ -59,6 +59,16 @@ const CheckoutScreen=({navigation,route})=>{
         }
        
     }
+    async function removeItem(index){
+        let arr2=[];
+        for(let i=0;i<allItems.length;i++){
+            if(i!=index){
+                arr2.push(allItems[i]);
+            }
+        }
+        console.log(arr2);
+        setAllItems([...arr2]);
+    }
     function checkedListMap(){
         console.log("checkedList -----MAP",allItems)
    
@@ -84,6 +94,7 @@ const CheckoutScreen=({navigation,route})=>{
                 <CheckBox
                     key={index}
                     title=''
+                    onIconPress={()=>removeItem(index)}
                     checked={true}
                     checkedColor='#F55633'
                     uncheckedColor='gray'
@@ -115,7 +126,7 @@ const CheckoutScreen=({navigation,route})=>{
 
             <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10}}>
             <View style={{flex:1}}><Button title="Add More +" onPress={()=>{navigation.navigate('Addition')}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
-            <View style={{flex:1}}><Button title="Check out" onPress={()=>{navigation.navigate('CheckoutPage',{checkedItems:route.params.checkedItems})}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+            <View style={{flex:1}}><Button title="Check out" onPress={()=>{navigation.navigate('CheckoutPage',{checkedItems:allItems})}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
 
         </View>
         </ScrollView>

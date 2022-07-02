@@ -9,7 +9,7 @@ import Checkout from './CheckoutScreen';
 import { CheckBox } from 'react-native-elements'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SingleAddress=({setAddress,add1,add2,landmark,state,pincode})=>{
+const SingleAddress=({setAddress,add1,add2,landmark,state,pincode,city})=>{
     const [value,setValue]=useState(false);
     
     return(
@@ -25,12 +25,12 @@ const SingleAddress=({setAddress,add1,add2,landmark,state,pincode})=>{
                 size={24}
                 checkedColor='#F55633'
                 containerStyle={{alignSelf:'center',justifyContent:'center',alignContent:'center'}}
-                onIconPress={()=>{setAddress(add1,add2,landmark,state,pincode);setValue(!value)}}
+                onIconPress={()=>{setAddress(add1,add2,landmark,state,pincode,city);setValue(!value)}}
                 />
             </View>
             <View style={{width:'87%',padding:5,justifyContent:'center',}}>
                 <Text style={{fontSize:16,fontWeight:'500',textTransform:'capitalize',color:'black'}}>{state}</Text>
-                <Text style={{fontSize:14,fontWeight:'500',color:'black'}}>{add1},{add2},{landmark},{state=='Home'?'':state},{pincode}</Text>
+                <Text style={{fontSize:14,fontWeight:'500',color:'black'}}>{state=='Home'?`${add1}`:(`${add1},${add2},${landmark},${city},${state},${pincode}`)}</Text>
             </View>
             </View>
 
@@ -51,14 +51,15 @@ const CheckoutPage=({navigation,route})=>{
 
         }
     }
-    const setAddress=async(add1,add2,landmark,state,pincode)=>{
+    const setAddress=async(add1,add2,landmark,state,pincode,city)=>{
         setDeliveryAdd({
             location:{
                 add1:add1,
                 add2:add2,
                 landmark:landmark,
                 state:state,
-                pincode:pincode
+                pincode:pincode,
+                city:city
             }
         });
     }
@@ -70,7 +71,13 @@ const CheckoutPage=({navigation,route})=>{
     }
     useEffect(()=>{
         getAddresses();
-    },[])
+        const willFocusSubscription = navigation.addListener('focus', () => {
+            getAddresses();
+        });
+      
+  
+      return willFocusSubscription;
+    },[navigation])
     useEffect(()=>{console.log('Route: ',route.params)},[oldAddresses])
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
@@ -80,7 +87,7 @@ const CheckoutPage=({navigation,route})=>{
                Choose Address
             </Text>
             {/* <SingleAddress add1={'add1'} add2={'add2'} pincode={'pincode'} landmark={'landmark'} state={'state'}/> */}
-            {oldAddresses==null?null: oldAddresses.map((address,index)=>(<SingleAddress   setAddress={setAddress} key={index} add1={address.add1} add2={address.add2} pincode={address.pincode} landmark={address.landmark} state={address.state}/> ))}
+            {oldAddresses==null?null: oldAddresses.map((address,index)=>(<SingleAddress   setAddress={setAddress} key={index} add1={address.add1} add2={address.add2} pincode={address.pincode} landmark={address.landmark} city={address.city} state={address.state}/> ))}
             
      
             <View style={{marginBottom:20}}><Button title=" +  Add New Address" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.navigate('AddAddress')}} buttonStyle={{backgroundColor:'white',width:190,height:41,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>

@@ -36,7 +36,7 @@ const Register = ({ navigation }) => {
                 if(responseData.data.status === 200){
                   console.log("responseData.data.status ---",responseData.data.user_info)
                   await AsyncStorage.setItem("user_info",JSON.stringify(responseData.data.user_info) );
-                  await AsyncStorage.setItem('Addresses',JSON.stringify({Address:[{add1:location,add2:'',landmark:'',state:'Home',pincode:''}]}));
+                  await AsyncStorage.setItem('Addresses',JSON.stringify({Address:[{add1:location,add2:'',landmark:'',state:'Home',pincode:'',city:''}]}));
                   setIsLoading(false)
                   Toast.show({
                     type: 'success',

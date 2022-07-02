@@ -104,7 +104,7 @@ const getUserInfo=async()=>{
               text1:result.message ,
               
               });
-              navigation.navigate('CheckoutNewConstruction',{order_id:result['Order ID']});
+              navigation.navigate('CheckoutNewConstruction',{order_id:result['Order ID'],request_id:result['request_id']});
             
 
          

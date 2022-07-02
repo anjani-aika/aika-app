@@ -66,20 +66,25 @@ const EditOrders=({navigation,route})=>{
 
                 },{
                     headers:{
-                        'token':arr.token
+                        'token':arr.token,
+                        'Content-Type':'multipart/form-data',
                     }
-                })
+                });
+                console.log(confirmBookEdit.data)
                 if(confirmBookEdit.data.status==200){
                     console.log("Done!!!!!",confirmBookEdit.data);
-                   
+                    navigation.reset({
+                        index: 0,
+                        routes: [{name: 'Our Services'}],
+                      });
                 }
             }
 
-            navigation.navigate('Our Services');
+          
            
             
         }catch(err){
-            console.log("Error: ",err)
+            console.log("Error: ",err.response.data)
         }
     }
     const removeItem=async(index)=>{

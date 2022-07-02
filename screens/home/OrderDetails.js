@@ -105,7 +105,7 @@ const OrderDetails=({navigation,route})=>{
                 let res = await AsyncStorage.getItem("user_info");
                 let arr = JSON.parse(res);
                 console.log("ARRRRR ------",arr);
-                const orderAcceptResult=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/Order_accept',{
+                const orderAcceptResult=await axios.post('https://reddoordevelopment.com/index.php/api/Users/Order_accept',{
                                                 req_id:route.params.request_id,
                                                 invoice_id:productList[0].order_id
                                             },{
@@ -137,7 +137,7 @@ const OrderDetails=({navigation,route})=>{
         let res = await AsyncStorage.getItem("user_info");
         let arr = JSON.parse(res);
         console.log("ARRRRR ------",arr,arr.user_id);
-        const cancelled=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/Order_rejected',{
+        const cancelled=await axios.post('https://reddoordevelopment.com/index.php/api/Users/Order_rejected',{
             req_id:route.params.request_id,
             invoice_id:productList[0].order_id
         },{
@@ -148,10 +148,10 @@ const OrderDetails=({navigation,route})=>{
             }
         });
         console.log("cancelled: ",cancelled.data);
-        if(cancelled.data.status==200){
+        if(cancelled.data.status==200 || cancelled.data.status==201){
             console.log("cancelled: ",cancelled.data);
-            // setIsCancelled(true);
-            setIsAccepted(true);
+            setIsCancelled(true);
+            //setIsAccepted(true);
             navigation.navigate('Our Services');
 
         }
@@ -223,9 +223,9 @@ const OrderDetails=({navigation,route})=>{
             <View style={{flexDirection:'row',marginVertical:30,paddingHorizontal:10,paddingBottom:35}}>
                 <View style={{flex:1}}>{productsPrice.length>0 && secondInvoice!=true?
                 (<Button title="Edit" onPress={()=>{navigation.navigate('EditOrders',{products:productList})}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/>)
-                :<Button title="Cancel" disabled={isAccepted} onPress={()=>{onCancelBooking()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/>
+                :<Button title="Cancel" disabled={isAccepted||isCancelled} onPress={()=>{onCancelBooking()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/>
                     }</View>
-                <View style={{flex:1}}><Button title="Accept" disabled={isAccepted} onPress={()=>{acceptingTheOrder()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
+                <View style={{flex:1}}><Button title="Accept" disabled={isAccepted || isCancelled} onPress={()=>{acceptingTheOrder()}} buttonStyle={{backgroundColor:'#F55633',width:150,height:50,alignSelf:'center',borderRadius:8}}/></View>
 
             </View>
             {/* disabled={isCancelled} */}

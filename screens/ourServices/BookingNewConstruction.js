@@ -29,16 +29,23 @@ const BookingNewConstruction=({navigation,route})=>{
             console.log("orderid",route.params.order_id);
             console.log("state",route.params.address.location.state);
             console.log("add",JSON.stringify(route.params.address.location));
-            const address=await axios.post('https://reddoordevelopment.com/index.php/api/Users/booking_address',{
-              order_id:route.params.order_id,
-              city:route.params.address.location.state,
-              address:route.params.address.location.toString()
+            let add=route.params.address.location;
+            const address=await axios.post('https://reddoordevelopment.com/index.php/api/Users/addlocation',{
+                address:`${add.add1},${add.add2}`,
+                pincode:add.pincode,
+                landmark:add.landmark,
+                state:add.state,
+                city:add.city,
+                userid:arr.user_id,
+                req_id:route.params.request_id
             },{
-              headers:{
-                'token':arr.token,
-                'Content-Type':'multipart/form-data',
-              }
+                headers:{
+                    'token':arr.token,
+                    'Content-Type':'multipart/form-data'
+
+                }
             });
+           
             console.log(address.data);
             if(address.data.status=200){
                 setIsLoading(false);
@@ -73,7 +80,10 @@ const BookingNewConstruction=({navigation,route})=>{
             {/* <Text style={{alignSelf:'center',fontSize:18,fontWeight:'400',marginBottom:25}}>Order ID : {route.params.orderId}</Text> */}
       
      
-            <View style={{marginBottom:20}}><Button title="Back To Home" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.navigate('OurServices')}} buttonStyle={{backgroundColor:'white',width:313,height:56,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>
+            <View style={{marginBottom:20}}><Button title="Back To Home" titleStyle={{color:'#F55633'}} onPress={()=>{navigation.reset({
+                        index: 0,
+                        routes: [{name: 'OurServices'}],
+                      })}} buttonStyle={{backgroundColor:'white',width:313,height:56,alignSelf:'center',borderRadius:8,borderWidth:1,borderColor:'#F55633'}} c/></View>
             {/* <View ><Button title="Booking Details" onPress={()=>{navigation.navigate('CheckoutScreen')}} buttonStyle={{backgroundColor:'#F55633',width:313,height:56,alignSelf:'center',borderRadius:8}}/></View> */}
           
 

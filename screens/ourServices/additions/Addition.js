@@ -49,7 +49,7 @@ const Addition=({navigation})=>{
           console.log("mainCategData -----MAP",mainCategData)
      
           return mainCategData.map((data, index) => {
-               console.log("DATA --------",data)
+               //console.log("DATA --------",data)
                 return (
                    
                     <View key={index}>
@@ -68,17 +68,7 @@ const Addition=({navigation})=>{
           <View style={{paddingBottom:30}}>
             {mainCategData && mainCategData.length > 0 ? mainCategoryListMap() : null}
             </View>
-           
-            {/* <TouchableOpacity onPress={()=>{navigation.navigate('Kitchen')}}><PageButton buttonName={'Kitchen'}/></TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Bathroom')}}><PageButton buttonName={'Bathroom'}/></TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Flooring')}}><PageButton buttonName={'Flooring'}/></TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Painting')}}><PageButton buttonName={'Painting'}/></TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Plumbing')}}><PageButton buttonName={'Plumbing'}/></TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Electrical')}}><PageButton buttonName={'Electrical'}/></TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Window')}}><PageButton buttonName={'Window'}/></TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Doors')}}><PageButton buttonName={'Doors'}/></TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Roofings')}}><PageButton buttonName={'Roofings'}/></TouchableOpacity>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Addition2')}}><PageButton buttonName={'Additions'}/></TouchableOpacity> */}
+         
  </ScrollView>
        
     )

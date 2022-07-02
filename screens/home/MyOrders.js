@@ -30,6 +30,7 @@ const MyOrders=({navigation})=>{
     const [loading,setIsLoading]=useState(true);
     const reloadOrders=async()=>{
         await getOrders();
+        
     }
     const getOrders=async()=>{
    
@@ -42,10 +43,11 @@ const MyOrders=({navigation})=>{
                             user_id:arr.user_id
                         },{
                             headers:{
-                                'token':arr.token
+                                'token':arr.token,
+                                'Content-Type':'multipart/form-data',
                             }
                     });
-                    console.log("View All Orders: ",viewAllOrders.data.order[0]);
+                    console.log("View All Orders: ",viewAllOrders.data);
                     if(viewAllOrders){
                         let filterOrders=viewAllOrders.data.order.map(order=>{
                            let bookingTimeAndDate= order.created_date.split(' ');
@@ -67,8 +69,13 @@ const MyOrders=({navigation})=>{
     }
     useEffect(()=>{
         getOrders();
-        console.log("inside my orers");
-    },[])
+        const willFocusSubscription = navigation.addListener('focus', () => {
+            getOrders();
+        });
+      
+  
+      return willFocusSubscription;
+    },[navigation])
     return(
         <ScrollView style={{backgroundColor:'white',flex:1,paddingTop:60}}>
             <ActivityIndicator style={{justifyContent:'center',alignItems: 'center',alignSelf:'center',position:'absolute',height:'50%',top:'50%'}} size="large" color="#F55633" animating={loading}/>

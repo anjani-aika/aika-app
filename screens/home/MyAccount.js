@@ -12,7 +12,6 @@ const MyAccount=({navigation})=>{
     const [loading,setIsLoading] = useState(true);
     const [userData,setUserData] = useState({});
     const [editN,setN]=useState(false);
-    const [editE,setE]=useState(false);
     const [editA,setA]=useState(false);
 
       useEffect(() => {
@@ -114,27 +113,8 @@ const MyAccount=({navigation})=>{
             <View style={{width:'100%',paddingLeft:-50 ,height:6,backgroundColor:'#E7E7E7',marginTop:20}}></View>
             <View style={{flexDirection:'row',justifyContent:'space-between',paddingRight:25}}>
             <Text style={{paddingLeft:25,fontSize:13,color:'#F55633',fontFamily:'Poppins-Light',marginTop:10,fontWeight:'500'}}>Email</Text>
-            {editE==false?(
-            <TouchableOpacity onPress={()=>setE(true)}>
-              <Image 
-                style={{height:13,width:13,resizeMode:'stretch',marginTop:10}} 
-                source={require('../../static/edit.png')}
-              />
-             </TouchableOpacity>
-             ):null}
             </View>
-            {editE==false?(
-                  <Text style={{paddingLeft:25,fontSize:13,color:'#000000',fontFamily:'Poppins',marginTop:10,fontWeight:'500'}}>{userData['email']}</Text>
-                ):(
-                  <TextInput
-                  style={{width:'60%',borderBottomColor:'gray',borderBottomWidth:1,fontSize:13,  color: 'black',marginLeft:25,textAlign:'left'}}
-                  editable={true}
-                  placeholderTextColor = "gray"
-                  onChangeText={(text)=>{setUserData({...userData,email:text})}}
-                  value={userData.email}
-                  ></TextInput> 
-                )}
-           
+            <Text style={{paddingLeft:25,fontSize:13,color:'#000000',fontFamily:'Poppins',marginTop:10,fontWeight:'500'}}>{userData['email']}</Text>
             <View style={{width:'100%',paddingLeft:-50 ,height:6,backgroundColor:'#E7E7E7',marginTop:20}}></View>
             <View style={{flexDirection:'row',justifyContent:'space-between',paddingRight:25}}>
             <Text style={{paddingLeft:25,fontSize:13,color:'#F55633',fontFamily:'Poppins-Light',marginTop:10,fontWeight:'500'}}>Address</Text>
@@ -160,7 +140,7 @@ const MyAccount=({navigation})=>{
             {/* <Text style={{paddingLeft:25,fontSize:11,fontFamily:'Poppins',marginTop:10}}>toit indiranagar ,100 feet road, binnamangala,
 indiranagar , begaluru,karnataka, india , 256778</Text> */}
       <View style={{width:'100%',paddingLeft:-50 ,height:6,backgroundColor:'#E7E7E7',marginTop:20}}></View>
-      {editA==true || editE==true ||editN==true?(
+      {editA==true ||editN==true?(
                 <>
                 <View style={{marginTop:20, alignSelf:'center',width:'100%'}}>
                     <Button title="Update" onPress={()=>updateAccount()} buttonStyle={{width:'70%',borderRadius:15,height:46,alignSelf:'center',backgroundColor:'#F55633'}}/>
