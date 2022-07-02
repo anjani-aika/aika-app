@@ -39,7 +39,7 @@ const MyOrders=({navigation})=>{
                 let arr = JSON.parse(res);
                 console.log("ARRRRR ------",arr,arr.user_id);
                 if(arr!= null || arr === [] || arr == ""){
-                    const viewAllOrders=await axios.post('https://reddoordevelopment.com/index.php/api/Users/view_all_order',{
+                    const viewAllOrders=await axios.post('https://pushpdiamonds.com/Door_Devp/index.php/api/Users/view_all_order',{
                             user_id:arr.user_id
                         },{
                             headers:{
@@ -53,9 +53,10 @@ const MyOrders=({navigation})=>{
                            let bookingTimeAndDate= order.created_date.split(' ');
                            let bookingTime=bookingTimeAndDate[1];
                            let bookingDate=bookingTimeAndDate[0]
-                           return {orderId:order.req_id,bookingTime:bookingTime,bookingDate:bookingDate}
+                           return {orderId:data.req_id,bookingTime:bookingTime,bookingDate:bookingDate}
                         });
-                       // console.log("FilteredOrders: ",filterOrders);
+                        setIsLoading(false);
+                       console.log("FilteredOrders: ",filterOrders);
                         setOldOrders([...filterOrders]);
                         setIsLoading(false);
                     }
@@ -64,6 +65,7 @@ const MyOrders=({navigation})=>{
                 }
                     
         }catch(err){
+            setIsLoading(false);
             console.log("Error: ",err);
         }
     }
